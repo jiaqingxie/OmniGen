@@ -1,0 +1,23 @@
+# OmniGen 环境变量配置文件
+# 复制此文件为 .env 并填写相应的 API Key
+
+# DeepSeek API 配置
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL_NAME=deepseek-chat
+
+# GPT-4o API 配置  
+GPT4O_API_KEY=your_gpt4o_api_key_here
+GPT4O_BASE_URL=https://api.openai.com/v1
+GPT4O_MODEL_NAME=gpt-4o
+
+# InternVL API 配置
+INTERNVL_API_KEY=your_internvl_api_key_here
+INTERNVL_BASE_URL=https://internlm-chat.intern-ai.org.cn/puyu/api/v1
+INTERNVL_MODEL_NAME=internvl2_5-7b-chat
+
+# 注意：InternVL 可用的模型名称可能包括：
+# - internvl2_5-7b-chat
+# - internvl2_5-26b-chat  
+# - internvl2-8b-chat
+# 请根据实际可用的模型进行调整 

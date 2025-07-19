@@ -1,0 +1,47 @@
+# OmniGen 配置文件 - 使用 InternVL API
+
+# 数据集配置
+dataset_path: "data_example.json"
+
+# 生成器配置
+generator_type: "benchmark"
+generator_config:
+  num_choices: 4
+  include_reasoning: false
+  prompt_template: |
+    你是一位专业的领域专家，需要根据提供的内容生成一个多选题。
+    
+    要求：
+    1. 生成一个清晰、准确的问题
+    2. 提供{num_choices}个选项
+    3. 确保只有一个正确答案
+    4. 选项应该具有合理的干扰性
+    5. 问题应该测试对内容的理解能力
+    
+    请以JSON格式回复：
+    {{
+        "question": "问题内容",
+        "choices": ["选项A", "选项B", "选项C", "选项D"],
+        "answer": "正确答案"
+    }}
+
+# 模型配置 - InternVL API
+model_type: "internvl"
+model_config:
+  model_name: "internvl-chat-v1_5"  # 可选，默认值
+  api_key: null  # 设置为 null 则从环境变量 INTERNVL_API_KEY 读取
+  base_url: null  # 设置为 null 则使用默认 URL
+  max_seq_len: 4096
+
+# 生成配置
+num_samples: 5
+output_path: "output/internvl_benchmark.json"
+
+# 其他配置
+verbose: true
+max_retries: 3
+
+# 环境变量说明：
+# 请设置以下环境变量：
+# export INTERNVL_API_KEY="your-api-key-here"
+# export INTERNVL_BASE_URL="https://internlm-chat.intern-ai.org.cn/puyu/api/v1"  # 可选 

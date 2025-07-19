@@ -1,0 +1,33 @@
+[
+    {
+        "id": "sample_1",
+        "text": "这是一个关于化学光谱的文本描述",
+        "metadata": {
+            "domain": "chemistry",
+            "spectrum_type": "IR"
+        }
+    },
+    {
+        "id": "sample_2",
+        "images": [
+            "seed_datasets/molpuzzle/IR/MOL_0001.png"
+        ],
+        "metadata": {
+            "domain": "chemistry",
+            "spectrum_type": "IR",
+            "molecule_id": "MOL_0001"
+        }
+    },
+    {
+        "id": "sample_3",
+        "text": "红外光谱图显示了分子的振动信息",
+        "images": [
+            "seed_datasets/molpuzzle/IR/MOL_0002.png"
+        ],
+        "metadata": {
+            "domain": "chemistry",
+            "spectrum_type": "IR",
+            "molecule_id": "MOL_0002"
+        }
+    }
+]
