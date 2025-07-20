@@ -14,10 +14,7 @@ from src.models.internvl_api import InternVL
 
 
 class TestInternVL:
-    """InternVL 模型测试类"""
-
     def test_config_loading(self):
-        """测试配置是否正确加载"""
         from src.config import ModelConfig
 
         config = ModelConfig()
@@ -55,4 +52,4 @@ class TestInternVL:
 
 
 if __name__ == "__main__":
-    pytest.main([__file__, "-v"])
+    pytest.main([__file__, "-v", "-s"])

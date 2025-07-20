@@ -1,8 +1,6 @@
-"""生成器基类和注册机制"""
-
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Type, Optional
-from ..core.data_structures import DataSample
+from ..data_loaders.data_structures import DataSample
 
 
 class BaseGenerator(ABC):

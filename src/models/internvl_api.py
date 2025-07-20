@@ -18,9 +18,9 @@ class InternVL(BaseAPIModel):
         **kwargs,
     ):
         # 设置默认值
-        model_name = model_name or os.getenv("INTERNVL_MODEL_NAME", "internvl2_5-7b-chat")
+        model_name = model_name or os.getenv("INTERNVL_MODEL_NAME")
         api_key = api_key or os.getenv("INTERNVL_API_KEY")
-        base_url = base_url or os.getenv("INTERNVL_BASE_URL", "https://internlm-chat.intern-ai.org.cn/puyu/api/v1")
+        base_url = base_url or os.getenv("INTERNVL_BASE_URL")
 
         # 初始化父类
         super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)

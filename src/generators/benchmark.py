@@ -1,51 +1,28 @@
-"""基准测试数据生成器"""
-
 import json
 from typing import Dict, Any, Optional, List
 from .base import BaseGenerator, PromptTemplate, register_generator
-from ..core.data_structures import DataSample
+from ..data_loaders import DataSample
 
 
 @register_generator("benchmark")
 class BenchmarkGenerator(BaseGenerator):
-    """基准测试数据生成器
-
-    生成标准的多选题格式，包含：
-    - question: 问题文本
-    - choices: 选项列表
-    - answer: 正确答案
-    - image_path: 图像路径（如果有）
-    """
+    """基准测试数据生成器"""
 
     def __init__(self, config: Dict[str, Any], model_client=None):
         super().__init__(config, model_client)
 
         # 从配置中获取提示词模板
-        template_str = config.get("prompt_template", self._default_template())
-        self.prompt_template = PromptTemplate(template_str)
+        self.prompt_templates = config.get("prompt_templates", {})
+        if not self.prompt_templates:
+            raise ValueError("配置中缺少 prompt_templates")
+
+        # 问题类型配置
+        self.question_types = config.get("question_types", ["type_cls"])
+        self.current_type_index = 0
 
         # 其他配置参数
         self.num_choices = config.get("num_choices", 4)
         self.include_reasoning = config.get("include_reasoning", False)
-
-    def _default_template(self) -> str:
-        """默认提示词模板"""
-        return """
-请根据提供的内容生成一个多选题。
-
-要求：
-1. 生成一个清晰的问题
-2. 提供{num_choices}个选项
-3. 确保只有一个正确答案
-4. 选项应该具有合理的干扰性
-
-请以JSON格式回复：
-{{
-    "question": "问题内容",
-    "choices": ["选项A", "选项B", "选项C", "选项D"],
-    "answer": "正确答案"
-}}
-"""
 
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
         """生成单个基准测试样本"""
@@ -53,19 +30,23 @@ class BenchmarkGenerator(BaseGenerator):
             return None
 
         try:
-            # 调用模型生成
-            if self.model_client is None:
-                # 如果没有模型客户端，返回模拟数据
-                return self._generate_mock_data(sample)
+            # 获取当前问题类型
+            question_type = self.question_types[self.current_type_index]
+
+            # 检查是否有对应的模板
+            if question_type not in self.prompt_templates:
+                raise ValueError(f"配置中缺少问题类型 '{question_type}' 的模板")
 
             # 准备模型输入
-            model_input = self._prepare_model_input(sample)
+            model_input = self._prepare_model_input(sample, question_type)
 
-            # 调用模型（同步调用）
-            response = self.model_client.generate(model_input, max_out_len=512)
-
-            # 解析响应
-            result = self._parse_response(response)
+            # 调用模型生成
+            if self.model_client is None:
+                result = self._generate_mock_data(sample, question_type)
+            else:
+                response = self.model_client.generate(model_input, max_out_len=512)
+                # 解析响应
+                result = self._parse_response(response)
 
             if result is None:
                 return None
@@ -78,31 +59,51 @@ class BenchmarkGenerator(BaseGenerator):
             if not self.validate_output(result):
                 return None
 
+            # 更新问题类型索引，为下次生成做准备
+            self.current_type_index = (self.current_type_index + 1) % len(self.question_types)
+
             return result
 
         except Exception as e:
             print(f"生成基准测试数据失败: {e}")
             return None
 
-    def _prepare_model_input(self, sample: DataSample):
+    def _prepare_model_input(self, sample: DataSample, question_type: str):
         """准备模型输入"""
         # 构建提示词
-        prompt_text = self._build_prompt(sample)
+        prompt_text = self._build_prompt(sample, question_type)
 
         # 如果有图像，构建多模态输入
         if sample.has_images():
-            return {"text": prompt_text, "images": sample.images}  # 直接传递图像路径，模型会处理
+            return {"text": prompt_text, "images": sample.images}
         else:
-            # 纯文本输入
             return prompt_text
 
-    def _build_prompt(self, sample: DataSample) -> str:
+    def _build_prompt(self, sample: DataSample, question_type: str) -> str:
         """构建提示词"""
-        # 准备模板变量
-        template_vars = {"num_choices": self.num_choices, **sample.metadata}
+        # 获取对应的模板
+        template_str = self.prompt_templates[question_type]
+        prompt_template = PromptTemplate(template_str)
+
+        # 准备模板变量 - 只使用简单的元数据
+        template_vars = {
+            "num_choices": self.num_choices,
+            "question_type": question_type,
+        }
+
+        # 安全地添加元数据中的简单字段
+        if sample.metadata:
+            for key, value in sample.metadata.items():
+                if isinstance(value, (str, int, float, bool)):
+                    template_vars[key] = value
 
         # 基础提示词
-        base_prompt = self.prompt_template.template.format(**template_vars)
+        try:
+            base_prompt = prompt_template.template.format(**template_vars)
+        except KeyError as e:
+            print(f"模板格式化失败，缺少变量: {e}")
+            # 使用原始模板
+            base_prompt = template_str
 
         # 如果有文本内容，添加到提示词中
         if sample.has_text():
@@ -143,10 +144,10 @@ class BenchmarkGenerator(BaseGenerator):
         except Exception:
             return None
 
-    def _generate_mock_data(self, sample: DataSample) -> Dict[str, Any]:
+    def _generate_mock_data(self, sample: DataSample, question_type: str) -> Dict[str, Any]:
         """生成模拟数据（用于测试）"""
         result = {
-            "question": f"关于样本 {sample.id} 的问题",
+            "question": f"关于样本 {sample.id} 的{question_type}问题",
             "choices": ["选项A", "选项B", "选项C", "选项D"],
             "answer": "选项A",
         }

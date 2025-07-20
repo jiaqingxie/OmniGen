@@ -1,5 +1,3 @@
-"""核心生成引擎"""
-
 import asyncio
 import json
 from pathlib import Path
@@ -7,7 +5,7 @@ from typing import List, Dict, Any, Optional
 import pandas as pd
 
 from ..config import OmniGenConfig
-from .data_structures import Dataset, DataSample
+from ..data_loaders import Dataset, DataSample
 from ..generators.base import create_generator
 from ..models.base import BaseModel
 
@@ -23,7 +21,7 @@ class MockModel(BaseModel):
         return '''
         {
             "question": "这是一个测试问题",
-            "choices": ["选项A", "选项B", "选项C", "选项D"],
+            "choices": ["选项A", "选项B", "选项C", "选项D", "选项E"],
             "answer": "选项A"
         }
         '''
@@ -37,6 +35,7 @@ class OmniGenEngine:
         self.dataset: Optional[Dataset] = None
         self.generator = None
         self.model_client = None
+        self.used_samples = set()  # 跟踪已使用的样本
 
         # 初始化组件
         self._init_model_client()
@@ -80,14 +79,7 @@ class OmniGenEngine:
             raise ValueError(f"无法创建生成器: {self.config.generator_type}")
 
     def load_dataset(self, dataset_path: Optional[str] = None) -> Dataset:
-        """加载数据集
-
-        Args:
-            dataset_path: 数据集路径，如果为None则使用配置中的路径
-
-        Returns:
-            加载的数据集
-        """
+        """加载数据集"""
         if dataset_path is None:
             dataset_path = self.config.dataset_path
 
@@ -96,11 +88,15 @@ class OmniGenEngine:
         if not dataset_path.exists():
             raise FileNotFoundError(f"数据集路径不存在: {dataset_path}")
 
-        # 检查是否是单个文件还是目录
-        if dataset_path.is_file():
-            self.dataset = self._load_single_file(dataset_path)
-        else:
-            self.dataset = self._load_directory(dataset_path)
+        # 使用数据加载器
+        from ..data_loaders import create_loader_for_path
+
+        loader = create_loader_for_path(dataset_path)
+
+        if loader is None:
+            raise ValueError(f"无法找到适合的加载器处理: {dataset_path}")
+
+        self.dataset = loader.load(dataset_path)
 
         if self.config.verbose:
             stats = self.dataset.get_stats()
@@ -108,96 +104,8 @@ class OmniGenEngine:
 
         return self.dataset
 
-    def _load_single_file(self, file_path: Path) -> Dataset:
-        """加载单个文件"""
-        if file_path.suffix.lower() == '.json':
-            return self._load_json_file(file_path)
-        elif file_path.suffix.lower() in ['.csv']:
-            return self._load_csv_file(file_path)
-        else:
-            raise ValueError(f"不支持的文件格式: {file_path.suffix}")
-
-    def _load_json_file(self, file_path: Path) -> Dataset:
-        """加载JSON文件"""
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-
-        samples = []
-        if isinstance(data, list):
-            for i, item in enumerate(data):
-                sample = self._parse_data_item(item, f"{file_path.stem}_{i}")
-                if sample:
-                    samples.append(sample)
-        elif isinstance(data, dict):
-            sample = self._parse_data_item(data, file_path.stem)
-            if sample:
-                samples.append(sample)
-
-        return Dataset(samples=samples)
-
-    def _load_csv_file(self, file_path: Path) -> Dataset:
-        """加载CSV文件"""
-        df = pd.read_csv(file_path)
-        samples = []
-
-        for idx, row in df.iterrows():
-            sample = DataSample(
-                id=str(idx),
-                text=row.get('text'),
-                images=self._parse_image_paths(row.get('images')),
-                metadata=row.to_dict(),
-            )
-            samples.append(sample)
-
-        return Dataset(samples=samples)
-
-    def _load_directory(self, dir_path: Path) -> Dataset:
-        """加载目录中的数据"""
-        # 简单实现：寻找所有图像文件
-        image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
-        samples = []
-
-        for img_path in dir_path.rglob('*'):
-            if img_path.suffix.lower() in image_extensions:
-                sample = DataSample(id=img_path.stem, images=[str(img_path)], metadata={"source_path": str(img_path)})
-                samples.append(sample)
-
-        return Dataset(samples=samples)
-
-    def _parse_data_item(self, item: Dict[str, Any], default_id: str) -> Optional[DataSample]:
-        """解析数据项"""
-        try:
-            sample_id = str(item.get('id', default_id))
-            text = item.get('text')
-            images = self._parse_image_paths(item.get('images'))
-            metadata = {k: v for k, v in item.items() if k not in ['id', 'text', 'images']}
-
-            return DataSample(id=sample_id, text=text, images=images, metadata=metadata)
-        except Exception as e:
-            print(f"解析数据项失败: {e}")
-            return None
-
-    def _parse_image_paths(self, images_data) -> Optional[List[str]]:
-        """解析图像路径"""
-        if images_data is None:
-            return None
-
-        if isinstance(images_data, str):
-            return [images_data]
-        elif isinstance(images_data, list):
-            return [str(img) for img in images_data]
-        else:
-            return None
-
     async def generate(self, num_samples: Optional[int] = None) -> List[Dict[str, Any]]:
-        """生成数据
-
-        Args:
-            num_samples: 生成样本数量，如果为None则使用配置中的数量
-
-        Returns:
-            生成的数据列表
-        """
+        """生成数据"""
         if self.dataset is None:
             raise ValueError("请先加载数据集")
 
@@ -210,6 +118,9 @@ class OmniGenEngine:
         generated_data = []
 
         for i in range(num_samples):
+            if self.config.verbose:
+                print(f"正在生成第 {i+1}/{num_samples} 个样本...")
+
             # 随机选择一个输入样本
             sample = self._select_sample()
 
@@ -218,20 +129,30 @@ class OmniGenEngine:
 
             while retry_count <= self.config.max_retries and result is None:
                 try:
-                    # 生成器现在是同步的，但我们仍然在异步上下文中运行
+                    if self.config.verbose and retry_count > 0:
+                        print(f"  重试第 {retry_count} 次...")
+
                     result = self.generator.generate_single(sample)
+
                     if result is not None:
                         generated_data.append(result)
                         if self.config.verbose:
-                            print(f"生成进度: {len(generated_data)}/{num_samples}")
+                            print(f"  生成成功: {len(generated_data)}/{num_samples}")
                         break
+                    else:
+                        if self.config.verbose:
+                            print(f"  生成返回 None，重试...")
+
                 except Exception as e:
                     if self.config.verbose:
-                        print(f"生成失败 (重试 {retry_count}/{self.config.max_retries}): {e}")
+                        print(f"  生成异常 (重试 {retry_count}/{self.config.max_retries}): {e}")
                     retry_count += 1
+                    continue
 
-            if result is None and self.config.verbose:
-                print(f"样本 {i+1} 生成失败，已达到最大重试次数")
+            if result is None:
+                if self.config.verbose:
+                    print(f"  样本 {i+1} 生成失败，已达到最大重试次数，跳过")
+                continue
 
         if self.config.verbose:
             print(f"生成完成，共生成 {len(generated_data)} 个有效样本")
@@ -239,18 +160,29 @@ class OmniGenEngine:
         return generated_data
 
     def _select_sample(self) -> DataSample:
-        """选择一个输入样本"""
+        """选择一个输入样本，确保随机性和均衡性"""
         import random
 
-        return random.choice(self.dataset.samples)
+        available_samples = [s for s in self.dataset.samples if s.id not in self.used_samples]
+
+        # 如果所有样本都用过了，重置已使用集合
+        if not available_samples:
+            if self.config.verbose:
+                print("所有样本都已使用过，重新开始选择")
+            self.used_samples.clear()
+            available_samples = self.dataset.samples
+
+        # 随机选择一个样本
+        selected_sample = random.choice(available_samples)
+        self.used_samples.add(selected_sample.id)
+
+        if self.config.verbose:
+            print(f"选择样本: {selected_sample.id}")
+
+        return selected_sample
 
     def save_results(self, results: List[Dict[str, Any]], output_path: Optional[str] = None):
-        """保存生成结果
-
-        Args:
-            results: 生成的结果列表
-            output_path: 输出路径，如果为None则使用配置中的路径
-        """
+        """保存生成结果"""
         if output_path is None:
             output_path = self.config.output_path
 
@@ -288,11 +220,7 @@ class OmniGenEngine:
         df.to_parquet(output_path, index=False)
 
     async def run(self) -> List[Dict[str, Any]]:
-        """运行完整的生成流程
-
-        Returns:
-            生成的结果列表
-        """
+        """运行完整的生成流程"""
         # 加载数据集
         self.load_dataset()
 

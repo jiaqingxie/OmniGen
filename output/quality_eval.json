@@ -1,0 +1,262 @@
+[
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/C-NMR/MOL_0015.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Yes, obvious quality issues",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0150.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0075.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/C-NMR/MOL_0179.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0097.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0161.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0028.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0053.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/MASS/MOL_0029.jpg"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0064.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/MASS/MOL_0041.jpg"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0181.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0073.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0153.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0171.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "Very low noise, negligible",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0124.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/H-NMR/MOL_0157.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/C-NMR/MOL_0105.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0190.png"
+    ]
+  },
+  {
+    "question": "Does this spectrum show obvious signal quality issues?",
+    "choices": [
+      "Yes, obvious quality issues",
+      "No, the signal is very clear",
+      "Localized noise",
+      "Very low noise, negligible"
+    ],
+    "answer": "No, the signal is very clear",
+    "image_path": [
+      "seed_datasets/molpuzzle/MASS/MOL_0009.jpg"
+    ]
+  }
+]

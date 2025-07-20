@@ -5,6 +5,7 @@
 *.venv/
 *__pycache__/
 .ruff_cache/
+.pytest_cache/
 
 # System files
 .DS_Store

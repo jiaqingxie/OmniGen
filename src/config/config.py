@@ -1,5 +1,3 @@
-"""基础配置类"""
-
 import os
 import json
 import yaml
