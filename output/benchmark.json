@@ -8,9 +8,9 @@
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
-    "answer": "Infrared Spectrum (IR)",
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
     "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0100.png"
+      "seed_datasets/molpuzzle/H-NMR/MOL_0019.png"
     ]
   }
 ]

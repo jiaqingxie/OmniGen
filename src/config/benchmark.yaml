@@ -1,37 +1,43 @@
 dataset_path: seed_datasets/molpuzzle/meta_data.json
 generator_type: benchmark
 generator_config:
-  num_choices: 5
   prompt_templates:
-    type_cls: |
-      请仔细观察这张谱图，识别它的类型。
-      这是一张分子谱图，请根据谱图的特征（如峰值位置、形状、强度等）来判断它属于哪种类型的谱图。
-      选项：
-      - Infrared Spectrum (IR) - 红外光谱，显示分子振动模式
-      - Proton Nuclear Magnetic Resonance (H-NMR) - 质子核磁共振，显示氢原子环境
-      - Carbon Nuclear Magnetic Resonance (C-NMR) - 碳核磁共振，显示碳原子环境
-      - Mass Spectrometry (MS) - 质谱，显示分子质量和碎片
-      - Raman Spectrum - 拉曼光谱，显示分子振动模式
-      请以JSON格式回复：
-      {{
+    type_cls:
+      template: |
+        Identify the type of the given spectrum image.
+
+        Please answer in the following JSON format:
+        {{
+          "question": "Your generated question here",
+          "choices": ["choice1", "choice2", "choice3", "choice4", "choice5"],
+          "answer": "the correct answer"
+        }}
+
+        Example:
+        {{
           "question": "What type of spectrum is shown in this image?",
           "choices": ["Infrared Spectrum (IR)", "Proton Nuclear Magnetic Resonance (H-NMR)", "Carbon Nuclear Magnetic Resonance (C-NMR)", "Mass Spectrometry (MS)", "Raman Spectrum"],
-          "answer": "正确答案"
-      }}
-    quality_eval: |
-      请评估这张谱图的信号质量。
-      仔细观察谱图的清晰度、噪声水平、峰值强度等特征，判断是否存在明显的质量问题。
-      选项：
-      - Yes, obvious quality issues - 是的，存在明显的质量问题
-      - No, the signal is very clear - 不，信号非常清晰
-      - Localized noise - 局部噪声
-      - Very low noise, negligible - 噪声很低，可忽略
-      请以JSON格式回复：
-      {{
+          "answer": "Infrared Spectrum (IR)"
+        }}
+      num_choices: 5
+    quality_eval:
+      template: |
+        Evaluate the signal quality of this spectrum image.
+
+        Please answer in the following JSON format:
+        {{
+          "question": "Your generated question here",
+          "choices": ["choice1", "choice2", "choice3", "choice4"],
+          "answer": "the correct answer"
+        }}
+
+        Example:
+        {{
           "question": "Does this spectrum show obvious signal quality issues?",
           "choices": ["Yes, obvious quality issues", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
-          "answer": "正确答案"
-      }}
+          "answer": "No, the signal is very clear"
+        }}
+      num_choices: 4
   question_types: ["type_cls", "quality_eval"]
 model_type: internvl
 model_config:
