@@ -7,8 +7,6 @@ from openai import OpenAI
 
 
 class InternVL(BaseAPIModel):
-    """InternVL API 客户端"""
-
     def __init__(
         self,
         model_name: Optional[str] = None,

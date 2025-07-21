@@ -39,15 +39,15 @@ class BenchmarkGenerator(BaseGenerator):
                 raw_output = self.model_client.generate(model_input, max_out_len=512)
                 result = self._parse_response(raw_output, num_choices, sample)
             # Print debug info
-            debug_info = {
-                "sample_id": sample.id,
-                "question_type": question_type,
-                "prompt": prompt_str,
-                "raw_output": raw_output,
-                "parsed_result": result,
-            }
-            print("\n[DEBUG] Benchmark Generation Info:")
-            print(json.dumps(debug_info, ensure_ascii=False, indent=2))
+            # debug_info = {
+            #     "sample_id": sample.id,
+            #     "question_type": question_type,
+            #     "prompt": prompt_str,
+            #     "raw_output": raw_output,
+            #     "parsed_result": result,
+            # }
+            # print("\n[DEBUG] Benchmark Generation Info:")
+            # print(json.dumps(debug_info, ensure_ascii=False, indent=2))
             if result is None:
                 return None
             self.current_type_index = (self.current_type_index + 1) % len(self.question_types)
@@ -59,8 +59,8 @@ class BenchmarkGenerator(BaseGenerator):
     def _prepare_model_input(self, sample: DataSample, question_type: str, template_str: str):
         prompt_text = self._build_prompt(sample, question_type, template_str)
         if sample.has_images():
-            # 传递所有谱图类型
-            return {"text": prompt_text, "images": sample.images}
+            image_paths = list(sample.images.values())
+            return {"text": prompt_text, "images": image_paths}
         else:
             return prompt_text
 
@@ -110,7 +110,6 @@ class BenchmarkGenerator(BaseGenerator):
             return None
 
     def _generate_mock_data(self, sample: DataSample, question_type: str, num_choices: int) -> Dict[str, Any]:
-        # 随机选一个谱图类型
         import random
 
         spectrum_types = list(sample.images.keys()) if sample.has_images() else []

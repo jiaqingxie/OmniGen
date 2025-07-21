@@ -1,17 +1,15 @@
 [
   {
-    "selected_spectrum_type": "C-NMR",
-    "question": "What functional groups are likely present based on the C-NMR spectrum of the molecule C4H6O2?",
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak (M+) observed in the mass spectrum?",
     "choices": [
-      "Carbonyl and Ether",
-      "Alcohol and Alkene",
-      "Carbonyl and Alcohol",
-      "Alkyne and Ether",
-      "Ester and Alkene"
+      "65",
+      "77",
+      "79",
+      "91",
+      "105"
     ],
-    "answer": "Carbonyl and Ether",
-    "image_path": {
-      "C-NMR": "seed_datasets/molpuzzle/C-NMR/MOL_0208.png"
-    }
+    "answer": "105",
+    "image_path": {}
   }
 ]
