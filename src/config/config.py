@@ -5,10 +5,28 @@ from dataclasses import dataclass, field
 from typing import Dict, Any
 from pathlib import Path
 from dotenv import load_dotenv
+import re
 
 project_root = Path(__file__).parent.parent.parent
 env_path = project_root / ".env"
 load_dotenv(env_path)
+
+
+def resolve_env_vars(obj):
+    """Recursively resolve ${VAR} in dict/list/str using environment variables."""
+    if isinstance(obj, dict):
+        return {k: resolve_env_vars(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [resolve_env_vars(i) for i in obj]
+    elif isinstance(obj, str):
+
+        def replacer(match):
+            var = match.group(1)
+            return os.environ.get(var, match.group(0))
+
+        return re.sub(r"\$\{([^}]+)\}", replacer, obj)
+    else:
+        return obj
 
 
 @dataclass
@@ -67,6 +85,8 @@ class OmniGenConfig:
             else:
                 raise ValueError(f"unsupported config file format: {config_path.suffix}")
 
+        # 递归替换环境变量
+        data = resolve_env_vars(data)
         return cls(**data)
 
     def to_file(self, config_path: str) -> None:

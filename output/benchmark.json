@@ -1,0 +1,16 @@
+[
+  {
+    "question": "What type of spectrum is shown in this image?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Carbon Nuclear Magnetic Resonance (C-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Infrared Spectrum (IR)",
+    "image_path": [
+      "seed_datasets/molpuzzle/IR/MOL_0100.png"
+    ]
+  }
+]
