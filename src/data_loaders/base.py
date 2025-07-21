@@ -1,19 +1,17 @@
-"""数据加载器基类"""
-
 from abc import ABC, abstractmethod
 from pathlib import Path
 from .data_structures import Dataset
 
 
 class BaseDataLoader(ABC):
-    """数据加载器基类"""
+    """Base data loader"""
 
     @abstractmethod
     def can_handle(self, data_path: Path) -> bool:
-        """判断是否能处理该数据路径"""
+        """check if can handle the data path"""
         pass
 
     @abstractmethod
     def load(self, data_path: Path) -> Dataset:
-        """加载数据并返回 Dataset"""
+        """load data and return Dataset"""
         pass

@@ -6,12 +6,12 @@ from .registry import register_loader
 from .data_structures import Dataset, DataSample
 
 
-@register_loader("molecule")
-class MoleculeDataLoader(BaseDataLoader):
-    """分子数据加载器"""
+@register_loader("molpuzzle")
+class MolPuzzleDataLoader(BaseDataLoader):
+    """MolPuzzle 数据集加载器"""
 
     def can_handle(self, data_path: Path) -> bool:
-        """判断是否为分子数据文件"""
+        """判断是否为 MolPuzzle 数据文件"""
         if data_path.suffix != '.json':
             return False
 
@@ -33,7 +33,7 @@ class MoleculeDataLoader(BaseDataLoader):
             return False
 
     def load(self, data_path: Path) -> Dataset:
-        """加载分子数据，将每个谱图作为独立样本"""
+        """加载 MolPuzzle 数据，将每个谱图作为独立样本"""
         with open(data_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
@@ -80,7 +80,7 @@ class MoleculeDataLoader(BaseDataLoader):
                         sample = DataSample(
                             id=sample_id,
                             text=text,
-                            images=[full_path],  # 只包含一个谱图
+                            images=[full_path],
                             metadata={
                                 "molecule_info": molecule_info,
                                 "spectrum_type": spectrum_type,

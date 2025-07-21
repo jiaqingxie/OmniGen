@@ -1,3 +1,8 @@
-"""OmniGen: 通用多模态数据生成框架"""
+__version__ = "0.0.1"
 
-__version__ = "0.1.0"
+
+from . import config
+from . import data_loaders
+from . import models
+from . import generators
+from . import core

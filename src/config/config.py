@@ -93,6 +93,3 @@ class OmniGenConfig:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             else:
                 raise ValueError(f"unsupported config file format: {config_path.suffix}")
-
-
-Config = ModelConfig
