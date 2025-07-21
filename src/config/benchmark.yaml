@@ -4,36 +4,48 @@ generator_config:
   prompt_templates:
     type_cls:
       template: |
-        Identify the type of the given spectrum image.
+        You are given the following spectra for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for the following task, and generate a question, choices, and answer based on it.
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
 
         Please answer in the following JSON format:
         {{
-          "question": "Your generated question here",
-          "choices": ["choice1", "choice2", "choice3", "choice4", "choice5"],
-          "answer": "the correct answer"
-        }}
-
-        Example:
-        {{
+          "selected_spectrum_type": "IR",
           "question": "What type of spectrum is shown in this image?",
           "choices": ["Infrared Spectrum (IR)", "Proton Nuclear Magnetic Resonance (H-NMR)", "Carbon Nuclear Magnetic Resonance (C-NMR)", "Mass Spectrometry (MS)", "Raman Spectrum"],
           "answer": "Infrared Spectrum (IR)"
         }}
+
+        Example:
+        {{
+          "selected_spectrum_type": "H-NMR",
+          "question": "Which substructure is most likely present based on the H-NMR spectrum?",
+          "choices": ["Benzene ring", "Alkene", "Alkyne", "Ether", "Alcohol"],
+          "answer": "Benzene ring"
+        }}
       num_choices: 5
     quality_eval:
       template: |
-        Evaluate the signal quality of this spectrum image.
+        You are given the following spectra for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for evaluating signal quality, and generate a question, choices, and answer based on it.
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
 
         Please answer in the following JSON format:
         {{
-          "question": "Your generated question here",
-          "choices": ["choice1", "choice2", "choice3", "choice4"],
-          "answer": "the correct answer"
+          "selected_spectrum_type": "IR",
+          "question": "Does this spectrum show obvious signal quality issues?",
+          "choices": ["Yes, obvious quality issues", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
+          "answer": "No, the signal is very clear"
         }}
 
         Example:
         {{
-          "question": "Does this spectrum show obvious signal quality issues?",
+          "selected_spectrum_type": "MASS",
+          "question": "Does this mass spectrum show obvious signal quality issues?",
           "choices": ["Yes, obvious quality issues", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
           "answer": "No, the signal is very clear"
         }}

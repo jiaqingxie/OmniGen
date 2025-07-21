@@ -105,7 +105,7 @@ class InternVL(BaseAPIModel):
         try:
             path = Path(image_path)
             if not path.exists():
-                print(f"警告: 图像文件不存在: {image_path}")
+                print(f"Warning: image file does not exist: {image_path}")
                 return None
 
             # 读取图像并转换为 base64
@@ -120,7 +120,7 @@ class InternVL(BaseAPIModel):
             return {"type": "image_url", "image_url": {"url": f"data:image/{image_format};base64,{image_data}"}}
 
         except Exception as e:
-            print(f"处理图像失败: {e}")
+            print(f"Failed to process image: {e}")
             return None
 
     def validate_config(self) -> bool:

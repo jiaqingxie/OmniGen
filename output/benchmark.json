@@ -1,16 +1,17 @@
 [
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "C-NMR",
+    "question": "What functional groups are likely present based on the C-NMR spectrum of the molecule C4H6O2?",
     "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "Carbonyl and Ether",
+      "Alcohol and Alkene",
+      "Carbonyl and Alcohol",
+      "Alkyne and Ether",
+      "Ester and Alkene"
     ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0019.png"
-    ]
+    "answer": "Carbonyl and Ether",
+    "image_path": {
+      "C-NMR": "seed_datasets/molpuzzle/C-NMR/MOL_0208.png"
+    }
   }
 ]

@@ -8,7 +8,7 @@ class DataSample:
 
     id: str
     text: Optional[str] = None
-    images: Optional[List[str]] = None
+    images: Optional[Dict[str, str]] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def has_text(self) -> bool:

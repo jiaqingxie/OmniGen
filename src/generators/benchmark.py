@@ -37,7 +37,7 @@ class BenchmarkGenerator(BaseGenerator):
                 result = self._generate_mock_data(sample, question_type, num_choices)
             else:
                 raw_output = self.model_client.generate(model_input, max_out_len=512)
-                result = self._parse_response(raw_output, num_choices)
+                result = self._parse_response(raw_output, num_choices, sample)
             # Print debug info
             debug_info = {
                 "sample_id": sample.id,
@@ -50,10 +50,6 @@ class BenchmarkGenerator(BaseGenerator):
             print(json.dumps(debug_info, ensure_ascii=False, indent=2))
             if result is None:
                 return None
-            if sample.has_images():
-                result["image_path"] = sample.images
-            if not self.validate_output(result, num_choices):
-                return None
             self.current_type_index = (self.current_type_index + 1) % len(self.question_types)
             return result
         except Exception as e:
@@ -63,14 +59,17 @@ class BenchmarkGenerator(BaseGenerator):
     def _prepare_model_input(self, sample: DataSample, question_type: str, template_str: str):
         prompt_text = self._build_prompt(sample, question_type, template_str)
         if sample.has_images():
+            # 传递所有谱图类型
             return {"text": prompt_text, "images": sample.images}
         else:
             return prompt_text
 
     def _build_prompt(self, sample: DataSample, question_type: str, template_str: str) -> str:
+        spectra_list = "\n".join([f"{k}: {v}" for k, v in (sample.images or {}).items()])
         prompt_template = PromptTemplate(template_str)
         template_vars = {
             "question_type": question_type,
+            "spectra_list": spectra_list,
         }
         if sample.metadata:
             for key, value in sample.metadata.items():
@@ -85,7 +84,7 @@ class BenchmarkGenerator(BaseGenerator):
             base_prompt += f"\n\nContent: {sample.text}"
         return base_prompt
 
-    def _parse_response(self, response: str, num_choices: int) -> Optional[Dict[str, Any]]:
+    def _parse_response(self, response: str, num_choices: int, sample: DataSample) -> Optional[Dict[str, Any]]:
         try:
             start_idx = response.find('{')
             end_idx = response.rfind('}')
@@ -93,25 +92,36 @@ class BenchmarkGenerator(BaseGenerator):
                 return None
             json_str = response[start_idx : end_idx + 1]
             data = json.loads(json_str)
-            required_fields = ["question", "choices", "answer"]
+            required_fields = ["selected_spectrum_type", "question", "choices", "answer"]
             if not all(field in data for field in required_fields):
                 return None
             if not isinstance(data["choices"], list):
                 return None
             if data["answer"] not in data["choices"]:
                 return None
+            # 只保留模型选择的谱图类型
+            spectrum_type = data["selected_spectrum_type"]
+            if sample.has_images() and spectrum_type in sample.images:
+                data["image_path"] = {spectrum_type: sample.images[spectrum_type]}
+            else:
+                data["image_path"] = {}
             return data
         except Exception:
             return None
 
     def _generate_mock_data(self, sample: DataSample, question_type: str, num_choices: int) -> Dict[str, Any]:
+        # 随机选一个谱图类型
+        import random
+
+        spectrum_types = list(sample.images.keys()) if sample.has_images() else []
+        selected_type = random.choice(spectrum_types) if spectrum_types else "IR"
         result = {
+            "selected_spectrum_type": selected_type,
             "question": f"Sample {sample.id} {question_type} question",
             "choices": [f"Option {chr(65+i)}" for i in range(num_choices)],
             "answer": "Option A",
+            "image_path": {selected_type: sample.images[selected_type]} if sample.has_images() else {},
         }
-        if sample.has_images():
-            result["image_path"] = sample.images
         return result
 
     def validate_input(self, sample: DataSample) -> bool:
@@ -130,26 +140,27 @@ class BenchmarkGenerator(BaseGenerator):
         return True
 
     def get_output_schema(self) -> Dict[str, Any]:
-        # 默认返回 type_cls 的 num_choices
-        type_cls_info = self.prompt_templates.get("type_cls", {})
-        num_choices = type_cls_info.get("num_choices", 5) if isinstance(type_cls_info, dict) else 5
         return {
             "type": "object",
             "properties": {
+                "selected_spectrum_type": {
+                    "type": "string",
+                    "description": "Selected spectrum type used for the question.",
+                },
                 "question": {"type": "string", "description": "Question text"},
                 "choices": {
                     "type": "array",
                     "items": {"type": "string"},
-                    "minItems": num_choices,
-                    "maxItems": num_choices,
+                    "minItems": 1,
+                    "maxItems": 10,
                     "description": "List of choices",
                 },
                 "answer": {"type": "string", "description": "Correct answer"},
                 "image_path": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "List of image paths (optional)",
+                    "type": "object",
+                    "description": "Selected spectrum type and its image path",
+                    "additionalProperties": {"type": "string"},
                 },
             },
-            "required": ["question", "choices", "answer"],
+            "required": ["selected_spectrum_type", "question", "choices", "answer"],
         }
