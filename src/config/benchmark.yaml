@@ -50,7 +50,139 @@ generator_config:
           "answer": "No, the signal is very clear"
         }}
       num_choices: 4
-  question_types: ["type_cls", "quality_eval"]
+    feature_extract:
+      template: |
+        You are given the following spectrum for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for extracting characteristic features, and generate a question, choices, and answer based on it.
+        Focus on extracting key features such as the position (wavenumber or ppm) of the strongest peak, the number of distinct signals, or the presence of characteristic peaks in specific regions. 
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+
+        Please answer in the following JSON format:
+        {{
+          "selected_spectrum_type": "IR",
+          "question": "Please select the approximate wavenumber of the strongest absorption peak in the image.",
+          "choices": ["~1700 cm⁻¹", "~2900 cm⁻¹", "~3400 cm⁻¹", "~1100 cm⁻¹"],
+          "answer": "~1700 cm⁻¹"
+        }}
+
+        Example:
+        {{
+          "selected_spectrum_type": "H-NMR",
+          "question": "Please select the approximate ppm value of the peak within the 6-8 ppm chemical shift range in the image.",
+          "choices": ["~1.2 ppm", "~3.5 ppm", "~7.1 ppm", "~9.0 ppm"],
+          "answer": "~7.1 ppm"
+        }}
+      num_choices: 4
+    impurity_detect:
+      template: |
+        You are given the following spectrum for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for impurity detection, and generate a question, choices, and answer based on it.
+        Focus on identifying abnormal peaks, classifying them as impurity or noise, or recognizing unexpected signals that do not belong to the target compound.
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+
+        Please answer in the following JSON format:
+        {{
+          "selected_spectrum_type": "H-NMR",
+          "question": "Please observe this spectrum carefully. Besides the signals from the target compound, there is also a distinct additional peak around 2.5 ppm in the image. What is this peak most likely?",
+          "choices": ["Solvent impurity", "Target compound", "Instrument noise", "Reference standard"],
+          "answer": "Solvent impurity"
+        }}
+        Example:
+        {{
+          "selected_spectrum_type": "IR",
+          "question": "List the wavenumbers of abnormal peaks and classify them as impurity or noise.",
+          "choices": ["1720 cm⁻¹ (impurity)", "3400 cm⁻¹ (noise)", "1100 cm⁻¹ (impurity)", "None detected"],
+          "answer": "1720 cm⁻¹ (impurity)"
+        }}
+      num_choices: 4
+    group_recog:
+      template: |
+        You are given the following spectrum for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for functional group or fragment recognition, and generate a question, choices, and answer based on it.
+        Focus on identifying the most likely functional group or chemical fragment present in the molecule, based on the spectral features.
+        Do NOT generate questions about spectrum type classification, signal quality, or peak assignment.
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+
+        Please answer in the following JSON format:
+        {{
+          "selected_spectrum_type": "IR",
+          "question": "Based on this infrared spectrum, what functional group is most likely present in the molecule?",
+          "choices": ["Carbonyl group (C=O)", "Hydroxyl group (-OH)", "Amino group (-NH2)", "Nitro group (-NO2)"],
+          "answer": "Carbonyl group (C=O)"
+        }}
+
+        Example:
+        {{
+          "selected_spectrum_type": "H-NMR",
+          "question": "What chemical fragment might be present in the molecule, as suggested by this spectrum?",
+          "choices": ["Methyl group (-CH3)", "Phenyl group (-C6H5)", "Carboxyl group (-COOH)", "Alkene group (C=C)"],
+          "answer": "Methyl group (-CH3)"
+        }}
+      num_choices: 4
+    element_pred:
+      template: |
+        You are given the following spectrum for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for element or isotope pattern prediction, and generate a question, choices, and answer based on it.
+        Focus on identifying the elemental composition or isotopic pattern (such as halogen presence) based on the mass spectrum.
+        Do NOT generate questions about spectrum type classification, signal quality, or functional group recognition.
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+
+        Please answer in the following JSON format:
+        {{
+          "selected_spectrum_type": "MS",
+          "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+          "choices": ["Fluorine (F)", "Chlorine (Cl)", "Bromine (Br)", "Iodine (I)"],
+          "answer": "Chlorine (Cl)"
+        }}
+
+        Example:
+        {{
+          "selected_spectrum_type": "MS",
+          "question": "In a mass spectrum, if the M+2 peak of the molecular ion has a relative intensity of about 4-5% compared to the M peak, which of the following elements might typically be indicated as present in the molecule?",
+          "choices": ["Nitrogen (N)", "Oxygen (O)", "Sulfur (S)", "Phosphorus (P)"],
+          "answer": "Sulfur (S)"
+        }}
+      num_choices: 4
+    peak_assign:
+      template: |
+        You are given the following spectrum for a molecule:
+        {spectra_list}
+
+        Please select the most appropriate spectrum for peak assignment, and generate a question, choices, and answer based on it.
+        Focus on assigning specific peaks (such as triplet, quartet, singlet, etc.) in the NMR spectrum to parts of the molecule, based on the chemical formula, SMILES, or structure.
+        Do NOT generate questions about spectrum type classification, signal quality, or functional group recognition.
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+
+        Please answer in the following JSON format:
+        {{
+          "selected_spectrum_type": "H-NMR",
+          "question": "Given the chemical formula C2H6O. Observe this HNMR spectrum. The triplet peak around ~1.2 ppm in the image is most likely assigned to which part of the molecule?",
+          "choices": ["-CH3 group", "-CH2 group", "-OH group", "Aromatic ring"],
+          "answer": "-CH3 group"
+        }}
+
+        Example:
+        {{
+          "selected_spectrum_type": "C-NMR",
+          "question": "Given the SMILES CC(=O)O. In this CNMR spectrum, the signal at ~180 ppm is most likely assigned to which carbon atom?",
+          "choices": ["Methyl carbon", "Carboxyl carbon", "Aromatic carbon", "Alkene carbon"],
+          "answer": "Carboxyl carbon"
+        }}
+      num_choices: 4
+  question_types: ["type_cls", "quality_eval", "feature_extract", "impurity_detect", "group_recog", "element_pred", "peak_assign"]
 model_type: internvl
 model_config:
   api_key: ${INTERNVL_API_KEY}
