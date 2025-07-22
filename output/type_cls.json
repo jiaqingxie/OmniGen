@@ -1,702 +1,664 @@
 [
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MASS",
+    "question": "What is the most prominent peak in the mass spectrum of the given molecule?",
+    "choices": [
+      "m/z 56",
+      "m/z 60",
+      "m/z 112",
+      "m/z 128"
+    ],
+    "answer": "m/z 112",
+    "image_path": {
+      "MASS": "seed_datasets/molpuzzle/MASS/MOL_0113.jpg"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Which type of spectrum is shown in the image?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0202.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MASS",
+    "question": "What type of spectrum is shown in the image?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Carbon Nuclear Magnetic Resonance (C-NMR)"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {
+      "MASS": "seed_datasets/molpuzzle/MASS/MOL_0089.jpg"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0156.jpg"
-    ]
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0040.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0204.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular weight of the compound based on the mass spectrum?",
     "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "120",
+      "150",
+      "130",
+      "140"
     ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0021.png"
-    ]
+    "answer": "120",
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Infrared Spectrum (IR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0179.png"
-    ]
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0177.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0123.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0183.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0140.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0092.jpg"
-    ]
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0152.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "Carbon Nuclear Magnetic Resonance (C-NMR)"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0190.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0093.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0144.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0069.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0183.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0178.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0216.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0147.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0116.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0139.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0195.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0052.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0200.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0142.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0087.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0209.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Carbon Nuclear Magnetic Resonance (C-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0200.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Infrared Spectrum (IR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0012.png"
-    ]
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0100.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0199.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0182.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0014.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0008.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Infrared Spectrum (IR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0157.png"
-    ]
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0056.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is shown in the image?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0209.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0074.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0179.jpg"
-    ]
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "Which type of spectrum is displayed in the image?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0040.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0136.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What is the chemical shift range for the major peaks observed in this spectrum?",
     "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "0-2 ppm",
+      "2-4 ppm",
+      "4-6 ppm",
+      "6-8 ppm"
     ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0025.png"
-    ]
+    "answer": "2-4 ppm",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0086.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0165.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0100.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "Carbon Nuclear Magnetic Resonance (C-NMR)"
     ],
     "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0202.jpg"
-    ]
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0214.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Infrared Spectrum (IR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0102.png"
-    ]
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0208.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "Carbon-13 Nuclear Magnetic Resonance (C-NMR)"
     ],
     "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0019.png"
-    ]
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0196.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak (M+) of the given compound based on the spectrum?",
     "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
+      "41",
+      "43",
+      "69",
+      "68"
     ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0116.jpg"
-    ]
+    "answer": "69",
+    "image_path": {}
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0055.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0133.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0016.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/H-NMR/MOL_0057.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0187.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0154.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0208.jpg"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
-      "Mass Spectrometry (MS)",
-      "Raman Spectrum"
-    ],
-    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/C-NMR/MOL_0137.png"
-    ]
-  },
-  {
-    "question": "What type of spectrum is shown in this image?",
-    "choices": [
-      "Infrared Spectrum (IR)",
-      "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Infrared Spectrum (IR)",
-    "image_path": [
-      "seed_datasets/molpuzzle/IR/MOL_0024.png"
-    ]
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0141.png"
+    }
   },
   {
-    "question": "What type of spectrum is shown in this image?",
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
     "choices": [
       "Infrared Spectrum (IR)",
       "Proton Nuclear Magnetic Resonance (H-NMR)",
-      "Carbon Nuclear Magnetic Resonance (C-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Infrared Spectrum (IR)",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0024.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0050.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak (M+) observed in the mass spectrum of C14H12O2?",
+    "choices": [
+      "91",
+      "65",
+      "107",
+      "140"
+    ],
+    "answer": "107",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
       "Mass Spectrometry (MS)",
       "Raman Spectrum"
     ],
     "answer": "Mass Spectrometry (MS)",
-    "image_path": [
-      "seed_datasets/molpuzzle/MASS/MOL_0135.jpg"
-    ]
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Infrared Spectrum (IR)",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0154.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak observed in this spectrum?",
+    "choices": [
+      "41",
+      "43",
+      "67",
+      "69"
+    ],
+    "answer": "69",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Carbon Nuclear Magnetic Resonance (C-NMR)"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the base peak in the mass spectrum of the compound C10H7Cl?",
+    "choices": [
+      "103 m/z",
+      "137 m/z",
+      "161 m/z",
+      "163 m/z"
+    ],
+    "answer": "161 m/z",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Which of the following is the most likely structure based on the H-NMR spectrum?",
+    "choices": [
+      "CH3CH2CH2CH3",
+      "CH3CH2CH2COOCH2CH2CH3",
+      "CH3(CH2)4CH3",
+      "CH3CH2CH2CHO"
+    ],
+    "answer": "CH3CH2CH2COOCH2CH2CH3",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0046.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Which spectrum represents the Proton Nuclear Magnetic Resonance (H-NMR) of the molecule C6H10O?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0143.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0111.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0003.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0060.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Infrared Spectrum (IR)",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0080.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Which spectrum best shows the chemical environment of hydrogen atoms in the molecule?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Carbon-13 Nuclear Magnetic Resonance (C-NMR)"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0020.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0090.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MASS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {
+      "MASS": "seed_datasets/molpuzzle/MASS/MOL_0116.jpg"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Carbon-13 Nuclear Magnetic Resonance (C-NMR)"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0175.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Proton Nuclear Magnetic Resonance (H-NMR)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0129.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Carbon Nuclear Magnetic Resonance (C-NMR)"
+    ],
+    "answer": "Mass Spectrometry (MS)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak (M+) for the molecule C5H9Br?",
+    "choices": [
+      "67",
+      "118",
+      "146",
+      "106"
+    ],
+    "answer": "146",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular weight of the molecule based on the spectrum?",
+    "choices": [
+      "39",
+      "41",
+      "69",
+      "80"
+    ],
+    "answer": "69",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "What type of spectrum is this?",
+    "choices": [
+      "Infrared Spectrum (IR)",
+      "Proton Nuclear Magnetic Resonance (H-NMR)",
+      "Mass Spectrometry (MS)",
+      "Raman Spectrum"
+    ],
+    "answer": "Infrared Spectrum (IR)",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0197.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "What is the molecular ion peak in the mass spectrum of C10H11BrO2?",
+    "choices": [
+      "91",
+      "119",
+      "156",
+      "194"
+    ],
+    "answer": "194",
+    "image_path": {}
   }
 ]

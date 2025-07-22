@@ -13,19 +13,19 @@ generator_config:
         Please answer in the following JSON format:
         {{
           "selected_spectrum_type": "IR",
-          "question": "What type of spectrum is shown in this image?",
-          "choices": ["Infrared Spectrum (IR)", "Proton Nuclear Magnetic Resonance (H-NMR)", "Carbon Nuclear Magnetic Resonance (C-NMR)", "Mass Spectrometry (MS)", "Raman Spectrum"],
+          "question": "What type of spectrum is this?",
+          "choices": ["Infrared Spectrum (IR)", "Proton Nuclear Magnetic Resonance (H-NMR)", "Mass Spectrometry (MS)", "Raman Spectrum"],
           "answer": "Infrared Spectrum (IR)"
         }}
 
         Example:
         {{
           "selected_spectrum_type": "H-NMR",
-          "question": "Which substructure is most likely present based on the H-NMR spectrum?",
-          "choices": ["Benzene ring", "Alkene", "Alkyne", "Ether", "Alcohol"],
-          "answer": "Benzene ring"
+          "question": "What type of spectrum is this?",
+          "choices": ["Infrared Spectrum (IR)", "Proton Nuclear Magnetic Resonance (H-NMR)", "Mass Spectrometry (MS)", "Raman Spectrum"],
+          "answer": "Proton Nuclear Magnetic Resonance (H-NMR)"
         }}
-      num_choices: 5
+      num_choices: 4
     quality_eval:
       template: |
         You are given the following spectra for a molecule:
@@ -38,15 +38,15 @@ generator_config:
         {{
           "selected_spectrum_type": "IR",
           "question": "Does this spectrum show obvious signal quality issues?",
-          "choices": ["Yes, obvious quality issues", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
+          "choices": ["Yes", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
           "answer": "No, the signal is very clear"
         }}
 
         Example:
         {{
           "selected_spectrum_type": "MASS",
-          "question": "Does this mass spectrum show obvious signal quality issues?",
-          "choices": ["Yes, obvious quality issues", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
+          "question": "Does this spectrum show obvious signal quality issues?",
+          "choices": ["Yes", "No, the signal is very clear", "Localized noise", "Very low noise, negligible"],
           "answer": "No, the signal is very clear"
         }}
       num_choices: 4

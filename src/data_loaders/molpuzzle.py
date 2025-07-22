@@ -55,9 +55,9 @@ class MolPuzzleDataLoader(BaseDataLoader):
             for spectrum in molecule_data.get("spectra", []):
                 spectrum_type = spectrum.get("spectrum_type", "Unknown")
                 for path in spectrum.get("path", []):
-                    print(f"DEBUG: spectrum_type={spectrum_type}, raw_path={path}")
+                    # print(f"DEBUG: spectrum_type={spectrum_type}, raw_path={path}")
                     full_path = str(Path("seed_datasets/molpuzzle") / path)
-                    print(f"DEBUG: full_path={full_path}")
+                    # print(f"DEBUG: full_path={full_path}")
                     if os.path.isfile(full_path):
                         images[spectrum_type] = full_path
                     else:
