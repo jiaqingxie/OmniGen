@@ -1,0 +1,602 @@
+[
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Based on the isotopic pattern in the molecular ion region of this mass spectrum, which halogen is most likely absent in the compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which of the following elements might typically be indicated as present in the molecule?",
+    "choices": [
+      "Nitrogen (N)",
+      "Oxygen (O)",
+      "Chlorine (Cl)",
+      "Bromine (Br)"
+    ],
+    "answer": "Nitrogen (N)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Based on the isotopic pattern in the mass spectrum, which halogen is most likely present in the compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely present in this compound due to the observed M+2 peak?",
+    "choices": [
+      "Nitrogen (N)",
+      "Carbon (C)",
+      "Hydrogen (H)",
+      "Sulfur (S)"
+    ],
+    "answer": "Carbon (C)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which of the following isotopic elements is most likely present in this compound?",
+    "choices": [
+      "Nitrogen (N)",
+      "Oxygen (O)",
+      "Bromine (Br)",
+      "Chlorine (Cl)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Fluorine (F)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on the observed isotopic pattern, which element is indicated by the presence of the M+2 peak?",
+    "choices": [
+      "Carbon (C)",
+      "Nitrogen (N)",
+      "Oxygen (O)",
+      "Sulfur (S)"
+    ],
+    "answer": "Carbon (C)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which nitrogen-containing group is most likely present in this compound?",
+    "choices": [
+      "Amide (CONH2)",
+      "Amine (NH2)",
+      "Nitro (NO2)",
+      "Nitrile (CN)"
+    ],
+    "answer": "Amide (CONH2)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely present in this compound?",
+    "choices": [
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Sulfur (S)",
+      "Oxygen (O)"
+    ],
+    "answer": "Sulfur (S)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which of the following elements might typically be indicated as present in the molecule?",
+    "choices": [
+      "Nitrogen (N)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Sulfur (S)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what element is most likely present in this compound?",
+    "choices": [
+      "Nitrogen (N)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Sulfur (S)"
+    ],
+    "answer": "Nitrogen (N)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is likely present in this compound?",
+    "choices": [
+      "Sulfur (S)",
+      "Phosphorus (P)",
+      "Chlorine (Cl)",
+      "Nitrogen (N)"
+    ],
+    "answer": "Sulfur (S)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which of the following elements is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element's presence is suggested by the observed peaks?",
+    "choices": [
+      "Carbon (C)",
+      "Oxygen (O)",
+      "Nitrogen (N)",
+      "Sulfur (S)"
+    ],
+    "answer": "Carbon (C)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what element is most likely present in this compound?",
+    "choices": [
+      "Sulfur (S)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Sulfur (S)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Chlorine (Cl)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+    "choices": [
+      "Fluorine (F)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Bromine (Br)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely contributing to the observed pattern?",
+    "choices": [
+      "Nitrogen (N)",
+      "Sulfur (S)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Sulfur (S)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, which element is most likely present in this compound?",
+    "choices": [
+      "Nitrogen (N)",
+      "Chlorine (Cl)",
+      "Bromine (Br)",
+      "Iodine (I)"
+    ],
+    "answer": "Nitrogen (N)",
+    "image_path": {}
+  }
+]

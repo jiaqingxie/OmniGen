@@ -1,0 +1,702 @@
+[
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C14H12O2 (C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2). Observe this H-NMR spectrum. The singlet peak around ~7.3 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OH group",
+      "Aromatic protons"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0215.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C4H4N2 (C(CC#N)C#N). In this H-NMR spectrum, the singlet peak around ~2.0 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (CH3)",
+      "Methylene group (CH2)",
+      "Nitrile group (C#N)",
+      "Aromatic protons"
+    ],
+    "answer": "Methylene group (CH2)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0029.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES CC1=CC(=C(C(=C1)C)C). In this HNMR spectrum, the singlet peak around ~1.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Terminal methyl group (CH3)",
+      "Methine group (CH)",
+      "Methylene group (CH2)",
+      "Aromatic protons"
+    ],
+    "answer": "Terminal methyl group (CH3)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0032.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C9H11Br. Observe this H-NMR spectrum. The triplet peak around ~4.3 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic protons",
+      "Protons adjacent to Br",
+      "-CH3 group",
+      "Protons on the double bond"
+    ],
+    "answer": "Protons adjacent to Br",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0004.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C10H7Cl (C1=CC=C2C=C(C=CC2=C1)Cl). Observe this HNMR spectrum. The singlet peak around ~6.8 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic CH adjacent to Cl",
+      "Aromatic CH next to a double bond",
+      "Aliphatic CH3 group",
+      "CH2 group"
+    ],
+    "answer": "Aromatic CH next to a double bond",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0070.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C9H8O (C1CC(=O)C2=CC=CC=C21). Observe this H-NMR spectrum. The singlet peak around ~7.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methylene group",
+      "Aromatic protons",
+      "Keto proton"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0141.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C4H6O2 (C1CC1C(=O)O). Observe this H-NMR spectrum. The singlet peak around ~3.7 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OH group",
+      "Methine hydrogen"
+    ],
+    "answer": "Methine hydrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0162.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H10O3 (CC1(CCOC(=O)C1)O). Observe this H-NMR spectrum. The quartet peak around ~3.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OH group",
+      "Aromatic ring"
+    ],
+    "answer": "-CH2 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0134.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES C1=CC=C(C=C1)N=C=O. In this H-NMR spectrum, the singlet peak around ~8.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic protons",
+      "Protons adjacent to nitrogen",
+      "Protons adjacent to carbonyl",
+      "Protons in a methylene group"
+    ],
+    "answer": "Protons adjacent to nitrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0170.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C4H8O3 (CCOC(=O)CO), observe this H-NMR spectrum. The quartet peak around ~4.1 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group adjacent to O",
+      "-OH group",
+      "Carbonyl adjacent protons"
+    ],
+    "answer": "-CH2 group adjacent to O",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0028.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C4H8Cl2 (C(CCCl)CCl). Observe this H-NMR spectrum. The triplet peak around ~1.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group adjacent to chlorine",
+      "Methylene group adjacent to chlorine",
+      "Methylene group between two methyl groups",
+      "Methyl group farthest from chlorine"
+    ],
+    "answer": "Methylene group adjacent to chlorine",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0140.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H4O3, observe this H-NMR spectrum. The singlet peak around ~7.3 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic hydrogen",
+      "Methoxy hydrogen",
+      "Aldehyde hydrogen",
+      "Hydroxyl hydrogen"
+    ],
+    "answer": "Aromatic hydrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0101.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C3H6Br2 (C(CBr)CBr), observe this H-NMR spectrum. The singlet peak around ~1.6 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group adjacent to Br",
+      "Methylene group adjacent to Br",
+      "Methyl group not adjacent to Br",
+      "Methylene group not adjacent to Br"
+    ],
+    "answer": "Methyl group adjacent to Br",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0131.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H11BrO2. Observe this H-NMR spectrum. The singlet peak around ~9.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-OH group",
+      "-CH3 group",
+      "-CH2 group",
+      "Aromatic hydrogen"
+    ],
+    "answer": "-OH group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0011.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C8H14O4. Observe this H-NMR spectrum. The singlet peak around ~3.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OCH3 group",
+      "Aromatic proton"
+    ],
+    "answer": "-OCH3 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0047.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C9H10O2 (CC(=O)C1=CC=C(C=C1)OC). Observe this H-NMR spectrum. The singlet peak around ~4.9 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic protons",
+      "Methyl group",
+      "Hydroxymethyl protons",
+      "Aldehyde protons"
+    ],
+    "answer": "Hydroxymethyl protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0193.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H11ClO2 (CC(=O)OCCCCCl). Observe this H-NMR spectrum. The triplet peak around ~1.6 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group adjacent to Cl",
+      "-CH2 group adjacent to carbonyl",
+      "Aromatic protons"
+    ],
+    "answer": "-CH2 group adjacent to Cl",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0012.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C10H16, observe this H-NMR spectrum. The quartet peak around ~1.4 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-CH group",
+      "Aromatic protons"
+    ],
+    "answer": "-CH2 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0079.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H5F. Observe this H-NMR spectrum. The singlet peak around ~7.3 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Fluoro-substituted carbon",
+      "Aromatic ring protons",
+      "Alkene protons"
+    ],
+    "answer": "Aromatic ring protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0111.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H4O3 (C1=COC(=C1)C(=O)O). Observe this H-NMR spectrum. The singlet peak around ~6.8 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Carboxyl hydrogen",
+      "Aromatic hydrogen",
+      "Methoxy hydrogen",
+      "Alkyl hydrogen"
+    ],
+    "answer": "Aromatic hydrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0100.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES C1CC2=CC=CC=C2C(=O)C1. In this H-NMR spectrum, the singlet peak around ~2.6 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Proton on aromatic ring",
+      "Proton on carbonyl group",
+      "Proton on bridgehead carbon",
+      "Proton on aliphatic carbon"
+    ],
+    "answer": "Proton on carbonyl group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0138.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C7H8O (COC1=CC=CC=C1), observe this H-NMR spectrum. The singlet peak around ~7.0 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methoxy group",
+      "Aromatic protons",
+      "Aldehyde proton"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0104.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the molecule C18H12 (C1=CC=C2C(=C1)C3=CC=CC=C3C4=CC=CC=C24), observe this H-NMR spectrum. The singlet peak around ~7.8 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Bridge carbon between rings",
+      "Terminal methyl group",
+      "Phenyl ring proton",
+      "Methoxy group proton"
+    ],
+    "answer": "Phenyl ring proton",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0093.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H7NO2. Observe this H-NMR spectrum. The singlet peak around ~8.0 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (-CH3)",
+      "Methoxy proton (-OCH3)",
+      "Proton on the nitrogen (N-H)",
+      "Proton near carbonyl group"
+    ],
+    "answer": "Proton near carbonyl group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0026.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C3H4Cl2 (C=C(CCl)Cl). Observe this H-NMR spectrum. The singlet peak around ~6.0 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH2Cl group",
+      "-CHCl group",
+      "Vinyl proton (C=C-H)",
+      "Aromatic ring"
+    ],
+    "answer": "Vinyl proton (C=C-H)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0013.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C8H14O3 (CCCC(=O)OC(=O)CCC). Observe this H-NMR spectrum. The singlet peak around ~4.2 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "CH3 group adjacent to carbonyl",
+      "Alcohol -OH group",
+      "CH2 group between two carbonyls",
+      "Methylene group near terminal carbon"
+    ],
+    "answer": "CH2 group between two carbonyls",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0046.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H9BrO2, observe this H-NMR spectrum. The triplet peak around ~1.2 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OH group",
+      "Aromatic ring"
+    ],
+    "answer": "-CH2 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0022.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES CC1=C(C(=C(C(=C1C)C)C)C)C for the molecule C12H18, in this H-NMR spectrum, the singlet peak around ~6.1 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "Vinyl protons",
+      "Aromatic ring"
+    ],
+    "answer": "Vinyl protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0031.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C10H14O2 (C1=CC=C(C=C1)COCCCO). Observe this H-NMR spectrum. The singlet peak around ~6.9 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic protons",
+      "Methyl protons",
+      "Oxygen-bound protons",
+      "Alkene protons"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0117.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the molecule C7H7Br (C1=CC=C(C=C1)CBr), observe this H-NMR spectrum. The singlet peak around ~7.4 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "The aromatic protons",
+      "The brominated methyl group",
+      "The methylene group",
+      "The methyl group"
+    ],
+    "answer": "The aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0089.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES C1CC(=O)CCC1=O and the chemical formula C6H8O2. Observe this H-NMR spectrum. The singlet peak around ~2.2 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-C=O group",
+      "Aromatic ring"
+    ],
+    "answer": "-C=O group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0195.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C10H14 (CC1=CC=C(C=C1)C(C)C). Observe this H-NMR spectrum. The singlet peak around ~6.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methylene group",
+      "Aromatic protons",
+      "Vinyl protons"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0202.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C12H16O2 (CC(=O)OC1=CC=C(C=C1)C(C)(C)C), observe this H-NMR spectrum. The triplet peak around ~1.2 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (-CH3) adjacent to the aromatic ring",
+      "Methylene group (-CH2-) connected to the carbonyl group",
+      "Aromatic protons",
+      "Hydroxyl group (-OH)"
+    ],
+    "answer": "Methyl group (-CH3) adjacent to the aromatic ring",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0186.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the molecule with the formula C9H10O (CCC(=O)C1=CC=CC=C1). In this H-NMR spectrum, the singlet peak around ~7.2 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methylene group",
+      "Aromatic proton",
+      "Carbonyl proton"
+    ],
+    "answer": "Aromatic proton",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0065.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H4Br2. In this H-NMR spectrum, the singlet peak around ~7.6 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "Aromatic protons",
+      "Alkene protons"
+    ],
+    "answer": "Aromatic protons",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0045.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C7H12O4. Observe this H-NMR spectrum. The singlet peak around ~1.0 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (CH3)",
+      "Methylene group (CH2)",
+      "Hydroxyl group (OH)",
+      "Aromatic proton"
+    ],
+    "answer": "Methyl group (CH3)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0018.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H14N2 (C(CCN)CCN). Observe this H-NMR spectrum. The singlet peak around ~3.0 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group adjacent to nitrogen",
+      "-CH2 group",
+      "-NH group",
+      "Aromatic ring"
+    ],
+    "answer": "-CH3 group adjacent to nitrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0157.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H12N2O (CN(C)C(=O)N(C)C). Observe this H-NMR spectrum. The singlet peak around ~8 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Alcohol group",
+      "Methyl group",
+      "Amide proton",
+      "Aromatic proton"
+    ],
+    "answer": "Amide proton",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0017.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C8H8O (C1C(O1)C2=CC=CC=C2). Observe this H-NMR spectrum. The singlet peak around ~6.8 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Protons on aromatic ring",
+      "Protons adjacent to oxygen",
+      "Methyl group",
+      "Protons on carbonyl group"
+    ],
+    "answer": "Protons adjacent to oxygen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0102.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C3H6BrCl (C(CCl)CBr). In this H-NMR spectrum, the singlet peak around ~7.2 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group next to Br",
+      "Methyl group next to Cl",
+      "Protons on aromatic ring",
+      "Protons on double bond"
+    ],
+    "answer": "Methyl group next to Cl",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0124.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H7N (pyridine derivative). Observe the H-NMR spectrum. The singlet peak around ~8.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Aromatic CH",
+      "Pyridine NH",
+      "Alkyl CH3",
+      "Alkyl CH2"
+    ],
+    "answer": "Pyridine NH",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0107.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES CC(C1=CC=CC=C1)O. Observe this HNMR spectrum. The singlet peak around ~7.3 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (CC)",
+      "Phenyl ring (C1=CC=CC=C1)",
+      "Methoxy group (O)",
+      "Alkene group"
+    ],
+    "answer": "Phenyl ring (C1=CC=CC=C1)",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0067.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C8H14O2. Observe this HNMR spectrum. The triplet peak around ~1.2 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group adjacent to alkene",
+      "-CH2 group in a chain",
+      "-OH group",
+      "Aromatic ring"
+    ],
+    "answer": "-CH2 group in a chain",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0130.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H10O (CC(=CC(=O)C)C). In this H-NMR spectrum, the singlet peak around ~1.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Terminal methyl group",
+      "Methylene group",
+      "Methyl group adjacent to carbonyl",
+      "Alkene hydrogen"
+    ],
+    "answer": "Methyl group adjacent to carbonyl",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0143.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the SMILES CC1=CC=NC=C1. Observe this H-NMR spectrum. The singlet peak around ~3.5 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Proton on nitrogen",
+      "Aromatic protons",
+      "Vinyl protons"
+    ],
+    "answer": "Proton on nitrogen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0108.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C7H14O2 (CCOC(C=C)OCC). Observe this H-NMR spectrum. The triplet peak around ~4.1 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group (-CH3)",
+      "Methylene group (-CH2-) adjacent to oxygen",
+      "Vinyl group (C=C-H)",
+      "Aromatic protons"
+    ],
+    "answer": "Methylene group (-CH2-) adjacent to oxygen",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0082.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C11H16, observe this H-NMR spectrum. The singlet peak around ~2.0 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methine group",
+      "Aromatic protons",
+      "Protons adjacent to a carbonyl group"
+    ],
+    "answer": "Methine group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0201.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C5H6O (C1CC(=O)C=C1). Observe this H-NMR spectrum. The quartet peak around ~2.5 ppm in the image is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group",
+      "-CH2 group",
+      "-OH group",
+      "Aromatic ring"
+    ],
+    "answer": "-CH2 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0123.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C10H14 (CC(C)(C)C1=CC=CC=C1). Observe this H-NMR spectrum. The singlet peak at ~1.6 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "-CH3 group adjacent to a quaternary carbon",
+      "-CH2 group",
+      "-CH group in a benzene ring",
+      "Hydroxyl group"
+    ],
+    "answer": "-CH3 group adjacent to a quaternary carbon",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0203.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the chemical formula C6H9NO5, observe this H-NMR spectrum. The singlet peak around ~2.0 ppm is most likely assigned to which part of the molecule?",
+    "choices": [
+      "Methyl group",
+      "Methylene group adjacent to carbonyl",
+      "Amine proton",
+      "Proton in the carboxyl group"
+    ],
+    "answer": "Methylene group adjacent to carbonyl",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0078.png"
+    }
+  }
+]

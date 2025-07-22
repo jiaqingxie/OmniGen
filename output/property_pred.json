@@ -1,0 +1,590 @@
+[
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "120",
+      "127",
+      "135",
+      "140"
+    ],
+    "answer": "135",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "150",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "95",
+      "105",
+      "130",
+      "150"
+    ],
+    "answer": "95",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "39",
+      "53",
+      "85",
+      "120"
+    ],
+    "answer": "53",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "65",
+      "78",
+      "90",
+      "100"
+    ],
+    "answer": "78",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "44",
+      "57",
+      "75",
+      "90"
+    ],
+    "answer": "75",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "179",
+      "181",
+      "155",
+      "165"
+    ],
+    "answer": "181",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "67",
+      "41",
+      "39",
+      "43"
+    ],
+    "answer": "67",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "43",
+      "51",
+      "53",
+      "55"
+    ],
+    "answer": "53",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "150",
+      "180",
+      "200",
+      "220"
+    ],
+    "answer": "180",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "85",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "150",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "148",
+      "150"
+    ],
+    "answer": "148",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "55",
+      "67",
+      "79",
+      "112"
+    ],
+    "answer": "79",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "85",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "85",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "85",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "41",
+      "42",
+      "53",
+      "120"
+    ],
+    "answer": "53",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "85",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "107",
+      "120",
+      "150",
+      "190"
+    ],
+    "answer": "107",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "120",
+      "150",
+      "156",
+      "170"
+    ],
+    "answer": "156",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "58",
+      "86",
+      "120",
+      "150"
+    ],
+    "answer": "86",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "150",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "41",
+      "42",
+      "66",
+      "68"
+    ],
+    "answer": "66",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "140",
+      "150",
+      "234"
+    ],
+    "answer": "234",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "90",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
+    "choices": [
+      "85",
+      "90",
+      "120",
+      "150"
+    ],
+    "answer": "120",
+    "image_path": {}
+  }
+]
