@@ -1,0 +1,607 @@
+[
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with prominent peaks at m/z 80, 91, 93, 106, and a base peak at m/z 196, predict the most likely molecular structure consistent with these fragments.",
+    "choices": [
+      "C14H15N",
+      "C13H13N",
+      "C12H11N",
+      "C15H17N"
+    ],
+    "answer": "C14H15N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(=O)C1=CC=CS1",
+      "CCOC1=CC=CC1",
+      "CC1=CC=CC1",
+      "CC1=CC=CS1"
+    ],
+    "answer": "CC(=O)C1=CC=CS1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula C6H12O2, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCC(C)CC=O",
+      "CC(C)(C)CC(=O)O",
+      "CCOCCO",
+      "CCOCCOCC"
+    ],
+    "answer": "CC(C)(C)CC(=O)O",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCC(C#N)C#N",
+      "CC1=CC=CC1",
+      "CC(=O)CCC",
+      "CCNCC"
+    ],
+    "answer": "CCC(C#N)C#N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(OC(=O)C)OC(=O)C",
+      "c1ccccc1O",
+      "CC(=O)OC(=O)C",
+      "CC(=O)OCC"
+    ],
+    "answer": "CC(OC(=O)C)OC(=O)C",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with fragments at m/z 51, 65, 77, 79, 89, and 91, deduce the most likely molecular structure.",
+    "choices": [
+      "CC1=CC=C(C=C1)C(=O)OC",
+      "CC1=CC=CC2=CC=CC=C12",
+      "CC1=CC=CC(=O)C=C1",
+      "CC1=CC=CC2=CC=C(C=C2)C(=O)OC1"
+    ],
+    "answer": "CC1=CC=C(C=C1)C(=O)OC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with peaks at m/z 92, 107, and 135, propose the most likely molecular structure consistent with these fragments.",
+    "choices": [
+      "CC(=O)C1=CC=CC1",
+      "COC1=CC=CC=C1",
+      "CC(=O)O",
+      "CC1=CC=CC1C=O"
+    ],
+    "answer": "COC1=CC=CC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN"
+    ],
+    "answer": "c1ccccc1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with molecular formula C12H14O4, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCOC(=O)C1=CC(=CC=C1)C(=O)OCC",
+      "CC(C(=O)O)C1=CC(=CC=C1)C(=O)OCC",
+      "CCOC(=O)C1=CC(=CC=C1)C(=O)CC",
+      "CCOCC1=CC(=CC=C1)C(=O)OC"
+    ],
+    "answer": "CCOC(=O)C1=CC(=CC=C1)C(=O)OCC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C9H8O, identify the most likely molecular structure consistent with the observed fragments and molecular ion peaks.",
+    "choices": [
+      "C1CC(=O)C2=CC=CC=C21",
+      "C1CC2=CC=CC=C1C2",
+      "C1CC1C2=CC=CC=C2",
+      "C1CC2=CC=CC=C2C1"
+    ],
+    "answer": "C1CC(=O)C2=CC=CC=C21",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "C1=CC=C(C=C1)CC#N",
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN"
+    ],
+    "answer": "C1=CC=C(C=C1)CC#N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN",
+      "CN(C)C(=O)N(C)C"
+    ],
+    "answer": "CN(C)C(=O)N(C)C",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum showing peaks at m/z 58, 55, and 43 for an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCCCCCN",
+      "CCNCC",
+      "CCCNC",
+      "CC(C)CN"
+    ],
+    "answer": "CCCCCCN",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with prominent peaks at m/z 93, 107, and 109, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCBr2",
+      "CCCl2",
+      "CClBr",
+      "CCl2Br"
+    ],
+    "answer": "CCBr2",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C6H7N, deduce the most likely molecular structure (SMILES) consistent with the observed fragment peaks at m/z 77, 67, 65, 53, 51, 49, 41, and 39.",
+    "choices": [
+      "CC1=CC=NC=C1",
+      "CCNCC1=CC=CC1",
+      "CC1=CC=CC=N1",
+      "CCNCC1=CN=CC1"
+    ],
+    "answer": "CC1=CC=NC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of the unknown compound with molecular formula C9H10O2, deduce the most likely molecular structure based on the fragmentation pattern observed.",
+    "choices": [
+      "CC(=O)OCC1=CC=CC=C1",
+      "CC1=CC=CC(=O)OC1",
+      "CC(=O)OC1=CC=CC=C1",
+      "CC1=CC=CC=C1"
+    ],
+    "answer": "CC(=O)OCC1=CC=CC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula C4H8Cl2, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(CCl)CCl",
+      "CClCCCl",
+      "CCl2CC",
+      "CCl2CCl"
+    ],
+    "answer": "CC(CCl)CCl",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with fragments at m/z 41, 55, 57, 63, 65, 79, 81, 95, 103, 105, 107, 109, 117, 119, and 161, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(C)(C)C1=CC=C(C=C1)C(=O)OC",
+      "CC(=O)OC(C)(C)C1=CC=C(C=C1)C(C)C",
+      "CC(C)(C)C1=CC=C(C=C1)C(=O)OCC",
+      "CC(=O)C(C)(C)CC1=CC=C(C=C1)C(C)C"
+    ],
+    "answer": "CC(C)(C)C1=CC=C(C=C1)C(=O)OC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C4H6N2, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC1=CN=CN1",
+      "CCN=NC",
+      "CNCN",
+      "C1=CC=CN1"
+    ],
+    "answer": "CC1=CN=CN1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with molecular formula C10H7Cl, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC1=CC=CC2=CC=CC=C12Cl",
+      "CCl1=CC=CC2=CC=CC=C12",
+      "CC1=CC=CC2=CC=CC=C21Cl",
+      "CCl1=CC=CC2=CC=CC=C12"
+    ],
+    "answer": "CCl1=CC=CC2=CC=CC=C12",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C5H9N, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(C)CC#N",
+      "CCNCC",
+      "CC(C)C=N",
+      "CCCNC"
+    ],
+    "answer": "CC(C)CC#N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the MS spectrum of an unknown compound with observed fragments at m/z 29, 41, 43, 55, and a molecular ion peak at m/z 130, deduce the most likely molecular structure (SMILES) that is consistent with the provided fragment pattern.",
+    "choices": [
+      "CCCCOCCCC",
+      "CCCOCCCO",
+      "COC(C)CCCC",
+      "CCCCOCC"
+    ],
+    "answer": "CCCCOCCCC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum data showing peaks at m/z values of 29, 39, 41, 55, and 69, determine the most likely molecular structure for the compound with the molecular formula C5H10.",
+    "choices": [
+      "C1CCCCC1",
+      "CC1CCC1",
+      "CCC=CCC",
+      "CC1=CCC1"
+    ],
+    "answer": "C1CCCCC1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "C1=CC=NC=C1"
+    ],
+    "answer": "C1=CC=NC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of the unknown compound with m/z values at 55, 71, 77, 79, 81, 89, 107, 147, 161, deduce the most plausible molecular structure consistent with these fragments.",
+    "choices": [
+      "C12H18",
+      "C10H14O",
+      "C10H10O2",
+      "C8H10N2"
+    ],
+    "answer": "C12H18",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with the molecular formula C5H9Br, deduce the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "C1CCC(C1)Br",
+      "CBr",
+      "CCCBr",
+      "CC(C)Br"
+    ],
+    "answer": "C1CCC(C1)Br",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "Given the IR and MS spectra of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed spectral features.",
+    "choices": [
+      "CCOC1=CC=C(C=C1)C(=O)N",
+      "CCOC1=CC=C(C=C1)C=O",
+      "CC(=O)NCC1=CC=C(C=C1)O",
+      "CCOC1=CC=C(C=C1)NC(=O)C"
+    ],
+    "answer": "CCOC1=CC=C(C=C1)C(=O)N",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0178.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(C)=O",
+      "CC1=CC=C(C=C1)NC(=O)C",
+      "CC(N)O",
+      "CC1=CC=CC2=CC=CC=C12"
+    ],
+    "answer": "CC1=CC=C(C=C1)NC(=O)C",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum showing peaks at m/z values of 26, 50, 53, and 82, deduce the most likely molecular structure for the compound with the formula C5H6O.",
+    "choices": [
+      "C=C(C)C=O",
+      "C1CC(=O)C=C1",
+      "CC(C)=O",
+      "C=CC=O"
+    ],
+    "answer": "C1CC(=O)C=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C9H12O2, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "COC(C1=CC=CC=C1)OC",
+      "CC(=O)OCC1=CC=CC1",
+      "CCOC(=O)C1=CC=CC1",
+      "CC1=CC=CC2=CC=CC=C12"
+    ],
+    "answer": "COC(C1=CC=CC=C1)OC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with the molecular formula C11H16, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(C)(C)CC1=CC=CC=C1",
+      "CC1=CC=CC=CC1CCC",
+      "CCC1=CC=CC=CC1C",
+      "CC(C)CC1=CC=CC=C1"
+    ],
+    "answer": "CC(C)(C)CC1=CC=CC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments. The molecular formula of the compound is C6H10O4.",
+    "choices": [
+      "CCOC(=O)C(=O)OCC",
+      "CCCOC(=O)CC",
+      "CCOC(=O)OCC",
+      "CCOC(=O)CCC"
+    ],
+    "answer": "CCOC(=O)C(=O)OCC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with prominent fragment peaks at m/z 43, 77, 87, 101, and 154, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(=O)C1=CC=C(C=C1)Br",
+      "CC1=CC=CC2=CC=CC=C12",
+      "CC(Br)C(=O)O",
+      "CC(C=O)C1=CC=CC=C1"
+    ],
+    "answer": "CC(=O)C1=CC=C(C=C1)Br",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with prominent peaks at m/z 65, 92, 120, 121, and 135, predict the most likely molecular structure consistent with the observed fragments.",
+    "choices": [
+      "CC(=O)C1=CC=C(C=C1)N",
+      "CCOC1=CC=C(C=C1)N",
+      "CCOCC1=CC=C(C=C1)N",
+      "CC(C)C1=CC=C(C=C1)N"
+    ],
+    "answer": "CC(=O)C1=CC=C(C=C1)N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of the unknown compound, identify the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC1=CC=C(C=C1)COC(=O)C2=CC=CC=C2",
+      "CC1=CC=CC2=CC=CC=C12",
+      "CC(=O)OC1=CC=CC2=CC=CC=C12",
+      "CC1=CC=CC2=CC=CC=C12"
+    ],
+    "answer": "CC1=CC=C(C=C1)COC(=O)C2=CC=CC=C2",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum showing base peaks at m/z 101, 129, 153, 165, 179, and 181, deduce the most likely molecular structure consistent with these fragments.",
+    "choices": [
+      "CC1=CC=CC2=CC=CC=C12",
+      "CC1C2=CC=CC=C2C3=CC=CC=C13",
+      "CC1=CC=CC2=CC=CC=C21",
+      "CC1=CC2=CC=CC=C1C2"
+    ],
+    "answer": "CC1C2=CC=CC=C2C3=CC=CC=C13",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCOC(=O)OCC",
+      "CC(C)O",
+      "CC=O",
+      "CCOCOC"
+    ],
+    "answer": "CCOC(=O)OCC",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCOC(=O)CO"
+    ],
+    "answer": "CCOC(=O)CO",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC1=CC(=C(C=C1)C)C",
+      "C1=CC=CC2=CC=CC=C12",
+      "CC(C)C1=CC=CC2=CC=CC=C12",
+      "C1=CC=CC=CC=CC=C1"
+    ],
+    "answer": "CC1=CC(=C(C=C1)C)C",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula C2H6O2, infer the most likely molecular structure (SMILES) based on the observed molecular ion peak at m/z 62.",
+    "choices": [
+      "CCO",
+      "CC(=O)O",
+      "CCOCC",
+      "CCO(=O)"
+    ],
+    "answer": "CC(=O)O",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with the molecular formula C10H14, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC1=CC(=C(C=C1C)C)C",
+      "CC1=CC(=CC2=CC=CC=C12)C",
+      "CC1=CC(=C(C=C1)C)C",
+      "CC1=CC(=C(C=C1)C)C"
+    ],
+    "answer": "CC1=CC(=C(C=C1C)C)C",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) based on the observed fragmentation pattern.",
+    "choices": [
+      "C1=CC=C(C=C1)C(C2=CC=CC=C2)(C(=O)O)O",
+      "C1=CC=CC2=CC=CC=C12",
+      "C1=CC=CC=CC2=CC=CC=C12",
+      "CC(C=O)O"
+    ],
+    "answer": "C1=CC=C(C=C1)C(C2=CC=CC=C2)(C(=O)O)O",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with a molecular formula of C10H18O, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CC(C)(C)C1CCC(=O)CC1",
+      "CCC(C)C1CCC1O",
+      "CC(=O)C1CCCCC1",
+      "COC(=O)C1CCCCC1"
+    ],
+    "answer": "CC(C)(C)C1CCC(=O)CC1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "C1=CC=C(C=C1)COCCCO",
+      "C=CC1C(C=C1)COO",
+      "C1=CC=C(C=C1)COCO",
+      "C=CC1C(C=C1)COCC"
+    ],
+    "answer": "C1=CC=C(C=C1)COCCCO",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound with m/z values 55, 68, 79, 80, 81, 94, and 96, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN"
+    ],
+    "answer": "CC(=O)O",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments and molecular formula C4H4N2.",
+    "choices": [
+      "C(C#N)C#N",
+      "CCNCC",
+      "CC(C)=N",
+      "CC(C#N)N"
+    ],
+    "answer": "C(C#N)C#N",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN"
+    ],
+    "answer": "CC(=O)O",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, deduce the most likely molecular structure that aligns with the observed fragment peaks and molecular ion peak.",
+    "choices": [
+      "CC1=CC=C(C=C1)Cl",
+      "CC(=O)C1=CC=C(C=C1)Cl",
+      "CClCC1=CC=C(C=C1)O",
+      "CC1=CC=C(C=C1)CO"
+    ],
+    "answer": "CC(=O)C1=CC=C(C=C1)Cl",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CC1=CC=CC=C1"
+    ],
+    "answer": "CC1=CC=CC=C1",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
+    "choices": [
+      "CCC(=O)OC(=O)CC",
+      "CCO",
+      "c1ccccc1",
+      "CC(=O)O",
+      "CCN"
+    ],
+    "answer": "CCC(=O)OC(=O)CC",
+    "image_path": {}
+  }
+]

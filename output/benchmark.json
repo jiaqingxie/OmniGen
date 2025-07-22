@@ -1,0 +1,618 @@
+[
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows prominent peaks at m/z values corresponding to isotopic patterns. What is the most likely identity of the peaks at m/z 60 and m/z 62?",
+    "choices": [
+      "Carbon-13 isotope",
+      "Chlorine-35 and Chlorine-37 isotopes",
+      "Oxygen-17 isotope",
+      "Chlorine-35 isotope"
+    ],
+    "answer": "Chlorine-35 and Chlorine-37 isotopes",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the mass spectrum of the molecule C6H10O, peaks at m/z 65, 55, 43, 41, and 39 are observed. Which peak corresponds to the molecular ion (M+) of the molecule?",
+    "choices": [
+      "39",
+      "41",
+      "43",
+      "55",
+      "65"
+    ],
+    "answer": "65",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum shows a strong peak around 3000 cm⁻¹ and a sharp peak around 1700 cm⁻¹. What functional groups are most likely present in the molecule?",
+    "choices": [
+      "Alcohol and Alkene",
+      "Carbonyl and Alkene",
+      "Amine and Alkane",
+      "Aldehyde and Alkane"
+    ],
+    "answer": "Carbonyl and Alkene",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0214.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 83, 55, 43, 41, and 39. Based on the molecular formula C7H12O4, which peak is most likely due to the loss of a water molecule from the molecular ion?",
+    "choices": [
+      "83",
+      "55",
+      "43",
+      "41"
+    ],
+    "answer": "55",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of the molecule C12H12 shows a prominent base peak at m/z 141. What type of fragmentation likely leads to this peak?",
+    "choices": [
+      "Loss of a methyl group",
+      "Loss of a hydrogen atom",
+      "Ring cleavage",
+      "Loss of a water molecule"
+    ],
+    "answer": "Ring cleavage",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows significant peaks at m/z 94, 154, and 183. Given the molecular formula C8H10BrN, which of the following is likely the base peak resulting from common fragmentation patterns of bromohexane derivatives?",
+    "choices": [
+      "94",
+      "154",
+      "183",
+      "171"
+    ],
+    "answer": "154",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows prominent peaks at m/z values of 39 and 41. What is the most likely explanation for these peaks?",
+    "choices": [
+      "Fragmentation of a chlorine-containing molecule",
+      "Isotopic pattern of a bromine-containing molecule",
+      "Fragmentation of a fluorine-containing molecule",
+      "Isotopic pattern of a chlorine-containing molecule"
+    ],
+    "answer": "Isotopic pattern of a chlorine-containing molecule",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 62, 63, and 90. Given the molecular formula C4H8Cl2, what is the most likely assignment for the m/z 90 peak?",
+    "choices": [
+      "Fragment of C4H7Cl2+",
+      "Molecular ion (M+) of C4H8Cl2",
+      "Fragment of C4H8Cl+",
+      "Isotopic pattern from Cl"
+    ],
+    "answer": "Molecular ion (M+) of C4H8Cl2",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the mass spectrum of C2H5I, several peaks are observed. Which of the following sets of m/z values are most likely due to the isotopic pattern of iodine?",
+    "choices": [
+      "156 and 158",
+      "127 and 129",
+      "141 and 143",
+      "157 and 159"
+    ],
+    "answer": "157 and 159",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum shows a strong peak around 1700 cm⁻¹. Given the molecular formula C8H10O2, what is the likely functional group responsible for this absorption?",
+    "choices": [
+      "Ester",
+      "Carbonyl",
+      "Alcohol",
+      "Alkene"
+    ],
+    "answer": "Carbonyl",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0189.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows several significant peaks at m/z values of 55, 77, 81, 89, 107, 147, and 161. Considering the molecular formula C12H18, which of these peaks likely corresponds to the base peak (most intense peak)?",
+    "choices": [
+      "55",
+      "77",
+      "81",
+      "89",
+      "107"
+    ],
+    "answer": "89",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 92 and 77. What is the most likely explanation for the peak at m/z 77?",
+    "choices": [
+      "Loss of a hydroxyl group",
+      "Loss of a methyl group",
+      "Loss of a water molecule",
+      "Loss of a carbon monoxide molecule"
+    ],
+    "answer": "Loss of a carbon monoxide molecule",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows prominent peaks at m/z 153 and 125. What is the most likely explanation for the peak at m/z 125?",
+    "choices": [
+      "Fragmentation of the benzene ring",
+      "Loss of a methyl group",
+      "Loss of a water molecule",
+      "Loss of a carboxyl group"
+    ],
+    "answer": "Loss of a carboxyl group",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "The 1H-NMR spectrum of C7H11NO5 shows a singlet at around 2.2 ppm and a triplet at around 4.5 ppm. Based on the given structure, what do these signals most likely correspond to?",
+    "choices": [
+      "The singlet corresponds to the protons on the carbonyl carbon, and the triplet corresponds to the protons on the nitrogen.",
+      "The singlet corresponds to the protons on the nitrogen, and the triplet corresponds to the protons adjacent to the oxygen.",
+      "The singlet corresponds to the protons on the carbon adjacent to the nitrogen, and the triplet corresponds to the protons on the carbon adjacent to the oxygen.",
+      "The singlet corresponds to the protons on the carbon adjacent to the oxygen, and the triplet corresponds to the protons on the carbon adjacent to the nitrogen."
+    ],
+    "answer": "The singlet corresponds to the protons on the carbon adjacent to the nitrogen, and the triplet corresponds to the protons on the carbon adjacent to the oxygen.",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0077.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the mass spectrum of C6H7N, peaks are observed at m/z values of 39, 41, 49, 51, 53, 65, 67, and 77. Which peak most likely corresponds to the base peak (most intense peak)?",
+    "choices": [
+      "39",
+      "41",
+      "65",
+      "77"
+    ],
+    "answer": "65",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of a compound with molecular formula C3H4Cl2 shows significant isotopic peaks. Which m/z values are most likely due to the presence of chlorine isotopes?",
+    "choices": [
+      "69 and 71",
+      "105 and 107",
+      "53 and 55",
+      "43 and 45"
+    ],
+    "answer": "69 and 71",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows major peaks at m/z 51, 65, and 91. Given the molecular formula C7H9N, which peak is most likely the base peak (most intense peak) in the spectrum?",
+    "choices": [
+      "51",
+      "65",
+      "91",
+      "None of the above"
+    ],
+    "answer": "65",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The MS spectrum shows prominent peaks at m/z values of 103 and 105 with a relative abundance ratio of approximately 1:1. What does this isotopic pattern suggest about the molecular composition?",
+    "choices": [
+      "Presence of chlorine",
+      "Presence of bromine",
+      "Presence of iodine",
+      "Presence of sulfur"
+    ],
+    "answer": "Presence of bromine",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the MS spectrum of the compound C5H6N2, what are the most likely m/z values for the base peak and the peak corresponding to the molecular ion?",
+    "choices": [
+      "52 and 64",
+      "64 and 65",
+      "64 and 67",
+      "67 and 68"
+    ],
+    "answer": "64 and 65",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 73 and 75. Considering the molecular formula C12H6, which element is likely responsible for the observed isotopic pattern?",
+    "choices": [
+      "Carbon",
+      "Hydrogen",
+      "Nitrogen",
+      "Sulfur"
+    ],
+    "answer": "Carbon",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of C9H11Br shows several fragmentation peaks. Which of the following m/z values corresponds to the loss of a bromine atom (Br) from the molecular ion?",
+    "choices": [
+      "91",
+      "79",
+      "65",
+      "89"
+    ],
+    "answer": "91",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "NMR",
+    "question": "The 1H-NMR spectrum shows signals at δ 1.2 ppm and δ 7.3 ppm. Given the molecular formula C12H16O2, which protons are most likely responsible for these signals?",
+    "choices": [
+      "Methyl protons on the benzene ring and aldehyde protons",
+      "Methine protons and aromatic protons",
+      "Methyl protons and aromatic protons",
+      "Methylene protons and aldehyde protons"
+    ],
+    "answer": "Methyl protons and aromatic protons",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of the molecule shows peaks at m/z 101 and 118. What is the most likely explanation for the presence of these peaks?",
+    "choices": [
+      "Fragmentation of the molecular ion",
+      "Isotopic variation of the molecular ion",
+      "Contaminant peaks",
+      "Ionization by-products"
+    ],
+    "answer": "Fragmentation of the molecular ion",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C5H10O, the mass spectrum shows significant peaks at m/z 53 and 69. Which of the following is a likely explanation for these peaks?",
+    "choices": [
+      "Loss of a methyl group from the molecular ion",
+      "Oxidation of a side chain",
+      "Cleavage of the carbon-oxygen bond",
+      "Hydrogen rearrangement"
+    ],
+    "answer": "Loss of a methyl group from the molecular ion",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of the molecule C7H12O4 shows several peaks. Which of the following m/z values is most likely the base peak corresponding to the molecular ion?",
+    "choices": [
+      "141",
+      "157",
+      "161",
+      "135"
+    ],
+    "answer": "157",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The molecular ion peak and its isotopic pattern are visible in the mass spectrum. Given the molecular formula C5H11NO, which m/z values correspond to the molecular ion and its most prominent isotope?",
+    "choices": [
+      "56 and 58",
+      "64 and 66",
+      "72 and 74",
+      "80 and 82"
+    ],
+    "answer": "72 and 74",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 93, 65, and 67. Which peak corresponds to the molecular ion of the molecule C6H7N?",
+    "choices": [
+      "93",
+      "65",
+      "67"
+    ],
+    "answer": "93",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum shows a strong peak around 1300 cm⁻¹ and another strong peak around 1150 cm⁻¹. What functional group is most likely present in the molecule C4H6O2S based on these peaks?",
+    "choices": [
+      "Carbonyl group",
+      "Sulfonyl group",
+      "Alcohol group",
+      "Carboxylic acid group"
+    ],
+    "answer": "Sulfonyl group",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0120.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z values of 84, 69, and 41. Based on the molecular formula C5H8O, which peak is most likely due to the molecular ion (M⁺)?",
+    "choices": [
+      "41",
+      "69",
+      "84",
+      "None of the above"
+    ],
+    "answer": "84",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows significant peaks at m/z values of 131 and 145. What is the most likely explanation for the presence of these peaks in the spectrum of C10H10O?",
+    "choices": [
+      "Fragmentation of the benzene ring",
+      "Loss of a methyl group",
+      "Presence of oxygen in the molecular structure",
+      "Isotopic pattern of chlorine",
+      "Fragmentation involving carbonyl group"
+    ],
+    "answer": "Fragmentation involving carbonyl group",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The molecular ion peak for C7H12O (C1CCCC(=O)CC1) is observed in the mass spectrum. What is the expected m/z value for the molecular ion peak (M+)?",
+    "choices": [
+      "115",
+      "116",
+      "117",
+      "118"
+    ],
+    "answer": "116",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 117 and 133, with a prominent peak at m/z 91. What could be the significance of the m/z 133 peak in relation to the molecular formula C11H16?",
+    "choices": [
+      "Loss of methyl group",
+      "Loss of water",
+      "Loss of ethylene",
+      "Oxidation product"
+    ],
+    "answer": "Loss of methyl group",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C9H10N2, what is the expected molecular ion peak (M⁺) and its corresponding isotope peak in the mass spectrum?",
+    "choices": [
+      "M⁺ = 154, Isotope = 156",
+      "M⁺ = 148, Isotope = 150",
+      "M⁺ = 150, Isotope = 152",
+      "M⁺ = 152, Isotope = 153"
+    ],
+    "answer": "M⁺ = 150, Isotope = 152",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z values 15, 28, 42, and 44. Which of the following molecular fragments could be responsible for the peak at m/z 28?",
+    "choices": [
+      "NH2",
+      "C2H4O",
+      "HCO2H",
+      "C2H5"
+    ],
+    "answer": "C2H5",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z 39, 51, and 63. What is the most likely molecular ion peak for the given compound C7H5NO?",
+    "choices": [
+      "39",
+      "51",
+      "63",
+      "None of these"
+    ],
+    "answer": "63",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows a base peak at m/z 84. Considering the molecular formula C8H14, what is the most likely origin of this base peak?",
+    "choices": [
+      "Fragmentation of the molecular ion",
+      "Isotopic pattern of chlorine",
+      "Isotopic pattern of bromine",
+      "Fragmentation due to a double bond"
+    ],
+    "answer": "Fragmentation of the molecular ion",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z values of 54 and 64. What is the most likely explanation for the m/z difference of 10?",
+    "choices": [
+      "Loss of a methyl group",
+      "Presence of a stable radical",
+      "Loss of a fragment with m/z = 10",
+      "Isotopic pattern of chlorine"
+    ],
+    "answer": "Loss of a fragment with m/z = 10",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows prominent peaks at m/z 41, 55, 65, 67, 81, and 99. What is the most likely structure for the molecular ion peak at m/z 132?",
+    "choices": [
+      "C7H12O2",
+      "C7H13O2",
+      "C7H11O2",
+      "C7H14O2"
+    ],
+    "answer": "C7H12O2",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum shows peaks at m/z values of 39 and 53. These peaks likely correspond to which fragments of the molecule C4H6O (cyclobutyl ether)?",
+    "choices": [
+      "C2H5+ and C3H3O+",
+      "C3H3+ and C4H5O+",
+      "C1H3+ and C3H3O+",
+      "C1H3O+ and C3H5+"
+    ],
+    "answer": "C3H3+ and C4H5O+",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum shows a strong peak around 1700 cm⁻¹, indicating the presence of a carbonyl group. Given the molecular formula C8H8O, which structural feature is most consistent with this IR spectrum?",
+    "choices": [
+      "Aldehyde",
+      "Ester",
+      "Ketone",
+      "Carboxylic Acid"
+    ],
+    "answer": "Ketone",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0102.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C4H6O, which corresponds to the compound C1COC=C1, what is the most likely m/z value for the molecular ion peak in the MS spectrum?",
+    "choices": [
+      "58",
+      "70",
+      "72",
+      "84"
+    ],
+    "answer": "70",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the mass spectrum of C5H9Br, two prominent peaks are observed. Which of the following m/z values are most likely due to the molecular ion isotopic pattern of bromine?",
+    "choices": [
+      "93 and 95",
+      "105 and 107",
+      "111 and 113",
+      "107 and 105"
+    ],
+    "answer": "105 and 107",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C7H5NO3, two prominent peaks appear at m/z values of 150 and 151 in the mass spectrum. What do these peaks most likely represent?",
+    "choices": [
+      "Fragmentation products",
+      "Isotopic pattern of the molecular ion",
+      "Metabolite peaks",
+      "Contaminant peaks"
+    ],
+    "answer": "Isotopic pattern of the molecular ion",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Based on the mass spectrum provided, which fragmentation pattern is most consistent with the molecular formula C3H8O?",
+    "choices": [
+      "Loss of a methyl group (m/z 31)",
+      "Loss of water (m/z 45)",
+      "Loss of a hydroxyl group (m/z 43)",
+      "Loss of an ethyl group (m/z 31)"
+    ],
+    "answer": "Loss of a methyl group (m/z 31)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum displays a strong peak around 1700 cm⁻¹. What functional group is most likely present based on this information?",
+    "choices": [
+      "Carbonyl",
+      "Alcohol",
+      "Amine",
+      "Alkene"
+    ],
+    "answer": "Carbonyl",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0048.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C6H14O2, what could be the reason for the m/z value of approximately 43 observed in the mass spectrum?",
+    "choices": [
+      "Fragmentation of the molecular ion",
+      "Presence of a stable ion fragment",
+      "Isotopic variation",
+      "Background noise"
+    ],
+    "answer": "Fragmentation of the molecular ion",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The mass spectrum of the molecule C4H6O2 shows significant peaks at m/z 41, 44, 71, and 87. Which of the following best explains the presence of the m/z 71 peak?",
+    "choices": [
+      "Loss of a water molecule (H2O)",
+      "Loss of a carbon dioxide molecule (CO2)",
+      "Loss of a methyl group (CH3)",
+      "Loss of a methylene group (CH2)"
+    ],
+    "answer": "Loss of a water molecule (H2O)",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "NMR",
+    "question": "Given the 1H-NMR spectrum of C10H14O2, which region is most likely to show a multiplet pattern due to the presence of aromatic protons?",
+    "choices": [
+      "1-2 ppm",
+      "3-4 ppm",
+      "7-8 ppm",
+      "10-12 ppm"
+    ],
+    "answer": "7-8 ppm",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "In the mass spectrum of C8H9NO2, which of the following fragments are most likely to be observed based on the fragmentation of the aromatic amide structure?",
+    "choices": [
+      "56 and 80",
+      "42 and 54",
+      "39 and 63",
+      "82 and 94"
+    ],
+    "answer": "42 and 54",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The IR spectrum shows a strong peak around 1700 cm⁻¹. Based on the given molecular formula, C7H10O3, what functional groups are most likely present in the molecule?",
+    "choices": [
+      "Ester and ketone",
+      "Ester and alcohol",
+      "Carbonyl and ether",
+      "Carboxylic acid and aldehyde"
+    ],
+    "answer": "Ester and ketone",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0135.png"
+    }
+  }
+]
