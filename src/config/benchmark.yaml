@@ -130,29 +130,31 @@ generator_config:
       num_choices: 4
     element_pred:
       template: |
-        You are given the following spectrum for a molecule:
-        {spectra_list}
+        This is an element prediction task.
 
-        Please select the most appropriate spectrum for element or isotope pattern prediction, and generate a question, choices, and answer based on it.
-        Focus on identifying the elemental composition or isotopic pattern (such as halogen presence) based on the mass spectrum.
-        Do NOT generate questions about spectrum type classification, signal quality, or functional group recognition.
+        You are provided with one or more spectrum images (such as MS, IR, NMR, etc.) for a molecule.
+        Please carefully select the most appropriate spectrum type for functional group or fragment recognition, and generate a question, choices, and answer based on the information visible in the spectrum image.
+        Your task is to create a question and answer that require the examinee to infer the elemental composition or isotopic pattern (for example, the presence of halogens) using the provided spectrum image.
+        **Be sure to choose a spectrum type that actually has an associated image, and ensure your question is grounded in the features visible in that image.**
+        Do NOT select a spectrum type that does not have an image.
 
-        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used, and ensure the "image_path" field contains the actual path to the spectrum image (it must not be empty).
+        Here are some example questions for your reference. Please output your result in the following JSON format (making sure image_path points to the actual spectrum image and is not empty):
 
-        Please answer in the following JSON format:
+        Example 1:
         {{
-          "selected_spectrum_type": "MS",
-          "question": "Observe the molecular ion region of this mass spectrum. Based on its isotopic pattern, what halogen atom is most likely present in this compound?",
+          "selected_spectrum_type": "MASS",
+          "question": "Given the mass spectrum image, what halogen atom is most likely present in the compound based on the observed isotopic pattern?",
           "choices": ["Fluorine (F)", "Chlorine (Cl)", "Bromine (Br)", "Iodine (I)"],
-          "answer": "Chlorine (Cl)"
+          "answer": "Chlorine (Cl)",
         }}
 
-        Example:
+        Example 2:
         {{
-          "selected_spectrum_type": "MS",
-          "question": "In a mass spectrum, if the M+2 peak of the molecular ion has a relative intensity of about 4-5% compared to the M peak, which of the following elements might typically be indicated as present in the molecule?",
-          "choices": ["Nitrogen (N)", "Oxygen (O)", "Sulfur (S)", "Phosphorus (P)"],
-          "answer": "Sulfur (S)"
+          "selected_spectrum_type": "MASS",
+          "question": "Observe the provided mass spectrum image. The M+2 peak has a significant relative intensity compared to the M peak. Which element is most likely present in the compound?",
+          "choices": ["Sulfur (S)", "Bromine (Br)", "Chlorine (Cl)", "Iodine (I)"],
+          "answer": "Sulfur (S)",
         }}
       num_choices: 4
     peak_assign:
@@ -186,45 +188,53 @@ generator_config:
       template: |
         This is a property prediction task.
 
-        You are given the following spectrum for a molecule:
+        You are given the following spectrum(s) for a molecule:
         {spectra_list}
 
-        Your goal is to predict a chemical or physical property of the compound that can be inferred from the spectrum. 
-        Typical properties include: molecular weight (from mass spectrum), acidity (from IR), color (from UV-Vis), or solubility (from NMR).
-        Please focus on designing questions that require the examinee to deduce such properties from the spectral features.
+        You are provided with one or more spectrum images (such as MS, IR, NMR, UV-Vis, etc.) for a molecule.
+        Your task is to create a question and answer that require the examinee to infer a chemical or physical property of the compound based on the features visible in the provided spectrum image(s).
+        Typical properties include: molecular weight (from mass spectrum), acidity (from IR), color (from UV-Vis), solubility (from NMR), and so on.
+        Please focus on designing questions that require the examinee to deduce such properties from the actual spectral features shown in the image(s).
         
-        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+        **Do not always use the mass spectrum (MS) for your question. When possible, also consider using IR, C-NMR, or H-NMR spectra to design property prediction questions, as long as the spectrum image is available and the property can be reliably inferred from it. Ensure the quality and relevance of the question.**
 
-        Please answer in the following JSON format:
-        {{
-          "selected_spectrum_type": "MS",
-          "question": "Observe this mass spectrum. What is the mass-to-charge ratio (m/z) of the molecular ion peak for this compound? The value usually corresponds to its molecular weight.",
-          "choices": ["85", "90", "120", "150"],
-          "answer": "120"
-        }}
+        **Be sure to choose a spectrum type that actually has an associated image, and ensure your question is grounded in the features visible in that image.**
+        Do NOT select a spectrum type that does not have an image.
+
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used, and ensure the "image_path" field contains the actual path to the spectrum image (it must not be empty).
+
+        Here are some example questions for your reference. Please output your result in the following JSON format (making sure image_path points to the actual spectrum image and is not empty):
 
         Example 1:
         {{
-          "selected_spectrum_type": "IR",
-          "question": "In this infrared spectrum, there is a very broad absorption band in the 2500−3300 cm⁻¹ range and a strong peak around 1700 cm⁻¹. What property does this most likely suggest for the compound?",
-          "choices": ["Strong acidity", "High basicity", "Aromaticity", "Aliphatic character"],
-          "answer": "Strong acidity"
+          "selected_spectrum_type": "MASS",
+          "question": "Given the mass spectrum image, what is the most likely molecular ion peak (m/z) observed for this compound?",
+          "choices": ["85", "90", "120", "150"],
+          "answer": "120",
         }}
 
         Example 2:
         {{
-          "selected_spectrum_type": "UV-Vis",
-          "question": "This UV-Vis spectrum shows strong absorption in the 400−500 nm wavelength range. What color does this most likely suggest for the compound?",
-          "choices": ["Red", "Yellow", "Blue", "Colorless"],
-          "answer": "Blue"
+          "selected_spectrum_type": "IR",
+          "question": "Given the infrared spectrum image, a very broad absorption band in the 2500−3300 cm⁻¹ range and a strong peak around 1700 cm⁻¹ are observed. What property does this most likely suggest for the compound?",
+          "choices": ["Strong acidity", "High basicity", "Aromaticity", "Aliphatic character"],
+          "answer": "Strong acidity",
         }}
 
         Example 3:
         {{
+          "selected_spectrum_type": "UV-Vis",
+          "question": "Given the UV-Vis spectrum image, strong absorption is observed in the 400−500 nm wavelength range. What color does this most likely suggest for the compound?",
+          "choices": ["Red", "Yellow", "Blue", "Colorless"],
+          "answer": "Blue",
+        }}
+
+        Example 4:
+        {{
           "selected_spectrum_type": "H-NMR",
-          "question": "Based on the chemical shifts and integration in this 1H NMR spectrum, what can you infer about the solubility of this compound in water?",
+          "question": "Based on the chemical shifts and integration in this 1H NMR spectrum image, what can you infer about the solubility of this compound in water?",
           "choices": ["Highly soluble", "Slightly soluble", "Insoluble", "Decomposes in water"],
-          "answer": "Highly soluble"
+          "answer": "Highly soluble",
         }}
       num_choices: 4
     structure_elucidate:
@@ -242,7 +252,7 @@ generator_config:
 
         Please answer in the following JSON format:
         {{
-          "selected_spectrum_type": "MS",
+          "selected_spectrum_type": "MASS",
           "question": "Given the mass spectrum of an unknown compound, predict the most likely molecular structure (SMILES) consistent with the observed fragments.",
           "choices": ["CCO", "c1ccccc1", "CC(=O)O", "CCN"],
           "answer": "CCO"
@@ -258,7 +268,7 @@ generator_config:
 
         Example 2:
         {{
-          "selected_spectrum_type": "MS",
+          "selected_spectrum_type": "MASS",
           "question": "Given multiple fragment-level features inferred from NMR and MS spectra, assemble the most likely full molecular structure by combining fragments in a chemically consistent way.",
           "choices": ["CCCO", "CCOC", "CCN", "CNC"],
           "answer": "CCCO"
@@ -268,53 +278,51 @@ generator_config:
       template: |
         This is a modality fusion task.
 
-        You are given multiple types of information about a molecule, such as its molecular formula, and one or more spectra (IR, NMR, MS, etc.).
-        Your goal is to integrate all available information to infer structural features, identify functional groups, or rank candidate structures.
-        Please focus on designing questions that require the examinee to combine and reason across different data modalities (e.g., formula + spectrum, or multiple spectra).
-
-        Do NOT generate questions that only require single-modality analysis or simple spectrum type classification.
+        You are given multiple types of information about a molecule, such as its molecular formula and one or more spectrum images (IR, NMR, MS, etc.).
+        Your goal is to integrate all available information—including the provided spectrum image(s)—to infer structural features, identify functional groups, or rank candidate structures.
+        When generating questions and answers, you must reference both the molecular formula and the actual spectrum image (do not ignore the image).
 
         In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
 
         Please answer in the following JSON format:
         {{
           "selected_spectrum_type": "IR",
-          "question": "The molecular formula of the compound is C8H8O2. Use this information together with the provided spectrum image to infer possible structural features.",
+          "question": "The molecular formula of the compound is C8H8O2. Use this information together with the provided IR spectrum image to infer possible structural features.",
           "choices": ["Aromatic ring", "Alkene", "Alkyne", "Ether"],
           "answer": "Aromatic ring"
         }}
 
         Example 1:
         {{
-          "selected_spectrum_type": "IR",
-          "question": "Given the IR spectrum of a compound with formula C8H8O2, identify the major functional groups present in the molecule.",
-          "choices": ["Carboxylic acid", "Aldehyde", "Ketone", "Alcohol"],
-          "answer": "Carboxylic acid"
+          "selected_spectrum_type": "MASS",
+          "question": "A compound has the formula C8H8O2. Given its mass spectrum image and 1H-NMR spectrum image, rank the following candidate structures based on how well they match the spectral data.",
+          "choices": ["Structure A", "Structure B", "Structure C", "Structure D"],
+          "answer": "Structure A"
         }}
 
         Example 2:
         {{
-          "selected_spectrum_type": "MS",
-          "question": "A compound has the formula C8H8O2. Given its mass spectrum and 1H-NMR spectrum, rank the following candidate structures based on how well they match the spectral data.",
-          "choices": ["Structure A", "Structure B", "Structure C", "Structure D"],
-          "answer": "Structure A"
+          "selected_spectrum_type": "H-NMR",
+          "question": "Given the 1H-NMR spectrum image and the molecular formula C7H8O, what is the most likely functional group present in the molecule?",
+          "choices": ["Aldehyde", "Ketone", "Alcohol", "Ether"],
+          "answer": "Aldehyde"
         }}
       num_choices: 4
     mol_reasoning:
       template: |
         This is a molecular reasoning task.
 
-        You are given one or more spectra and/or other chemical information about a molecule.
-        Your goal is to design questions that require logical reasoning, calculation, or deduction based on the spectral and chemical data provided.
-        Typical questions may involve isotopic patterns, molecular formula deduction, or multi-step reasoning combining several pieces of evidence.
+        You are provided with one or more spectra (such as IR, NMR, MS, etc.) and/or other chemical information about a molecule.
+        Your goal is to design questions that require logical deduction, calculation, or multi-step reasoning based on the combination of spectral and chemical data.
+        Suitable questions may involve deducing molecular formulas, interpreting isotopic patterns, inferring structural features from multiple spectra, or integrating evidence from different sources to reach a conclusion.
 
-        Do NOT generate questions about simple spectrum type classification, signal quality, or direct property lookup.
+        Please avoid generating questions that are simple spectrum type classification, direct property lookup, or only about signal quality.
 
-        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used.
+        In your JSON output, include a field "selected_spectrum_type" to indicate which spectrum you used for reasoning.
 
         Please answer in the following JSON format:
         {{
-          "selected_spectrum_type": "MS",
+          "selected_spectrum_type": "MASS",
           "question": "In the mass spectrum of bromohexane, two peaks of equal intensity are observed. Which of the following m/z values are most likely due to the molecular ion isotopic pattern?",
           "choices": ["15 and 29", "93 and 15", "29 and 95", "95 and 93"],
           "answer": "29 and 95"
@@ -322,7 +330,7 @@ generator_config:
 
         Example 1:
         {{
-          "selected_spectrum_type": "MS",
+          "selected_spectrum_type": "MASS",
           "question": "A hydrocarbon with m/z = 142 was observed in the mass spectrum. What is the most likely molecular formula?",
           "choices": ["C10H22", "C11H18", "C11H10", "C8H18"],
           "answer": "C11H10"

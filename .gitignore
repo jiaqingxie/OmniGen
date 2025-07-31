@@ -18,3 +18,6 @@
 # Local data & playground
 data/
 playground/
+/seed_datasets
+/output
+

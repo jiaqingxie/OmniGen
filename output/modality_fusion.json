@@ -1,628 +1,396 @@
 [
   {
-    "selected_spectrum_type": "NMR",
-    "question": "The molecular formula of the compound is C7H14O2. Use the provided 1H-NMR spectrum along with the formula to deduce the number and type of hydrogen environments.",
-    "choices": [
-      "Three unique hydrogen environments",
-      "Four unique hydrogen environments",
-      "Five unique hydrogen environments",
-      "Six unique hydrogen environments"
-    ],
-    "answer": "Four unique hydrogen environments",
-    "image_path": {}
-  },
-  {
     "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C6H10O2. Use the provided mass spectrum and molecular formula to deduce the possible structural features of the molecule.",
+    "question": "The molecular formula of the compound is C9H12. Use the provided MS spectrum image to infer the most likely structural components.",
     "choices": [
-      "Ester",
-      "Ketone",
-      "Alcohol",
-      "Aldehyde"
-    ],
-    "answer": "Ester",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C11H12N2O2. Given its mass spectrum and the molecular formula, infer the possible structural features or functional groups present in the molecule.",
-    "choices": [
-      "Aromatic ring",
-      "Amide",
-      "Carboxylic acid",
-      "Ester"
-    ],
-    "answer": "Aromatic ring",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C8H14 and the provided mass spectrum, identify the most likely structural feature of the molecule.",
-    "choices": [
-      "Alkane",
+      "Benzene ring with a side chain",
+      "Cycloalkane",
       "Alkene",
-      "Alkyne",
-      "Aromatic"
+      "Alkyne"
     ],
-    "answer": "Alkene",
+    "answer": "Benzene ring with a side chain",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C3H8O3 (C(C(CO)O)O), what is the most likely structural feature present in the molecule?",
+    "choices": [
+      "Alcohol",
+      "Ether",
+      "Ester",
+      "Carbonyl"
+    ],
+    "answer": "Alcohol",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0128.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C10H21N and the provided mass spectrum image, determine the most likely structural feature of the molecule.",
+    "choices": [
+      "Alkyl chain",
+      "Aromatic ring",
+      "Carbonyl group",
+      "Carboxylic acid"
+    ],
+    "answer": "Alkyl chain",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C8H6S and the provided mass spectrum image, what is the base peak in the spectrum?",
+    "choices": [
+      "m/z 65",
+      "m/z 75",
+      "m/z 89",
+      "m/z 133"
+    ],
+    "answer": "m/z 133",
     "image_path": {}
   },
   {
     "selected_spectrum_type": "IR",
-    "question": "Given the IR spectrum of a compound with the molecular formula C15H14O2, what functional groups are most likely present?",
+    "question": "The molecular formula of the compound is C4H8O2. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Ester",
+      "Carboxylic acid",
+      "Ether",
+      "Alcohol"
+    ],
+    "answer": "Ester",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0015.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C5H6N2. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Aromatic ring",
+      "Alkyne",
+      "Nitrile",
+      "Amide"
+    ],
+    "answer": "Aromatic ring",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0103.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C3H7N, what is the most likely structure of the molecule?",
+    "choices": [
+      "Propylamine",
+      "Isopropylamine",
+      "Ethylmethylamine",
+      "Methylhydrazine"
+    ],
+    "answer": "Propylamine",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0081.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C13H17NO4, use the provided mass spectrum image to infer the most likely structural features of the molecule.",
+    "choices": [
+      "Alcohol",
+      "Amine",
+      "Ester",
+      "Ester with aromatic rings"
+    ],
+    "answer": "Ester with aromatic rings",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C6H10O2. Use this information together with the provided IR spectrum image to infer possible structural features.",
     "choices": [
       "Carbonyl group",
       "Alcohol",
-      "Amine",
-      "Aromatic ring"
+      "Carboxylic acid",
+      "Ether"
     ],
     "answer": "Carbonyl group",
     "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0154.png"
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0057.png"
     }
   },
   {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C12H14O and the provided MS spectrum, determine the most plausible structural feature of the compound based on the fragmentation pattern.",
-    "choices": [
-      "Aromatic ring with an aldehyde group",
-      "Aromatic ring with an ether linkage",
-      "Aromatic ring with an alkyne side chain",
-      "A long alkyl chain with an alcohol group"
-    ],
-    "answer": "Aromatic ring with an alkyne side chain",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C8H7N. Analyze the provided mass spectrum and infrared spectrum to deduce the structural features of the molecule.",
-    "choices": [
-      "Alkene",
-      "Nitrile",
-      "Amine",
-      "Carboxylic acid"
-    ],
-    "answer": "Nitrile",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C8H8O2. Use this information together with the provided IR spectrum to determine the presence of specific functional groups.",
-    "choices": [
-      "Carbonyl group",
-      "Alcohol group",
-      "Ester group",
-      "Nitrile group"
-    ],
-    "answer": "Ester group",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0181.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C8H9NO and the mass spectrum, identify the base peak and discuss how it correlates with the structural features of the compound.",
-    "choices": [
-      "Molecular ion peak at m/z 143",
-      "Fragment peak at m/z 121",
-      "Fragment peak at m/z 92",
-      "Fragment peak at m/z 65"
-    ],
-    "answer": "Fragment peak at m/z 121",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C4H6O2S. Use the mass spectrum provided along with the molecular formula to determine the most likely structural features of the molecule.",
-    "choices": [
-      "Thioester",
-      "Thioether",
-      "Sulfone",
-      "Sulfoxide"
-    ],
-    "answer": "Thioester",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C2H5I, use the provided mass spectrum and 1H-NMR spectrum to deduce the structural features of the compound.",
-    "choices": [
-      "Methyl iodide",
-      "Ethyl iodide",
-      "Vinyl iodide",
-      "Iodoform"
-    ],
-    "answer": "Ethyl iodide",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C7H6Cl2 and the provided mass spectrum, identify the base peak and deduce the presence of chlorine in the molecule.",
-    "choices": [
-      "Molecular ion peak at m/z 147",
-      "Molecular ion peak at m/z 149",
-      "Fragmentation peak at m/z 125",
-      "Fragmentation peak at m/z 108"
-    ],
-    "answer": "Molecular ion peak at m/z 149",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "1H-NMR",
-    "question": "The molecular formula of the compound is C9H12. Analyze the provided 1H-NMR spectrum and deduce the possible structural features of the molecule.",
-    "choices": [
-      "Cyclohexane",
-      "Monosubstituted benzene",
-      "Disubstituted benzene",
-      "Tetrasubstituted benzene"
-    ],
-    "answer": "Tetrasubstituted benzene",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C9H8O2S. Using the mass spectrum and the provided NMR spectrum, identify which structural feature is most likely present in the molecule.",
-    "choices": [
-      "Sulfoxide group",
-      "Sulfone group",
-      "Thioether group",
-      "Ether group"
-    ],
-    "answer": "Thioether group",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C6H11NO. Use this information together with the provided IR spectrum to infer possible structural features.",
-    "choices": [
-      "Amide",
-      "Alcohol",
-      "Ester",
-      "Alkene"
-    ],
-    "answer": "Amide",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0206.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C5H9BrO2. Given the mass spectrum data, predict the fragmentation pattern and deduce probable structural features.",
-    "choices": [
-      "Primary alcohol with bromine",
-      "Secondary alcohol with bromine",
-      "Ester with bromine",
-      "Acid with bromine"
-    ],
-    "answer": "Ester with bromine",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C6H5Br2N. Use this information along with the provided MS spectrum to determine possible structural features of the molecule.",
-    "choices": [
-      "Brominated aromatic ring",
-      "Secondary amine",
-      "Alkyl halide",
-      "Ester"
-    ],
-    "answer": "Brominated aromatic ring",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C6H5BrO. Use this information together with the provided MS spectrum image to infer the most likely structural feature of the molecule.",
-    "choices": [
-      "Aromatic ring with a bromine substituent",
-      "Alkyl halide",
-      "Carboxylic acid",
-      "Ether"
-    ],
-    "answer": "Aromatic ring with a bromine substituent",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C6H6OS and the provided mass spectrum (MS) data, identify the base peak and propose a possible fragmentation pattern.",
-    "choices": [
-      "Base peak at m/z 43, fragmentation includes loss of water",
-      "Base peak at m/z 41, fragmentation includes loss of sulfur",
-      "Base peak at m/z 56, fragmentation includes loss of methyl group",
-      "Base peak at m/z 68, fragmentation includes loss of hydrogen"
-    ],
-    "answer": "Base peak at m/z 43, fragmentation includes loss of water",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "Given the IR spectrum and the molecular formula C10H10O, identify the possible functional groups present in the molecule.",
-    "choices": [
-      "Carboxylic acid",
-      "Aldehyde",
-      "Ketone",
-      "Ester"
-    ],
-    "answer": "Ketone",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0161.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C8H14O3. Use the IR and MS spectra provided to deduce the presence of specific functional groups in the molecule.",
-    "choices": [
-      "Ester",
-      "Carbonyl",
-      "Alcohol",
-      "Ether"
-    ],
-    "answer": "Ester",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0046.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C5H7NO2. Use this information together with the provided IR spectrum to determine the major functional groups present in the molecule.",
-    "choices": [
-      "Amide",
-      "Ester",
-      "Carboxylic acid",
-      "Alcohol"
-    ],
-    "answer": "Amide",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0026.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C10H7Cl and the provided MS spectrum, determine the plausible fragmentation pattern and deduce structural features of the molecule.",
-    "choices": [
-      "Aromatic ring with alkyl side chain",
-      "Alkyl halide",
-      "Cyclic alkene",
-      "Alcohol"
-    ],
-    "answer": "Aromatic ring with alkyl side chain",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C10H11BrO2 and the provided mass spectrum, identify the most likely molecular ion peak and explain its significance.",
-    "choices": [
-      "m/z 227",
-      "m/z 177",
-      "m/z 119",
-      "m/z 194"
-    ],
-    "answer": "m/z 227",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C3H6O2 (CCOC=O) and the provided NMR spectrum, analyze the integration and chemical shifts to determine the number and types of hydrogen environments present in the molecule.",
-    "choices": [
-      "One singlet",
-      "Two singlets",
-      "One triplet and one singlet",
-      "One quartet and one triplet"
-    ],
-    "answer": "One triplet and one singlet",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C2H4Br2, use the provided 1H-NMR spectrum to determine the number of unique hydrogen environments in the molecule.",
-    "choices": [
-      "1",
-      "2",
-      "3",
-      "4"
-    ],
-    "answer": "1",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C7H12O4. Using the provided IR spectrum and considering the molecular formula, what functional groups are likely present in the compound?",
-    "choices": [
-      "Carboxylic acid",
-      "Ester",
-      "Alcohol",
-      "Alkene"
-    ],
-    "answer": "Ester",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0019.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C4H6N2 and the provided MS spectrum, identify the most likely fragments that are being observed in the mass spectrum.",
-    "choices": [
-      "m/z 54 and m/z 39",
-      "m/z 42 and m/z 26",
-      "m/z 60 and m/z 45",
-      "m/z 48 and m/z 32"
-    ],
-    "answer": "m/z 54 and m/z 39",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C4H6O2. Use the IR spectrum provided to identify the functional groups present in the molecule.",
-    "choices": [
-      "Ester",
-      "Carboxylic acid",
-      "Alcohol",
-      "Ether"
-    ],
-    "answer": "Ester",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0162.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C6H12O2. Use this information along with the provided IR spectrum to infer possible functional groups in the compound.",
-    "choices": [
-      "Ester",
-      "Ketone",
-      "Carboxylic acid",
-      "Alcohol"
-    ],
-    "answer": "Ester",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0024.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the formula C10H14O2 and the mass spectrum provided, deduce the most likely structural fragmentations observed in the mass spectrum.",
-    "choices": [
-      "Loss of a methyl group",
-      "Loss of an ethyl group",
-      "Loss of a water molecule",
-      "Loss of a carbonyl group"
-    ],
-    "answer": "Loss of a methyl group",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "The molecular formula of the compound is C7H9N. Use the provided 1H-NMR spectrum along with the molecular formula to deduce the structural features of the compound.",
-    "choices": [
-      "Benzene ring with an amine group",
-      "Alkyl chain with a nitrile group",
-      "Cycloalkane with an amine group",
-      "Alkene with an amine group"
-    ],
-    "answer": "Benzene ring with an amine group",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C7H12O. Use the mass spectrum and the given molecular formula to deduce the possible structural features of the compound.",
-    "choices": [
-      "Cyclic ketone",
-      "Aliphatic alcohol",
-      "Aromatic compound",
-      "Carboxylic acid"
-    ],
-    "answer": "Cyclic ketone",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "The molecule has the formula C7H7NO3. Analyze the 1H-NMR spectrum alongside the molecular formula to determine the structural features present.",
-    "choices": [
-      "Alcohol group",
-      "Nitro group",
-      "Ester group",
-      "Carbonyl group"
-    ],
-    "answer": "Nitro group",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C10H13NO2, analyze the provided 1H-NMR spectrum to determine the presence of specific proton environments in the molecule.",
-    "choices": [
-      "Aromatic protons",
-      "Alcohol protons",
-      "Alkene protons",
-      "Alkyne protons"
-    ],
-    "answer": "Aromatic protons",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C4H6BrN. Use the provided mass spectrum and the molecular formula to determine the possible structural features of the compound.",
-    "choices": [
-      "Alkyl halide",
-      "Nitrile",
-      "Amide",
-      "Amine"
-    ],
-    "answer": "Nitrile",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C12H24O6. Use the IR spectrum and MS spectrum provided to determine the presence of specific functional groups in the molecule.",
-    "choices": [
-      "Ester",
-      "Alcohol",
-      "Carboxylic acid",
-      "Ether"
-    ],
-    "answer": "Ether",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0014.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C13H17NO4 and the provided mass spectrum, identify the base peak and propose possible structural fragments that correspond to the observed mass fragments.",
-    "choices": [
-      "Base peak at m/z 91",
-      "Base peak at m/z 107",
-      "Base peak at m/z 136",
-      "Base peak at m/z 164"
-    ],
-    "answer": "Base peak at m/z 91",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C6H4Cl3N, use the provided 1H-NMR spectrum to infer the possible structural features.",
-    "choices": [
-      "Monosubstituted benzene ring",
-      "Disubstituted benzene ring",
-      "Trisubstituted benzene ring",
-      "Tetrasubstituted benzene ring"
-    ],
-    "answer": "Trisubstituted benzene ring",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "Given the molecular formula C14H14OS and the provided IR spectrum, identify the functional groups present in the molecule.",
-    "choices": [
-      "Ester",
-      "Amine",
-      "Thioether",
-      "Aldehyde"
-    ],
-    "answer": "Thioether",
-    "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0211.png"
-    }
-  },
-  {
-    "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C4H10O, use the provided mass spectrum and 1H-NMR spectrum to identify the major structural features and functional groups of the compound.",
-    "choices": [
-      "Primary alcohol",
-      "Secondary alcohol",
-      "Tertiary alcohol",
-      "Ether"
-    ],
-    "answer": "Tertiary alcohol",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C18H12. Use the IR spectrum and the molecular formula to deduce the presence of any significant functional groups or structural features such as aromatic rings or alkenes.",
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C9H12, what is the most likely structural feature present in the molecule?",
     "choices": [
       "Aromatic ring",
       "Alkene",
       "Alkyne",
-      "Nitrile"
+      "Alcohol"
     ],
     "answer": "Aromatic ring",
     "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0093.png"
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0036.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C7H12O4. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Carboxylic acid",
+      "Ester",
+      "Alcohol",
+      "Alkene"
+    ],
+    "answer": "Carboxylic acid",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0018.png"
     }
   },
   {
     "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C5H10O. Use the provided MS and IR spectra to determine the structural features of the molecule.",
+    "question": "The molecular formula of the compound is C9H8O. Use this information together with the provided MS spectrum image to determine which of the following is a likely fragment ion.",
     "choices": [
-      "Alcohol with tertiary carbon",
+      "65",
+      "77",
+      "89",
+      "91"
+    ],
+    "answer": "77",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C14H8O2, what is the most likely functional group present in the molecule?",
+    "choices": [
       "Aldehyde",
-      "Ester",
+      "Carbonyl",
+      "Alcohol",
       "Ether"
     ],
-    "answer": "Alcohol with tertiary carbon",
+    "answer": "Carbonyl",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0094.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The molecular formula of the compound is C7H5NO. Use this information together with the provided MS spectrum image to infer possible structural features.",
+    "choices": [
+      "Carboxylic acid",
+      "Amide",
+      "Nitrile",
+      "Imine"
+    ],
+    "answer": "Amide",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C12H14O4. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Aromatic ring",
+      "Carbonyl group",
+      "Ester",
+      "Alcohol"
+    ],
+    "answer": "Aromatic ring",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0167.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C9H8O, what is the most likely functional group present in the molecule?",
+    "choices": [
+      "Aldehyde",
+      "Ketone",
+      "Phenol",
+      "Ester"
+    ],
+    "answer": "Phenol",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0139.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C9H8O4. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Carboxylic acid",
+      "Ester",
+      "Alcohol",
+      "Amide"
+    ],
+    "answer": "Ester",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0180.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C10H14O2. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Aromatic ring",
+      "Alcohol",
+      "Carbonyl group",
+      "Alkyne"
+    ],
+    "answer": "Aromatic ring",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0117.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "Given the molecular formula C9H10O and the provided mass spectrum image, what is the most likely structure of the compound?",
+    "choices": [
+      "Structure A",
+      "Structure B",
+      "Structure C",
+      "Structure D"
+    ],
+    "answer": "Structure A",
     "image_path": {}
   },
   {
     "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C12H18. Using the provided MS spectrum, deduce possible structural features of the compound.",
+    "question": "The molecular formula of the compound is C6H5Br2N. Use this information together with the provided MS spectrum image to determine the most likely structural features or functional groups.",
     "choices": [
-      "Cyclic structure",
-      "Linear alkane",
-      "Branched alkane",
-      "Aromatic ring"
+      "Bromoalkane",
+      "Bromoaryl",
+      "Bromoamine",
+      "Bromoester"
     ],
-    "answer": "Cyclic structure",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "The molecular formula of the compound is C8H14O3. Analyze the 1H-NMR spectrum and compare with the molecular formula to deduce the number and type of hydrogen environments present in the molecule.",
-    "choices": [
-      "Three singlets",
-      "Two doublets and one singlet",
-      "One triplet and two singlets",
-      "Two triplets and one doublet"
-    ],
-    "answer": "One triplet and two singlets",
-    "image_path": {}
-  },
-  {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C8H10O and the provided NMR spectrum, identify the structural features of the molecule.",
-    "choices": [
-      "Alcohol with an aromatic ring",
-      "Aldehyde with an alkene",
-      "Ether with a cycloalkane",
-      "Carboxylic acid with an alkyne"
-    ],
-    "answer": "Alcohol with an aromatic ring",
+    "answer": "Bromoaryl",
     "image_path": {}
   },
   {
     "selected_spectrum_type": "MS",
-    "question": "Given the molecular formula C6H10O3 and the provided MS spectrum, determine the most plausible structural features present in the molecule.",
+    "question": "The molecular formula of the compound is C4H6O. Use this information together with the provided MS spectrum image to determine possible structural features.",
+    "choices": [
+      "Aldehyde",
+      "Ketone",
+      "Ester",
+      "Carboxylic acid"
+    ],
+    "answer": "Ketone",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C5H10O3. Use this information together with the provided IR spectrum image to infer possible functional groups present.",
+    "choices": [
+      "Ester",
+      "Alcohol",
+      "Carboxylic acid",
+      "Ether"
+    ],
+    "answer": "Ester",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0129.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C3H4Cl2. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Aromatic ring",
+      "Alkene",
+      "Alkyne",
+      "Ether"
+    ],
+    "answer": "Alkene",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0013.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The molecular formula of the compound is C7H10S. Use this information together with the provided MS spectrum image to identify possible structural features.",
+    "choices": [
+      "Cyclic thioether",
+      "Alkyl thiol",
+      "Thioester",
+      "Thioamide"
+    ],
+    "answer": "Cyclic thioether",
+    "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "H-NMR",
+    "question": "Given the 1H-NMR spectrum image and the molecular formula C4H8Cl2, what is the most likely structural feature of the molecule?",
+    "choices": [
+      "Two equivalent CH2 groups",
+      "One CH3 and one CH2 group",
+      "Two CH3 groups",
+      "One CH3 and two CH2 groups"
+    ],
+    "answer": "One CH3 and one CH2 group",
+    "image_path": {
+      "H-NMR": "seed_datasets/molpuzzle/H-NMR/MOL_0140.png"
+    }
+  },
+  {
+    "selected_spectrum_type": "MS",
+    "question": "The molecular formula of the compound is C7H12O2. Use this information together with the provided MS spectrum image to infer possible structural features.",
     "choices": [
       "Ester",
       "Carboxylic acid",
-      "Ketone",
-      "Amide"
+      "Alcohol",
+      "Ether"
     ],
     "answer": "Ester",
     "image_path": {}
   },
   {
     "selected_spectrum_type": "IR",
-    "question": "The molecular formula of the compound is C6H7N. Use the provided IR spectrum to identify possible functional groups and structural features.",
+    "question": "The molecular formula of the compound is C4H9NO2. Use this information together with the provided IR spectrum image to infer possible structural features.",
     "choices": [
-      "Aromatic ring",
-      "Alcohol",
-      "Carbonyl",
-      "Amide"
+      "Carboxylic acid",
+      "Ester",
+      "Amide",
+      "Alcohol"
     ],
-    "answer": "Aromatic ring",
+    "answer": "Amide",
     "image_path": {
-      "IR": "seed_datasets/molpuzzle/IR/MOL_0106.png"
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0112.png"
     }
   },
   {
-    "selected_spectrum_type": "NMR",
-    "question": "Given the molecular formula C9H10O and the provided NMR spectrum, determine the structural feature that is most consistent with the observed chemical shifts.",
+    "selected_spectrum_type": "MS",
+    "question": "The molecular formula of the compound is C8H6O3. Use this information together with the provided MS spectrum image to infer possible structural features.",
     "choices": [
-      "Allylic alcohol",
-      "Phenol",
-      "Ether",
-      "Aldehyde"
+      "Aromatic ring",
+      "Alkene",
+      "Alkyne",
+      "Carboxylic acid"
     ],
-    "answer": "Allylic alcohol",
+    "answer": "Aromatic ring",
     "image_path": {}
   },
   {
     "selected_spectrum_type": "MS",
-    "question": "The molecular formula of the compound is C12H8Br2. Use the mass spectrum and the molecular formula to determine the most likely molecular ion peak.",
+    "question": "The molecular formula of the compound is C12H16O2. Use this information together with the provided MS spectrum image to infer possible structural features.",
     "choices": [
-      "101",
-      "168",
-      "216",
-      "310"
+      "Aromatic ring",
+      "Ester group",
+      "Alkyne",
+      "Carboxylic acid"
     ],
-    "answer": "310",
+    "answer": "Ester group",
     "image_path": {}
+  },
+  {
+    "selected_spectrum_type": "IR",
+    "question": "The molecular formula of the compound is C6H10O3. Use this information together with the provided IR spectrum image to infer possible structural features.",
+    "choices": [
+      "Ester",
+      "Carboxylic acid",
+      "Alcohol",
+      "Alkene"
+    ],
+    "answer": "Ester",
+    "image_path": {
+      "IR": "seed_datasets/molpuzzle/IR/MOL_0134.png"
+    }
   }
 ]
