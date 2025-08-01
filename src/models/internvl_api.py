@@ -20,7 +20,7 @@ class InternVL(BaseAPIModel):
         api_key = api_key or os.getenv("INTERNVL_API_KEY")
         base_url = base_url or os.getenv("INTERNVL_BASE_URL")
 
-        # 初始化父类
+        # 初始化父类 
         super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)
 
         # 验证配置

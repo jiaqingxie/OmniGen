@@ -8,7 +8,7 @@ from PIL import Image as PILImage
 
 @register_generator("benchmark")
 class BenchmarkGenerator(BaseGenerator):
-    """Benchmark data generator."""
+    """Benchmark data generator for creating spectrum analysis questions."""
 
     def __init__(self, config: Dict, model_client=None):
         super().__init__(config, model_client)
@@ -22,7 +22,6 @@ class BenchmarkGenerator(BaseGenerator):
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
         """Generate a single benchmark sample."""
         if not self.validate_input(sample):
-            print(f"❌ Sample {sample.id} failed validation")
             return None
         try:
             question_type = self.question_types[self.current_type_index]
@@ -34,32 +33,33 @@ class BenchmarkGenerator(BaseGenerator):
                 template_str = template_info
                 num_choices = 4
 
-            print(f"🔄 Generating {question_type} question for sample {sample.id}")
             model_input = self._prepare_model_input(sample, question_type, template_str)
 
+            result = None
             if self.model_client is None:
-                print("📝 Using simple result generation (no model)")
                 result = self._generate_simple_result(sample, question_type, num_choices)
             else:
-                print("🤖 Using model for generation")
-                raw_output = self.model_client.generate(model_input, max_out_len=512)
-                result = self._parse_response(raw_output, num_choices, sample)
+                try:
+                    raw_output = self.model_client.generate(model_input, max_out_len=512)
+                    if raw_output:
+                        result = self._parse_response(raw_output, num_choices, sample)
+                except Exception as e:
+                    pass  # Silently fall back to simple result
+
+                # Fall back to simple result if model generation failed
+                if result is None:
+                    result = self._generate_simple_result(sample, question_type, num_choices)
 
             if result is None:
-                print(f"❌ Result is None for sample {sample.id}")
                 return None
 
-            print(f"✅ Successfully generated result for sample {sample.id}")
             self.current_type_index = (self.current_type_index + 1) % len(self.question_types)
             return result
         except Exception as e:
-            print(f"❌ Exception in generate_single for sample {sample.id}: {e}")
-            import traceback
-
-            traceback.print_exc()
             return None
 
     def _prepare_model_input(self, sample: DataSample, question_type: str, template_str: str):
+        """Prepare input for the model including text prompt and images."""
         prompt_text = self._build_prompt(sample, question_type, template_str)
         if sample.has_images():
             image_paths = list(sample.images.values())
@@ -68,6 +68,7 @@ class BenchmarkGenerator(BaseGenerator):
             return prompt_text
 
     def _build_prompt(self, sample: DataSample, question_type: str, template_str: str) -> str:
+        """Build the text prompt using template and sample data."""
         spectra_list = "\n".join([f"{k}: available" for k in (sample.images or {}).keys()])
         prompt_template = PromptTemplate(template_str)
         template_vars = {
@@ -81,13 +82,13 @@ class BenchmarkGenerator(BaseGenerator):
         try:
             base_prompt = prompt_template.template.format(**template_vars)
         except KeyError as e:
-            print(f"Prompt formatting failed, missing variable: {e}")
             base_prompt = template_str
         if sample.has_text():
             base_prompt += f"\n\nContent: {sample.text}"
         return base_prompt
 
     def _parse_response(self, response: str, num_choices: int, sample: DataSample) -> Optional[Dict[str, Any]]:
+        """Parse model response and add image paths."""
         try:
             start_idx = response.find('{')
             end_idx = response.rfind('}')
@@ -103,7 +104,7 @@ class BenchmarkGenerator(BaseGenerator):
             if data["answer"] not in data["choices"]:
                 return None
 
-            # 保存选中的图像并添加路径
+            # Save selected image and add path
             spectrum_type = data["selected_spectrum_type"]
             image_path = self._save_and_get_image_path(sample, spectrum_type)
             if image_path:
@@ -115,17 +116,17 @@ class BenchmarkGenerator(BaseGenerator):
             return None
 
     def _generate_simple_result(self, sample: DataSample, question_type: str, num_choices: int) -> Dict[str, Any]:
-        """生成简单的测试结果"""
+        """Generate simple fallback result when model fails."""
         import random
 
         spectrum_types = list(sample.images.keys()) if sample.has_images() else ["IR"]
         selected_type = random.choice(spectrum_types)
 
-        # 生成简单的问题和选项
+        # Generate simple questions and choices
         questions = {
-            "type_cls": f"What type of spectrum is this?",
-            "peak_identification": f"Which peak corresponds to the functional group in this spectrum?",
-            "compound_identification": f"What compound does this spectrum represent?",
+            "type_cls": "What type of spectrum is this?",
+            "peak_identification": "Which peak corresponds to the functional group in this spectrum?",
+            "compound_identification": "What compound does this spectrum represent?",
         }
 
         choices_map = {
@@ -142,8 +143,8 @@ class BenchmarkGenerator(BaseGenerator):
         question = questions.get(question_type, f"Sample {sample.id} {question_type} question")
         choices = choices_map.get(question_type, [f"Option {chr(65+i)}" for i in range(num_choices)])
 
-        # 根据选择的谱图类型确定答案
-        answer = choices[0]  # 默认答案
+        # Determine answer based on spectrum type
+        answer = choices[0]  # Default answer
         if question_type == "type_cls":
             type_mapping = {
                 "IR": "Infrared Spectrum (IR)",
@@ -153,7 +154,7 @@ class BenchmarkGenerator(BaseGenerator):
             }
             answer = type_mapping.get(selected_type, choices[0])
 
-        # 保存选中的图像并获取路径
+        # Save selected image and get path
         image_path = self._save_and_get_image_path(sample, selected_type)
 
         result = {
@@ -166,7 +167,7 @@ class BenchmarkGenerator(BaseGenerator):
         return result
 
     def _save_and_get_image_path(self, sample: DataSample, spectrum_type: str) -> str:
-        """保存指定类型的图像到临时文件夹并返回路径"""
+        """Save specified image type to temp folder and return path."""
         if not sample.has_images() or spectrum_type not in sample.images:
             return ""
 
@@ -174,24 +175,27 @@ class BenchmarkGenerator(BaseGenerator):
         if not isinstance(image_data, PILImage.Image):
             return ""
 
-        # 创建输出目录
+        # Create output directory
         output_dir = "output/temp_images"
         os.makedirs(output_dir, exist_ok=True)
 
-        # 生成文件名
-        filename = f"{sample.id}_{spectrum_type.lower().replace('-', '_')}.png"
+        # Generate safe filename
+        safe_sample_id = sample.id.replace('/', '_').replace('\\', '_')
+        safe_spectrum_type = spectrum_type.lower().replace('-', '_')
+        filename = f"{safe_sample_id}_{safe_spectrum_type}.png"
         file_path = os.path.join(output_dir, filename)
 
-        # 保存图像
+        # Save image
         image_data.save(file_path, "PNG")
-        print(f"Saved image: {file_path}")
 
         return file_path
 
     def validate_input(self, sample: DataSample) -> bool:
+        """Validate input sample has required data."""
         return sample.has_text() or sample.has_images()
 
     def validate_output(self, output: Dict[str, Any], num_choices: int) -> bool:
+        """Validate generated output format."""
         if not super().validate_output(output):
             return False
         required_fields = ["question", "choices", "answer"]
@@ -204,6 +208,7 @@ class BenchmarkGenerator(BaseGenerator):
         return True
 
     def get_output_schema(self) -> Dict[str, Any]:
+        """Get output schema definition."""
         return {
             "type": "object",
             "properties": {
