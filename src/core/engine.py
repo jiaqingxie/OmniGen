@@ -4,26 +4,27 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 import pandas as pd
 import random
+from PIL import Image as PILImage
 from ..config import OmniGenConfig
-from ..data_loaders import Dataset, DataSample, create_loader_for_path
+from ..data_loaders import Dataset, DataSample, create_loader_for_source
 from ..generators.base import create_generator
 from ..models.base import BaseModel
 
 
-class MockModel(BaseModel):
-    """Mock model for testing."""
+class CustomJSONEncoder(json.JSONEncoder):
+    """Custom JSON encoder to handle PIL Image objects."""
 
-    def __init__(self, path: str = "mock", max_seq_len: int = 2048):
-        super().__init__(path, max_seq_len)
+    def default(self, obj):
+        if isinstance(obj, PILImage.Image):
+            # Convert PIL Image to base64 string
+            import base64
+            import io
 
-    def generate(self, prompt, max_out_len: int = 512) -> str:
-        return '''
-        {
-            "question": "This is a test question",
-            "choices": ["A", "B", "C", "D", "E"],
-            "answer": "A"
-        }
-        '''
+            buffer = io.BytesIO()
+            obj.save(buffer, format='PNG')
+            img_str = base64.b64encode(buffer.getvalue()).decode()
+            return f"data:image/png;base64,{img_str}"
+        return super().default(obj)
 
 
 class OmniGenEngine:
@@ -41,9 +42,7 @@ class OmniGenEngine:
     def _init_model_client(self):
         """Initialize model client."""
         model_type = self.config.model_type.lower()
-        if model_type == "mock":
-            self.model_client = MockModel()
-        elif model_type == "internvl":
+        if model_type == "internvl":
             try:
                 from ..models import InternVL
 
@@ -55,14 +54,11 @@ class OmniGenEngine:
                     max_seq_len=model_config.get("max_seq_len", 2048),
                 )
             except ImportError as e:
-                print(f"[WARN] Failed to import InternVL: {e}. Using MockModel instead.")
-                self.model_client = MockModel()
+                raise ImportError(f"Failed to import InternVL: {e}")
             except Exception as e:
-                print(f"[WARN] InternVL initialization failed: {e}. Using MockModel instead.")
-                self.model_client = MockModel()
+                raise RuntimeError(f"InternVL initialization failed: {e}")
         else:
-            print(f"[WARN] Unsupported model type: {model_type}. Using MockModel instead.")
-            self.model_client = MockModel()
+            raise ValueError(f"Unsupported model type: {model_type}")
 
     def _init_generator(self):
         """Initialize generator."""
@@ -70,17 +66,22 @@ class OmniGenEngine:
         if self.generator is None:
             raise ValueError(f"Cannot create generator: {self.config.generator_type}")
 
-    def load_dataset(self, dataset_path: Optional[str] = None) -> Dataset:
-        """Load dataset from path."""
-        if dataset_path is None:
-            dataset_path = self.config.dataset_path
-        dataset_path = Path(dataset_path)
-        if not dataset_path.exists():
-            raise FileNotFoundError(f"Dataset path does not exist: {dataset_path}")
-        loader = create_loader_for_path(dataset_path)
+    def load_dataset(self, data_source: Optional[str] = None) -> Dataset:
+        """Load dataset from data source (Hugging Face dataset ID or local path)."""
+        if data_source is None:
+            data_source = self.config.dataset_path
+
+        # Get loader kwargs from generator_config
+        loader_kwargs = self.config.generator_config.get("loader_kwargs", {})
+
+        # Create appropriate loader
+        loader = create_loader_for_source(data_source)
         if loader is None:
-            raise ValueError(f"No suitable loader found for: {dataset_path}")
-        self.dataset = loader.load(dataset_path)
+            raise ValueError(f"No suitable loader found for: {data_source}")
+
+        # Load dataset with kwargs
+        self.dataset = loader.load(data_source, **loader_kwargs)
+
         if self.config.verbose:
             stats = self.dataset.get_stats()
             print(f"Dataset loaded: {stats}")
@@ -164,18 +165,54 @@ class OmniGenEngine:
             print(f"Results saved to: {output_path}")
 
     def _save_json(self, results: List[Dict[str, Any]], output_path: Path):
-        """Save as JSON format."""
+        """Save as JSON format"""
         with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(results, f, ensure_ascii=False, indent=2)
+            json.dump(results, f, ensure_ascii=False, indent=2, cls=CustomJSONEncoder)
 
     def _save_csv(self, results: List[Dict[str, Any]], output_path: Path):
         """Save as CSV format."""
-        df = pd.DataFrame(results)
+        # Convert results to serializable format before saving
+        serializable_results = []
+        for result in results:
+            serializable_result = {}
+            for key, value in result.items():
+                if isinstance(value, PILImage.Image):
+                    # Convert PIL Image to base64 string
+                    import base64
+                    import io
+
+                    buffer = io.BytesIO()
+                    value.save(buffer, format='PNG')
+                    img_str = base64.b64encode(buffer.getvalue()).decode()
+                    serializable_result[key] = f"data:image/png;base64,{img_str}"
+                else:
+                    serializable_result[key] = value
+            serializable_results.append(serializable_result)
+
+        df = pd.DataFrame(serializable_results)
         df.to_csv(output_path, index=False, encoding='utf-8')
 
     def _save_parquet(self, results: List[Dict[str, Any]], output_path: Path):
         """Save as Parquet format."""
-        df = pd.DataFrame(results)
+        # Convert results to serializable format before saving
+        serializable_results = []
+        for result in results:
+            serializable_result = {}
+            for key, value in result.items():
+                if isinstance(value, PILImage.Image):
+                    # Convert PIL Image to base64 string
+                    import base64
+                    import io
+
+                    buffer = io.BytesIO()
+                    value.save(buffer, format='PNG')
+                    img_str = base64.b64encode(buffer.getvalue()).decode()
+                    serializable_result[key] = f"data:image/png;base64,{img_str}"
+                else:
+                    serializable_result[key] = value
+            serializable_results.append(serializable_result)
+
+        df = pd.DataFrame(serializable_results)
         df.to_parquet(output_path, index=False)
 
     async def run(self) -> List[Dict[str, Any]]:
