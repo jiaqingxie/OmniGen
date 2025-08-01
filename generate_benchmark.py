@@ -12,6 +12,9 @@ def main():
     parser.add_argument("--samples", type=int, default=None, help="Number of samples to generate (override config)")
     parser.add_argument("--data-source", type=str, default=None, help="Override data source (Hugging Face dataset ID)")
     parser.add_argument("--max-data-samples", type=int, default=None, help="Maximum number of data samples to load")
+    parser.add_argument(
+        "--output", type=str, default="benchmark.json", help="Output filename (default: benchmark.json)"
+    )
 
     args = parser.parse_args()
 
@@ -37,6 +40,18 @@ def main():
             config.generator_config["loader_kwargs"] = {}
         config.generator_config["loader_kwargs"]["max_samples"] = args.max_data_samples
         print(f"Limiting data samples to: {args.max_data_samples}")
+
+    # Handle output filename override
+    if args.output:
+        # Ensure the output path uses the specified filename
+        output_path = Path(config.output_path)
+        # If it's just a directory, append the filename
+        if output_path.is_dir() or str(output_path).endswith('/'):
+            config.output_path = str(output_path / args.output)
+        else:
+            # Replace the filename part
+            config.output_path = str(output_path.parent / args.output)
+        print(f"Using output file: {args.output}")
 
     # Print configuration summary
     print(f"Configuration:")
