@@ -1,14 +1,16 @@
 import json
+import os
 from typing import Dict, Any, Optional, List
 from .base import BaseGenerator, PromptTemplate, register_generator
 from ..data_loaders import DataSample
+from PIL import Image as PILImage
 
 
 @register_generator("benchmark")
 class BenchmarkGenerator(BaseGenerator):
     """Benchmark data generator."""
 
-    def __init__(self, config: Dict[str, Any], model_client=None):
+    def __init__(self, config: Dict, model_client=None):
         super().__init__(config, model_client)
         self.prompt_templates = config.get("prompt_templates", {})
         if not self.prompt_templates:
@@ -18,8 +20,9 @@ class BenchmarkGenerator(BaseGenerator):
         self.include_reasoning = config.get("include_reasoning", False)
 
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
-        """Generate a single benchmark sample, print prompt, raw output, and parsed result."""
+        """Generate a single benchmark sample."""
         if not self.validate_input(sample):
+            print(f"❌ Sample {sample.id} failed validation")
             return None
         try:
             question_type = self.question_types[self.current_type_index]
@@ -30,30 +33,30 @@ class BenchmarkGenerator(BaseGenerator):
             else:
                 template_str = template_info
                 num_choices = 4
+
+            print(f"🔄 Generating {question_type} question for sample {sample.id}")
             model_input = self._prepare_model_input(sample, question_type, template_str)
-            prompt_str = model_input["text"] if isinstance(model_input, dict) else model_input
+
             if self.model_client is None:
-                raw_output = str(self._generate_mock_data(sample, question_type, num_choices))
-                result = self._generate_mock_data(sample, question_type, num_choices)
+                print("📝 Using simple result generation (no model)")
+                result = self._generate_simple_result(sample, question_type, num_choices)
             else:
+                print("🤖 Using model for generation")
                 raw_output = self.model_client.generate(model_input, max_out_len=512)
                 result = self._parse_response(raw_output, num_choices, sample)
-            # Print debug info
-            # debug_info = {
-            #     "sample_id": sample.id,
-            #     "question_type": question_type,
-            #     "prompt": prompt_str,
-            #     "raw_output": raw_output,
-            #     "parsed_result": result,
-            # }
-            # print("\n[DEBUG] Benchmark Generation Info:")
-            # print(json.dumps(debug_info, ensure_ascii=False, indent=2))
+
             if result is None:
+                print(f"❌ Result is None for sample {sample.id}")
                 return None
+
+            print(f"✅ Successfully generated result for sample {sample.id}")
             self.current_type_index = (self.current_type_index + 1) % len(self.question_types)
             return result
         except Exception as e:
-            print(f"Failed to generate benchmark data: {e}")
+            print(f"❌ Exception in generate_single for sample {sample.id}: {e}")
+            import traceback
+
+            traceback.print_exc()
             return None
 
     def _prepare_model_input(self, sample: DataSample, question_type: str, template_str: str):
@@ -65,7 +68,7 @@ class BenchmarkGenerator(BaseGenerator):
             return prompt_text
 
     def _build_prompt(self, sample: DataSample, question_type: str, template_str: str) -> str:
-        spectra_list = "\n".join([f"{k}: {v}" for k, v in (sample.images or {}).items()])
+        spectra_list = "\n".join([f"{k}: available" for k in (sample.images or {}).keys()])
         prompt_template = PromptTemplate(template_str)
         template_vars = {
             "question_type": question_type,
@@ -99,29 +102,91 @@ class BenchmarkGenerator(BaseGenerator):
                 return None
             if data["answer"] not in data["choices"]:
                 return None
-            # 只保留模型选择的谱图类型
+
+            # 保存选中的图像并添加路径
             spectrum_type = data["selected_spectrum_type"]
-            if sample.has_images() and spectrum_type in sample.images:
-                data["image_path"] = {spectrum_type: sample.images[spectrum_type]}
+            image_path = self._save_and_get_image_path(sample, spectrum_type)
+            if image_path:
+                data["images"] = {spectrum_type: image_path}
             else:
-                data["image_path"] = {}
+                data["images"] = {}
             return data
         except Exception:
             return None
 
-    def _generate_mock_data(self, sample: DataSample, question_type: str, num_choices: int) -> Dict[str, Any]:
+    def _generate_simple_result(self, sample: DataSample, question_type: str, num_choices: int) -> Dict[str, Any]:
+        """生成简单的测试结果"""
         import random
 
-        spectrum_types = list(sample.images.keys()) if sample.has_images() else []
-        selected_type = random.choice(spectrum_types) if spectrum_types else "IR"
+        spectrum_types = list(sample.images.keys()) if sample.has_images() else ["IR"]
+        selected_type = random.choice(spectrum_types)
+
+        # 生成简单的问题和选项
+        questions = {
+            "type_cls": f"What type of spectrum is this?",
+            "peak_identification": f"Which peak corresponds to the functional group in this spectrum?",
+            "compound_identification": f"What compound does this spectrum represent?",
+        }
+
+        choices_map = {
+            "type_cls": [
+                "Infrared Spectrum (IR)",
+                "Proton Nuclear Magnetic Resonance (H-NMR)",
+                "Mass Spectrometry (MS)",
+                "Carbon-13 Nuclear Magnetic Resonance (C-NMR)",
+            ],
+            "peak_identification": ["Peak A", "Peak B", "Peak C", "Peak D"],
+            "compound_identification": ["Compound A", "Compound B", "Compound C", "Compound D"],
+        }
+
+        question = questions.get(question_type, f"Sample {sample.id} {question_type} question")
+        choices = choices_map.get(question_type, [f"Option {chr(65+i)}" for i in range(num_choices)])
+
+        # 根据选择的谱图类型确定答案
+        answer = choices[0]  # 默认答案
+        if question_type == "type_cls":
+            type_mapping = {
+                "IR": "Infrared Spectrum (IR)",
+                "H-NMR": "Proton Nuclear Magnetic Resonance (H-NMR)",
+                "MS": "Mass Spectrometry (MS)",
+                "C-NMR": "Carbon-13 Nuclear Magnetic Resonance (C-NMR)",
+            }
+            answer = type_mapping.get(selected_type, choices[0])
+
+        # 保存选中的图像并获取路径
+        image_path = self._save_and_get_image_path(sample, selected_type)
+
         result = {
             "selected_spectrum_type": selected_type,
-            "question": f"Sample {sample.id} {question_type} question",
-            "choices": [f"Option {chr(65+i)}" for i in range(num_choices)],
-            "answer": "Option A",
-            "image_path": {selected_type: sample.images[selected_type]} if sample.has_images() else {},
+            "question": question,
+            "choices": choices,
+            "answer": answer,
+            "images": {selected_type: image_path} if image_path else {},
         }
         return result
+
+    def _save_and_get_image_path(self, sample: DataSample, spectrum_type: str) -> str:
+        """保存指定类型的图像到临时文件夹并返回路径"""
+        if not sample.has_images() or spectrum_type not in sample.images:
+            return ""
+
+        image_data = sample.images[spectrum_type]
+        if not isinstance(image_data, PILImage.Image):
+            return ""
+
+        # 创建输出目录
+        output_dir = "output/temp_images"
+        os.makedirs(output_dir, exist_ok=True)
+
+        # 生成文件名
+        filename = f"{sample.id}_{spectrum_type.lower().replace('-', '_')}.png"
+        file_path = os.path.join(output_dir, filename)
+
+        # 保存图像
+        image_data.save(file_path, "PNG")
+        print(f"Saved image: {file_path}")
+
+        return file_path
 
     def validate_input(self, sample: DataSample) -> bool:
         return sample.has_text() or sample.has_images()
@@ -155,7 +220,7 @@ class BenchmarkGenerator(BaseGenerator):
                     "description": "List of choices",
                 },
                 "answer": {"type": "string", "description": "Correct answer"},
-                "image_path": {
+                "images": {
                     "type": "object",
                     "description": "Selected spectrum type and its image path",
                     "additionalProperties": {"type": "string"},

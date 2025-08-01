@@ -2,29 +2,11 @@ import asyncio
 import json
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-import pandas as pd
 import random
-from PIL import Image as PILImage
 from ..config import OmniGenConfig
 from ..data_loaders import Dataset, DataSample, create_loader_for_source
 from ..generators.base import create_generator
 from ..models.base import BaseModel
-
-
-class CustomJSONEncoder(json.JSONEncoder):
-    """Custom JSON encoder to handle PIL Image objects."""
-
-    def default(self, obj):
-        if isinstance(obj, PILImage.Image):
-            # Convert PIL Image to base64 string
-            import base64
-            import io
-
-            buffer = io.BytesIO()
-            obj.save(buffer, format='PNG')
-            img_str = base64.b64encode(buffer.getvalue()).decode()
-            return f"data:image/png;base64,{img_str}"
-        return super().default(obj)
 
 
 class OmniGenEngine:
@@ -148,72 +130,21 @@ class OmniGenEngine:
         return selected_sample
 
     def save_results(self, results: List[Dict[str, Any]], output_path: Optional[str] = None):
-        """Save generated results to file."""
+        """Save generated results to JSON file."""
         if output_path is None:
             output_path = self.config.output_path
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        save_map = {
-            '.json': self._save_json,
-            '.csv': self._save_csv,
-            '.parquet': self._save_parquet,
-        }
-        ext = output_path.suffix.lower()
-        save_func = save_map.get(ext, self._save_json)
-        save_func(results, output_path)
+
+        # 确保输出文件为JSON格式
+        if output_path.suffix.lower() != '.json':
+            output_path = output_path.with_suffix('.json')
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=2)
+
         if self.config.verbose:
             print(f"Results saved to: {output_path}")
-
-    def _save_json(self, results: List[Dict[str, Any]], output_path: Path):
-        """Save as JSON format"""
-        with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(results, f, ensure_ascii=False, indent=2, cls=CustomJSONEncoder)
-
-    def _save_csv(self, results: List[Dict[str, Any]], output_path: Path):
-        """Save as CSV format."""
-        # Convert results to serializable format before saving
-        serializable_results = []
-        for result in results:
-            serializable_result = {}
-            for key, value in result.items():
-                if isinstance(value, PILImage.Image):
-                    # Convert PIL Image to base64 string
-                    import base64
-                    import io
-
-                    buffer = io.BytesIO()
-                    value.save(buffer, format='PNG')
-                    img_str = base64.b64encode(buffer.getvalue()).decode()
-                    serializable_result[key] = f"data:image/png;base64,{img_str}"
-                else:
-                    serializable_result[key] = value
-            serializable_results.append(serializable_result)
-
-        df = pd.DataFrame(serializable_results)
-        df.to_csv(output_path, index=False, encoding='utf-8')
-
-    def _save_parquet(self, results: List[Dict[str, Any]], output_path: Path):
-        """Save as Parquet format."""
-        # Convert results to serializable format before saving
-        serializable_results = []
-        for result in results:
-            serializable_result = {}
-            for key, value in result.items():
-                if isinstance(value, PILImage.Image):
-                    # Convert PIL Image to base64 string
-                    import base64
-                    import io
-
-                    buffer = io.BytesIO()
-                    value.save(buffer, format='PNG')
-                    img_str = base64.b64encode(buffer.getvalue()).decode()
-                    serializable_result[key] = f"data:image/png;base64,{img_str}"
-                else:
-                    serializable_result[key] = value
-            serializable_results.append(serializable_result)
-
-        df = pd.DataFrame(serializable_results)
-        df.to_parquet(output_path, index=False)
 
     async def run(self) -> List[Dict[str, Any]]:
         """Run the full generation pipeline."""
