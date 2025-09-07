@@ -11,7 +11,8 @@ import asyncio
 import argparse
 from pathlib import Path
 from src.config import OmniGenConfig
-from src.core.validator_engine import ValidatorEngine
+from src.core import ValidatorEngine
+from src.validators import ValidatorResult
 
 
 async def main():

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Dict, Optional
-from ..core.validator_engine import ValidatorResult
+from .result import ValidatorResult
 from ..config.config import ValidatorConfig
 
 

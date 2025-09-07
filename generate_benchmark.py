@@ -2,7 +2,7 @@ import asyncio
 import argparse
 from pathlib import Path
 from src.config import OmniGenConfig
-from src.core.engine import OmniGenEngine
+from src.core import OmniGenEngine
 
 
 def main():

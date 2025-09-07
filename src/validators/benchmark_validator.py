@@ -1,7 +1,7 @@
 from typing import Dict, Any, List
 from .base import BaseValidator
 from .registry import register_validator
-from ..core.validator_engine import ValidatorResult
+from .result import ValidatorResult
 
 
 @register_validator("benchmark")

@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from .base import BaseValidator
 from .registry import register_validator
-from ..core.validator_engine import ValidatorResult
+from .result import ValidatorResult
 
 
 @register_validator("image_pair")
@@ -79,14 +79,89 @@ class ImagePairValidator(BaseValidator):
 
     async def _validate_image_validity(self, sample: Dict[str, Any]) -> float:
         """Validate that image files exist and are valid"""
-        pass
+        score = 10.0
+        config = self.validation_config.image_pair_config
+
+        supported_formats = config.get("supported_formats", ["png", "jpg", "jpeg"])
+
+        for img_key in ["image_1", "image_2"]:
+            img_path = sample.get(img_key)
+
+            if not img_path:
+                score -= 5.0
+                continue
+
+            # Check if file exists
+            if not os.path.exists(img_path):
+                score -= 4.0
+                continue
+
+            # Check file extension
+            file_ext = Path(img_path).suffix.lower().lstrip('.')
+            if file_ext not in supported_formats:
+                score -= 1.0
+
+            # Check file size (basic validation)
+            try:
+                file_size = os.path.getsize(img_path)
+                if file_size == 0:
+                    score -= 3.0
+                elif file_size < 1024:  # Very small file
+                    score -= 1.0
+            except OSError:
+                score -= 2.0
+
+        return max(0.0, min(10.0, score))
 
     async def _validate_semantic_relevance(self, sample: Dict[str, Any]) -> float:
         """Validate semantic relevance between images and label"""
-        pass
+        # Placeholder implementation - TODO: Implement image-semantic validation
+        label = sample.get("label", "")
+
+        if not label.strip():
+            return 0.0
+
+        score = 7.0  # Default score
+
+        # Basic label validation
+        if len(label) < 3:
+            score -= 2.0
+        elif len(label) > 100:
+            score -= 1.0
+
+        # Check for meaningful label content
+        if label.lower() in ["positive", "negative", "similar", "different"]:
+            score += 1.0
+
+        return max(0.0, min(10.0, score))
 
     async def _validate_quality_consistency(self, sample: Dict[str, Any]) -> float:
         """Validate consistency in image quality"""
-        # Placeholder implementation - focus on architecture
-        # TODO: Implement actual image quality comparison
-        pass
+        # Placeholder implementation - TODO: Implement actual image quality comparison
+        img1_path = sample.get("image_1")
+        img2_path = sample.get("image_2")
+
+        if not img1_path or not img2_path:
+            return 0.0
+
+        score = 8.0  # Default score
+
+        # Basic file size comparison as quality proxy
+        try:
+            if os.path.exists(img1_path) and os.path.exists(img2_path):
+                size1 = os.path.getsize(img1_path)
+                size2 = os.path.getsize(img2_path)
+
+                # Check if sizes are drastically different
+                if size1 > 0 and size2 > 0:
+                    ratio = max(size1, size2) / min(size1, size2)
+                    if ratio > 10:  # One file is 10x larger
+                        score -= 2.0
+                    elif ratio > 5:
+                        score -= 1.0
+            else:
+                score -= 3.0
+        except OSError:
+            score -= 2.0
+
+        return max(0.0, min(10.0, score))

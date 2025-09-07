@@ -1,7 +1,7 @@
 from typing import Dict, Any, List
 from .base import BaseValidator
 from .registry import register_validator
-from ..core.validator_engine import ValidatorResult
+from .result import ValidatorResult
 
 
 @register_validator("cot")
@@ -79,12 +79,65 @@ class CotValidator(BaseValidator):
 
     async def _validate_reasoning_coherence(self, sample: Dict[str, Any]) -> float:
         """Validate logical coherence of reasoning steps"""
-        pass
+        # Placeholder implementation - TODO: Implement LLM-based validation
+        reasoning_steps = sample.get("reasoning_steps", [])
+
+        if not reasoning_steps:
+            return 0.0
+
+        score = 8.0  # Default score
+
+        # Basic coherence checks
+        for step in reasoning_steps:
+            if not str(step).strip():
+                score -= 1.0
+            elif len(str(step)) < 10:
+                score -= 0.5
+
+        return max(0.0, min(10.0, score))
 
     async def _validate_step_completeness(self, sample: Dict[str, Any]) -> float:
         """Validate completeness of reasoning steps"""
-        pass
+        # Placeholder implementation - TODO: Implement completeness validation
+        reasoning_steps = sample.get("reasoning_steps", [])
+
+        if not reasoning_steps:
+            return 0.0
+
+        score = 7.0  # Default score
+
+        # Basic completeness heuristics
+        if len(reasoning_steps) >= 3:
+            score += 1.0
+
+        first_step = str(reasoning_steps[0]) if reasoning_steps else ""
+        last_step = str(reasoning_steps[-1]) if reasoning_steps else ""
+
+        # Check for logical flow indicators
+        if any(keyword in first_step.lower() for keyword in ["given", "since", "we have"]):
+            score += 0.5
+
+        if any(keyword in last_step.lower() for keyword in ["therefore", "thus", "so"]):
+            score += 0.5
+
+        return max(0.0, min(10.0, score))
 
     async def _validate_factual_accuracy(self, sample: Dict[str, Any]) -> float:
         """Validate factual accuracy of reasoning and answer"""
-        pass
+        # Placeholder implementation - TODO: Implement LLM-based factual validation
+        reasoning_steps = sample.get("reasoning_steps", [])
+        answer = sample.get("answer", "")
+
+        if not reasoning_steps or not answer:
+            return 0.0
+
+        score = 8.0  # Default score
+
+        # Basic consistency checks
+        if not answer.strip():
+            score -= 3.0
+
+        # Check for obvious contradictions (simplified)
+        # TODO: Implement more sophisticated factual checking
+
+        return max(0.0, min(10.0, score))
