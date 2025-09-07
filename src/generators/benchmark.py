@@ -104,8 +104,15 @@ class BenchmarkGenerator(BaseGenerator):
                 return None
 
             # Save selected images if available
-            if sample.has_images() and "selected_data_type" in data:
-                data_type = data["selected_data_type"]
+            # Check for both possible field names for backward compatibility
+            selected_type_field = None
+            if "selected_spectrum_type" in data:
+                selected_type_field = "selected_spectrum_type"
+            elif "selected_data_type" in data:
+                selected_type_field = "selected_data_type"
+
+            if sample.has_images() and selected_type_field:
+                data_type = data[selected_type_field]
                 image_path = self._save_and_get_image_path(sample, data_type)
                 if image_path:
                     data["images"] = {data_type: image_path}
