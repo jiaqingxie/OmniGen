@@ -56,7 +56,7 @@ generator_config:
   
   # Text generation settings
   min_text_length: 50
-  max_text_length: 300
+  max_text_length: 2500  # Increased to accommodate detailed InternVL responses
   default_description_type: "basic_description"
   
   # Image output settings
