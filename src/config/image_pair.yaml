@@ -1,0 +1,78 @@
+# Image-Text Pair Generation Configuration
+dataset_path: seed_datasets/molpuzzle/meta_data.json
+generator_type: image_pair
+generator_config:
+  prompt_templates:
+    basic_description:
+      template: |
+        You are analyzing a molecular spectrum image. Generate a descriptive English text that includes:
+        
+        Given information:
+        - Spectrum type: {spectrum_type}
+        - Molecular formula: {formula}
+        - SMILES: {smiles}
+        - Available spectra: {available_spectra}
+        
+        Please generate a comprehensive description following this format:
+        "This is a {spectrum_type} spectrum of a molecule with formula {formula} (SMILES: {smiles}). The spectrum shows [describe key spectral features, peaks, and their chemical significance]. This indicates [chemical interpretation of the observed features]."
+        
+        Requirements:
+        - Write in clear, scientific English
+        - Be specific about spectral features visible in the image
+        - Include chemical interpretation
+        - Keep description between 50-250 words
+        - Focus on educational value
+        
+        Please provide only the descriptive text, no additional formatting or quotation marks.
+        
+    detailed_analysis:
+      template: |
+        Provide a detailed scientific analysis of this molecular spectrum:
+        
+        Spectrum Information:
+        - Type: {spectrum_type} spectrum
+        - Molecular formula: {formula}
+        - SMILES notation: {smiles}
+        - Available data: {available_spectra}
+        
+        Generate a detailed description that covers:
+        1. Spectrum type identification and its analytical purpose
+        2. Key spectral features and peak assignments
+        3. Functional groups or structural elements identified
+        4. Chemical significance and interpretation
+        5. Educational insights about the molecular structure
+        
+        Write as if explaining to chemistry students, using precise scientific terminology while remaining accessible.
+        
+        Requirements:
+        - Scientific accuracy and clarity
+        - Educational value
+        - 100-300 words
+        - Professional tone
+        
+        Please provide only the analytical text content.
+
+  description_types: ["basic_description", "detailed_analysis"]
+  
+  # Text generation settings
+  min_text_length: 50
+  max_text_length: 300
+  default_description_type: "basic_description"
+  
+  # Image processing settings
+  #TODO supported_spectrum_types is unnecessary
+  supported_spectrum_types: ["IR", "H-NMR", "C-NMR", "MASS"]
+  image_output_dir: "output/spectrum_images"
+  image_format: "png"
+
+model_type: internvl
+model_config:
+  api_key: ${INTERNVL_API_KEY}
+  base_url: ${INTERNVL_BASE_URL}
+  model_name: ${INTERNVL_MODEL_NAME}
+  max_seq_len: 2048
+
+num_samples: 20
+output_path: output/image_pairs.json
+verbose: true
+max_retries: 3

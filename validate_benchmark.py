@@ -1,12 +1,3 @@
-"""
-Example script for validating generated data using the OmniGen validation system.
-
-Usage:
-    python validate_benchmark.py --config src/config/benchmark.yaml --data-type benchmark
-    python validate_benchmark.py --file output/benchmark.json --data-type benchmark
-    python validate_benchmark.py --file output/cot_data.json --data-type cot
-"""
-
 import asyncio
 import argparse
 from pathlib import Path
