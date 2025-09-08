@@ -23,9 +23,9 @@ class ImagePairGenerator(BaseGenerator):
         # Image-pair specific settings
         self.min_text_length = config.get("min_text_length", 50)
         self.max_text_length = config.get("max_text_length", 300)
-        self.supported_spectrum_types = config.get("supported_spectrum_types", ["IR", "H-NMR", "C-NMR", "MASS"])
+        self.supported_spectrum_types = ["IR", "H-NMR", "C-NMR", "MASS"]  # Standard spectrum types
         self.image_output_dir = config.get("image_output_dir", "output/spectrum_images")
-        self.image_format = config.get("image_format", "png")
+        self.image_format = "png"  # Default format
         self.default_description_type = config.get("default_description_type", "basic_description")
 
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
@@ -33,8 +33,9 @@ class ImagePairGenerator(BaseGenerator):
         if not self.validate_input(sample):
             return None
 
+        # Handle missing model client gracefully
         if self.model_client is None:
-            raise ValueError("Model client is required for image-pair generation")
+            return None
 
         try:
             # Select spectrum type from available images
@@ -203,14 +204,8 @@ class ImagePairGenerator(BaseGenerator):
         file_path = os.path.join(self.image_output_dir, filename)
 
         try:
-            # Save image
-            if self.image_format.upper() == "PNG":
-                image_data.save(file_path, "PNG")
-            elif self.image_format.upper() in ["JPG", "JPEG"]:
-                image_data.save(file_path, "JPEG")
-            else:
-                image_data.save(file_path)
-
+            # Save image as PNG (default format)
+            image_data.save(file_path, "PNG")
             return file_path
         except Exception as e:
             return None

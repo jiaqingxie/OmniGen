@@ -59,11 +59,8 @@ generator_config:
   max_text_length: 300
   default_description_type: "basic_description"
   
-  # Image processing settings
-  #TODO supported_spectrum_types is unnecessary
-  supported_spectrum_types: ["IR", "H-NMR", "C-NMR", "MASS"]
+  # Image output settings
   image_output_dir: "output/spectrum_images"
-  image_format: "png"
 
 model_type: internvl
 model_config:
