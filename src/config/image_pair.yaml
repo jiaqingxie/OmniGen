@@ -1,0 +1,81 @@
+# Image-Text Pair Generation Configuration
+dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+generator_type: image_pair
+generator_config:
+  prompt_templates:
+    basic_description:
+      template: |
+        You are analyzing a molecular spectrum image. Generate a descriptive English text.
+
+        IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
+        - Molecular formula: {formula} (DO NOT CHANGE THIS)
+        - SMILES notation: {smiles} (DO NOT CHANGE THIS)
+        - Spectrum type: {spectrum_type}
+
+        TASK: Generate a description that STARTS with this exact phrase:
+        "This is a {spectrum_type} spectrum of a molecule with formula {formula} (SMILES: {smiles})."
+
+        Then continue with your analysis of the spectral features visible in the image.
+
+        Requirements:
+        - MUST use the exact formula and SMILES provided above
+        - DO NOT infer or guess different molecular information
+        - Focus on describing visible spectral features (peaks, bands, chemical shifts)
+        - Provide chemical interpretation of the observed features
+        - Write in clear, scientific English
+        - Keep description between 100-500 words
+        - Be educational and informative
+
+        Please provide only the descriptive text, no additional formatting or quotation marks.
+        
+    detailed_analysis:
+      template: |
+        Provide a detailed scientific analysis of this molecular spectrum.
+
+        IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
+        - Molecular formula: {formula} (DO NOT CHANGE THIS)
+        - SMILES notation: {smiles} (DO NOT CHANGE THIS)
+        - Spectrum type: {spectrum_type}
+
+        TASK: Generate a detailed analysis that includes the exact molecular information provided above.
+
+        Structure your analysis with these sections:
+        1. Spectrum type identification and analytical purpose
+        2. Key spectral features and peak assignments for molecule {formula} (SMILES: {smiles})
+        3. Functional groups or structural elements identified
+        4. Chemical significance and interpretation
+        5. Educational insights about the molecular structure
+
+        Requirements:
+        - MUST use the exact formula and SMILES provided above
+        - DO NOT infer or guess different molecular information
+        - Write as if explaining to chemistry students
+        - Use precise scientific terminology while remaining accessible
+        - Scientific accuracy and clarity
+        - Educational value
+        - 200-800 words
+        - Professional tone
+
+        Please provide only the analytical text content.
+
+  description_types: ["basic_description", "detailed_analysis"]
+  
+  # Text generation settings
+  min_text_length: 50
+  max_text_length: 2500  # Increased to accommodate detailed InternVL responses
+  default_description_type: "basic_description"
+  
+  # Image output settings
+  image_output_dir: "output/spectrum_images"
+
+model_type: internvl
+model_config:
+  api_key: ${INTERNVL_API_KEY}
+  base_url: ${INTERNVL_BASE_URL}
+  model_name: ${INTERNVL_MODEL_NAME}
+  max_seq_len: 2048
+
+num_samples: 20
+output_path: output/image_pairs.json
+verbose: true
+max_retries: 3

@@ -2,5 +2,6 @@
 
 from .base import BaseGenerator, register_generator, create_generator
 from .benchmark import BenchmarkGenerator
- 
-__all__ = ['BaseGenerator', 'BenchmarkGenerator', 'register_generator', 'create_generator'] 
+from .image_pair_generator import ImagePairGenerator
+
+__all__ = ['BaseGenerator', 'BenchmarkGenerator', 'ImagePairGenerator', 'register_generator', 'create_generator']

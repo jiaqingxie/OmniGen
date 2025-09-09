@@ -21,3 +21,5 @@ playground/
 /seed_datasets
 /output
 
+# logs
+omnigenlog/

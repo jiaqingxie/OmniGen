@@ -1,4 +1,4 @@
-dataset_path: seed_datasets/molpuzzle/meta_data.json
+dataset_path: SpectrumWorld/molpuzzle-seed-datasets
 generator_type: benchmark
 generator_config:
   prompt_templates:

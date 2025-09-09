@@ -38,6 +38,35 @@ class ModelConfig:
 
 
 @dataclass
+class ValidatorConfig:
+    """Validator configuration"""
+
+    # General settings
+    enabled: bool = True
+    output_dir: str = "omnigenlog/validation_reports"
+    verbose: bool = True
+
+    # Threshold settings
+    overall_threshold: float = 7.0
+    critical_threshold: float = 5.0
+
+    # Data type specific configs
+    benchmark_config: Dict[str, Any] = field(
+        default_factory=lambda: {
+            "question_quality_weight": 1.5,
+            "answer_correctness_weight": 2.0,
+            "choices_quality_weight": 1.0,
+            "image_relevance_weight": 1.2,
+            "strict_mode": False,
+        }
+    )
+
+    cot_config: Dict[str, Any] = field(default_factory=lambda: {})
+
+    image_pair_config: Dict[str, Any] = field(default_factory=lambda: {})
+
+
+@dataclass
 class OmniGenConfig:
     # dataset config
     dataset_path: str = "data"
@@ -49,6 +78,9 @@ class OmniGenConfig:
     # model config
     model_type: str = "mock"
     model_config: Dict[str, Any] = field(default_factory=dict)
+
+    # validation_config
+    validation_config: ValidatorConfig = field(default_factory=ValidatorConfig)
 
     # other config
     num_samples: int = 10

@@ -36,17 +36,25 @@ class OmniGenEngine:
                     max_seq_len=model_config.get("max_seq_len", 2048),
                 )
             except ImportError as e:
-                raise ImportError(f"Failed to import InternVL: {e}")
+                print(f"Warning: Failed to import InternVL: {e}")
+                self.model_client = None
             except Exception as e:
-                raise RuntimeError(f"InternVL initialization failed: {e}")
+                print(f"Warning: InternVL initialization failed: {e}")
+                self.model_client = None
         else:
-            raise ValueError(f"Unsupported model type: {model_type}")
+            print(f"Warning: Unsupported model type: {model_type}, setting model_client to None")
+            self.model_client = None
 
     def _init_generator(self):
         """Initialize generator."""
         self.generator = create_generator(self.config.generator_type, self.config.generator_config, self.model_client)
         if self.generator is None:
             raise ValueError(f"Cannot create generator: {self.config.generator_type}")
+
+    def set_model_client(self, model_client):
+        """Set model client and reinitialize generator."""
+        self.model_client = model_client
+        self._init_generator()
 
     def load_dataset(self, data_source: Optional[str] = None) -> Dataset:
         """Load dataset from data source (Hugging Face dataset ID or local path)."""
