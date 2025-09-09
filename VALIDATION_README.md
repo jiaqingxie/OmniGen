@@ -44,13 +44,16 @@ print(f"Average score: {stats['average_score']:.2f}")
 
 ```bash
 # Validate benchmark data
-python validate_benchmark.py --file output/benchmark.json --data-type benchmark
+python -m main.validate --type benchmark --file output/benchmark.json
 
-# Validate COT data
-python validate_benchmark.py --file output/cot_data.json --data-type cot
+# Validate image-text pair data
+python -m main.validate --type image_pair --file output/image_pairs.json
+
+# Validate with verbose output
+python -m main.validate --type benchmark --file output/benchmark.json --verbose
 
 # Validate with custom config
-python validate_benchmark.py --config my_config.yaml --data-type benchmark
+python -m main.validate --type benchmark --file output/benchmark.json --config custom_config.yaml
 ```
 
 ## Configuration
