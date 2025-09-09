@@ -29,8 +29,8 @@ class BaseAPIModel(BaseModel):
 
     def validate_config(self) -> bool:
         """验证配置是否有效"""
-        if not self.api_key:
+        if not self.api_key or self.api_key.strip() == "":
             return False
-        if not self.model_name:
+        if not self.model_name or self.model_name.strip() == "":
             return False
         return True

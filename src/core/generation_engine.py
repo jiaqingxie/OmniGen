@@ -41,6 +41,25 @@ class OmniGenEngine:
             except Exception as e:
                 print(f"Warning: InternVL initialization failed: {e}")
                 self.model_client = None
+        elif model_type == "gemini":
+            try:
+                from ..models import Gemini
+
+                model_config = self.config.model_config
+                self.model_client = Gemini(
+                    model_name=model_config.get("model_name"),
+                    api_key=model_config.get("api_key"),
+                    base_url=model_config.get("base_url"),
+                    max_seq_len=model_config.get("max_seq_len", 1048576),
+                    site_url=model_config.get("site_url"),
+                    site_name=model_config.get("site_name"),
+                )
+            except ImportError as e:
+                print(f"Warning: Failed to import Gemini: {e}")
+                self.model_client = None
+            except Exception as e:
+                print(f"Warning: Gemini initialization failed: {e}")
+                self.model_client = None
         else:
             print(f"Warning: Unsupported model type: {model_type}, setting model_client to None")
             self.model_client = None

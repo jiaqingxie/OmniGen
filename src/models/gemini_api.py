@@ -6,30 +6,30 @@ from .base_api import BaseAPIModel
 from openai import OpenAI
 
 
-class InternVL(BaseAPIModel):
+class Gemini(BaseAPIModel):
     def __init__(
         self,
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 2048,
+        max_seq_len: int = 4096,  # Gemini 2.5 Pro has 1M+ context
+        site_url: Optional[str] = None,
+        site_name: Optional[str] = None,
         **kwargs,
     ):
-        # Set default values
-        model_name = model_name or os.getenv("INTERNVL_MODEL_NAME")
-        api_key = api_key or os.getenv("INTERNVL_API_KEY")
-        base_url = base_url or os.getenv("INTERNVL_BASE_URL")
+        # Set default values for Gemini
+        model_name = model_name or os.getenv("GEMINI_MODEL_NAME", "google/gemini-2.5-pro")
+        api_key = api_key or os.getenv("GEMINI_API_KEY")
+        base_url = base_url or os.getenv("GEMINI_BASE_URL", "https://openrouter.ai/api/v1")
 
         # Initialize parent class
         super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)
 
         # Validate configuration
         if not self.validate_config():
-            raise ValueError(
-                "InternVL configuration invalid. Please set INTERNVL_API_KEY environment variable or provide api_key parameter."
-            )
+            raise ValueError("Gemini configuration invalid. Please set GEMINI_API_KEY environment variable.")
 
-        # Initialize OpenAI client
+        # Initialize OpenAI client for OpenRouter
         self.client = OpenAI(
             api_key=self.api_key,
             base_url=self.base_url,
@@ -37,14 +37,14 @@ class InternVL(BaseAPIModel):
 
     def generate(self, prompt: Union[str, Dict[str, Any]], max_out_len: int = 512) -> str:
         """
-        Generate response, supporting text and multimodal input
+        Generate response supporting text and multimodal input
 
         Args:
             prompt: Input prompt, can be:
-                   - str: pure text prompt
-                   - Dict: multimodal prompt, format:
+                   - str: Pure text prompt
+                   - Dict: Multimodal prompt, format:
                      {
-                         "text": "question text",
+                         "text": "Question text",
                          "images": [{"type": "image_url", "image_url": {"url": "data:..."}}]
                      }
             max_out_len: Maximum output length
@@ -60,12 +60,13 @@ class InternVL(BaseAPIModel):
                 messages=messages,
                 max_tokens=max_out_len,
                 temperature=0.7,
+                extra_body={},
             )
 
             return response.choices[0].message.content or ""
 
         except Exception as e:
-            raise RuntimeError(f"InternVL API call failed: {e}")
+            raise RuntimeError(f"Gemini API call failed: {e}")
 
     def _prepare_messages(self, prompt: Union[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Prepare message format"""
@@ -96,7 +97,7 @@ class InternVL(BaseAPIModel):
         else:
             # Pure text input
             text_content = str(prompt)
-            messages.append({"role": "user", "content": text_content})
+            messages.append({"role": "user", "content": [{"type": "text", "text": text_content}]})
 
         return messages
 

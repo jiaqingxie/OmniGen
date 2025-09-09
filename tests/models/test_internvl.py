@@ -1,11 +1,9 @@
-"""InternVL 模型测试"""
-
 import pytest
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# 确保加载 .env 文件
+# Ensure .env file is loaded
 project_root = Path(__file__).parent.parent.parent
 env_path = project_root / ".env"
 load_dotenv(env_path)
@@ -19,36 +17,36 @@ class TestInternVL:
 
         config = ModelConfig()
 
-        # 检查配置是否有值（从环境变量或默认值）
-        print(f"API Key 状态: {'已设置' if config.internvl_api_key else '未设置'}")
+        # Check if config values exist (from environment variables or defaults)
+        print(f"API Key status: {'Set' if config.internvl_api_key else 'Not Set'}")
         print(f"Base URL: {config.internvl_base_url}")
         print(f"Model Name: {config.internvl_model_name}")
 
-        # 至少默认值应该存在
+        # At least default values should exist
         assert config.internvl_base_url is not None
         assert config.internvl_model_name is not None
 
-    @pytest.mark.skipif(not os.getenv("INTERNVL_API_KEY"), reason="需要 INTERNVL_API_KEY 环境变量")
+    @pytest.mark.skipif(not os.getenv("INTERNVL_API_KEY"), reason="Requires INTERNVL_API_KEY environment variable")
     def test_model_real_api_call(self):
-        """测试真实 API 调用"""
-        # 验证环境变量
+        """Test real API call"""
+        # Validate environment variable
         api_key = os.getenv("INTERNVL_API_KEY")
-        assert api_key is not None, "INTERNVL_API_KEY 环境变量未设置"
+        assert api_key is not None, "INTERNVL_API_KEY environment variable not set"
 
-        # 创建模型实例
+        # Create model instance
         model = InternVL()
 
-        # 打印实际使用的模型信息
-        print(f"使用的模型: {model.model_name}")
-        print(f"API 端点: {model.base_url}")
+        # Print actual model information used
+        print(f"Model used: {model.model_name}")
+        print(f"API Endpoint: {model.base_url}")
 
-        # 测试简单文本生成
-        response = model.generate("你好，请简单回复", max_out_len=50)
+        # Test simple text generation
+        response = model.generate("Hello, please reply briefly", max_out_len=50)
 
-        # 验证响应
+        # Validate response
         assert isinstance(response, str)
         assert len(response) > 0
-        print(f"模型响应: {response}")
+        print(f"Model response: {response}")
 
 
 if __name__ == "__main__":
