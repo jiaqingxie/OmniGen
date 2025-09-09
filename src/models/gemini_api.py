@@ -12,9 +12,7 @@ class Gemini(BaseAPIModel):
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 4096,  # Gemini 2.5 Pro has 1M+ context
-        site_url: Optional[str] = None,
-        site_name: Optional[str] = None,
+        max_seq_len: int = 2048,
         **kwargs,
     ):
         # Set default values for Gemini
@@ -58,8 +56,6 @@ class Gemini(BaseAPIModel):
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
-                max_tokens=max_out_len,
-                temperature=0.7,
                 extra_body={},
             )
 

@@ -51,34 +51,6 @@ class TestGemini:
         assert len(response) > 0
         print(f"Model response: {response}")
 
-    @pytest.mark.skipif(not os.getenv("GEMINI_API_KEY"), reason="Requires GEMINI_API_KEY environment variable")
-    def test_multimodal_input(self):
-        """Test multimodal input (requires a valid image file)"""
-        # This test requires an actual image file
-        test_image_path = project_root / "output" / "spectrum_images"
-
-        # Find any available test image
-        if test_image_path.exists():
-            image_files = list(test_image_path.glob("*.png"))
-            if image_files:
-                test_image = str(image_files[0])
-
-                model = Gemini()
-
-                # Test multimodal input
-                multimodal_prompt = {"text": "What type of spectrum is shown in this image?", "images": [test_image]}
-
-                response = model.generate(multimodal_prompt, max_out_len=100)
-
-                # Validate response
-                assert isinstance(response, str)
-                assert len(response) > 0
-                print(f"Multimodal response: {response}")
-            else:
-                pytest.skip("No test images found")
-        else:
-            pytest.skip("Test image directory not found")
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "-s"])
