@@ -70,10 +70,10 @@ generator_config:
 
 model_type: gemini
 model_config:
-  api_key: ${OPENROUTER_API_KEY}
+  api_key: ${GEMINI_API_KEY}
   base_url: ${GEMINI_BASE_URL}
   model_name: ${GEMINI_MODEL_NAME}
-  max_seq_len: 4096  # Gemini 2.5 Pro has 1M+ context
+  max_seq_len: 4096
   site_url: ${SITE_URL}
   site_name: ${SITE_NAME}
 

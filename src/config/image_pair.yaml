@@ -76,6 +76,6 @@ model_config:
   max_seq_len: 2048
 
 num_samples: 20
-output_path: output/image_pairs.json
+output_path: output/internvl_image_pairs.json
 verbose: true
 max_retries: 3

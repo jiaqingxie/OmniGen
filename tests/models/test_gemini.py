@@ -1,5 +1,3 @@
-"""Gemini Model Tests"""
-
 import pytest
 import os
 from pathlib import Path

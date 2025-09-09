@@ -50,9 +50,6 @@ class OmniGenEngine:
                     model_name=model_config.get("model_name"),
                     api_key=model_config.get("api_key"),
                     base_url=model_config.get("base_url"),
-                    max_seq_len=model_config.get("max_seq_len", 1048576),
-                    site_url=model_config.get("site_url"),
-                    site_name=model_config.get("site_name"),
                 )
             except ImportError as e:
                 print(f"Warning: Failed to import Gemini: {e}")
