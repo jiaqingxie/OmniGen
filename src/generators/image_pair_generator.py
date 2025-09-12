@@ -22,7 +22,7 @@ class ImagePairGenerator(BaseGenerator):
 
         # Image-pair specific settings
         self.min_text_length = config.get("min_text_length", 50)
-        self.max_text_length = config.get("max_text_length", 300)
+        self.max_text_length = config.get("max_text_length", 2500)
         self.supported_spectrum_types = ["IR", "H-NMR", "C-NMR", "MASS"]  # Standard spectrum types
         self.image_output_dir = config.get("image_output_dir", "output/spectrum_images")
         self.image_format = "png"  # Default format
@@ -62,14 +62,21 @@ class ImagePairGenerator(BaseGenerator):
 
             try:
                 # Generate description using LLM
-                raw_output = self.model_client.generate(model_input, max_out_len=512)
+                # Use a higher max_out_len to accommodate longer descriptions
+                max_out_len = self.config.get("max_out_len", 1500)  # Default to 1500 tokens for longer descriptions
+                raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
                 if raw_output:
                     result = self._create_image_pair(sample, selected_spectrum_type, raw_output)
                     if result:
                         self.current_type_index = (self.current_type_index + 1) % len(self.description_types)
                         return result
+                else:
+                    print(f"  Model returned empty output for sample {sample.id}")
             except Exception as e:
-                pass  # Continue to return None
+                print(f"  Exception in generate_single for sample {sample.id}: {e}")
+                import traceback
+
+                traceback.print_exc()
 
             return None
         except Exception as e:

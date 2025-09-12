@@ -40,7 +40,8 @@ class BenchmarkGenerator(BaseGenerator):
             model_input = self._prepare_model_input(sample, question_type, template_str)
 
             try:
-                raw_output = self.model_client.generate(model_input, max_out_len=512)
+                max_out_len = self.config.get("max_out_len", 1000)  # Default to 1000 tokens for questions
+                raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
                 if raw_output:
                     result = self._parse_response(raw_output, num_choices, sample)
                     if result:

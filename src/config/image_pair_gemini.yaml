@@ -63,17 +63,18 @@ generator_config:
   # Text generation settings
   min_text_length: 50
   max_text_length: 2500  # Increased to accommodate detailed Gemini responses
+  max_out_len: 2000  # Maximum tokens for model output - should accommodate 500 words
   default_description_type: "basic_description"
   
   # Image output settings
-  image_output_dir: "output/spectrum_images"
+  image_output_dir: "output/gemini_spectrum_images"
 
 model_type: gemini
 model_config:
   api_key: ${GEMINI_API_KEY}
   base_url: ${GEMINI_BASE_URL}
   model_name: ${GEMINI_MODEL_NAME}
-  max_seq_len: 4096
+  max_seq_len: 2048
   site_url: ${SITE_URL}
   site_name: ${SITE_NAME}
 

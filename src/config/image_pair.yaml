@@ -63,10 +63,11 @@ generator_config:
   # Text generation settings
   min_text_length: 50
   max_text_length: 2500  # Increased to accommodate detailed InternVL responses
+  max_out_len: 2000  # Maximum tokens for model output - should accommodate 500 words
   default_description_type: "basic_description"
   
   # Image output settings
-  image_output_dir: "output/spectrum_images"
+  image_output_dir: "output/spectrum_images_500"
 
 model_type: internvl
 model_config:
@@ -76,6 +77,6 @@ model_config:
   max_seq_len: 2048
 
 num_samples: 20
-output_path: output/internvl_image_pairs.json
+output_path: output/internvl_image_pairs_500.json
 verbose: true
 max_retries: 3
