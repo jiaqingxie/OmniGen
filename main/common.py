@@ -15,7 +15,7 @@ DEFAULT_CONFIGS = {
     "benchmark": "src/config/benchmark.yaml",
     "image_pair": "src/config/image_pair.yaml",
     "qa_pair": "src/config/qa_pair.yaml",
-    "cot": "src/config/cot.yaml",  # TODO Future implementation
+    "cot": "src/config/cot.yaml",
 }
 
 # Supported data types
@@ -65,7 +65,19 @@ def add_type_specific_generation_args(parser: argparse.ArgumentParser, data_type
             help="Type of QA conversation to generate",
         )
     elif data_type == "cot":
+        parser.add_argument("--cot-type", type=str, choices=["text_only", "multimodal"], help="Type of CoT to generate")
+        parser.add_argument(
+            "--stages",
+            type=str,
+            nargs="+",
+            choices=["core_generation", "reasoning_generation"],
+            help="Stages to run: core_generation (question/solution), reasoning_generation (thinking trajectories)",
+        )
         parser.add_argument("--reasoning-steps", type=int, help="Number of reasoning steps to generate")
+        parser.add_argument("--use-claude", action="store_true", help="Include Claude model outputs")
+        parser.add_argument(
+            "--use-internvl3", action="store_true", default=True, help="Include InternVL3 model outputs"
+        )
 
 
 def load_config_for_type(data_type: str, config_path: Optional[str] = None) -> OmniGenConfig:
@@ -116,8 +128,17 @@ def apply_generation_overrides(config: OmniGenConfig, args: argparse.Namespace, 
     elif data_type == "qa_pair" and hasattr(args, 'qa_type') and args.qa_type:
         config.generator_config["qa_types"] = [args.qa_type]
 
-    elif data_type == "cot" and hasattr(args, 'reasoning_steps') and args.reasoning_steps:
-        config.generator_config["reasoning_steps"] = args.reasoning_steps
+    elif data_type == "cot":
+        if hasattr(args, 'cot_type') and args.cot_type:
+            config.generator_config["cot_types"] = [args.cot_type]
+        if hasattr(args, 'stages') and args.stages:
+            config.generator_config["stages"] = args.stages
+        if hasattr(args, 'reasoning_steps') and args.reasoning_steps:
+            config.generator_config["reasoning_steps"] = args.reasoning_steps
+        if hasattr(args, 'use_claude') and args.use_claude:
+            config.generator_config["use_claude"] = True
+        if hasattr(args, 'use_internvl3') and args.use_internvl3:
+            config.generator_config["use_internvl3"] = True
 
 
 def apply_validation_overrides(config: OmniGenConfig, args: argparse.Namespace) -> None:

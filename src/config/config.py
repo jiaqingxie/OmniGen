@@ -66,7 +66,16 @@ class ValidatorConfig:
         }
     )
 
-    cot_config: Dict[str, Any] = field(default_factory=lambda: {})
+    cot_config: Dict[str, Any] = field(
+        default_factory=lambda: {
+            "question_quality_weight": 1.0,
+            "solution_quality_weight": 1.5,
+            "reasoning_quality_weight": 1.0,
+            "attempt_quality_weight": 1.0,
+            "image_relevance_weight": 1.0,
+            "min_score": 5.0,
+        }
+    )
 
     image_pair_config: Dict[str, Any] = field(default_factory=lambda: {})
 

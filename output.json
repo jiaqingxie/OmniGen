@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cot_SpectrumWorld/molpuzzle-seed-datasets_214_text_only",
+    "type": "cot text-only",
+    "question": "Analyze the molecular structure of C14H12O2 (SMILES: C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2). What are the key spectroscopic features that would help identify this compound?",
+    "solution": "To identify C14H12O2 (SMILES: C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2), we would look for several key spectroscopic features:\n\n1. IR Spectrum: Look for characteristic absorption bands corresponding to functional groups\n2. NMR Spectrum: Analyze chemical shifts and coupling patterns\n3. Mass Spectrum: Identify molecular ion peak and fragmentation patterns\n4. Cross-reference: Compare with known spectra and databases",
+    "internvl3_thinking_trajectories": "Let me think through this step by step. For C14H12O2, I need to consider:\n1. The molecular structure from SMILES: C1=CC=C(C=C1)COC(=O)C2=CC=CC=C2\n2. Expected functional groups and their spectroscopic signatures\n3. How different analytical techniques complement each other\n4. Systematic approach to compound identification",
+    "internvl3_attempt": "Based on my analysis, C14H12O2 would show characteristic peaks in IR around 1700 cm⁻¹ (C=O stretch), NMR signals around 2-4 ppm, and a molecular ion at m/z corresponding to the molecular weight. The fragmentation pattern would help confirm the structure."
+  },
+  {
+    "id": "cot_SpectrumWorld/molpuzzle-seed-datasets_173_text_only",
+    "type": "cot text-only",
+    "question": "Analyze the molecular structure of C10H13NO2 (SMILES: CCOC1=CC=C(C=C1)NC(=O)C). What are the key spectroscopic features that would help identify this compound?",
+    "solution": "To identify C10H13NO2 (SMILES: CCOC1=CC=C(C=C1)NC(=O)C), we would look for several key spectroscopic features:\n\n1. IR Spectrum: Look for characteristic absorption bands corresponding to functional groups\n2. NMR Spectrum: Analyze chemical shifts and coupling patterns\n3. Mass Spectrum: Identify molecular ion peak and fragmentation patterns\n4. Cross-reference: Compare with known spectra and databases",
+    "internvl3_thinking_trajectories": "Let me think through this step by step. For C10H13NO2, I need to consider:\n1. The molecular structure from SMILES: CCOC1=CC=C(C=C1)NC(=O)C\n2. Expected functional groups and their spectroscopic signatures\n3. How different analytical techniques complement each other\n4. Systematic approach to compound identification",
+    "internvl3_attempt": "Based on my analysis, C10H13NO2 would show characteristic peaks in IR around 1700 cm⁻¹ (C=O stretch), NMR signals around 2-4 ppm, and a molecular ion at m/z corresponding to the molecular weight. The fragmentation pattern would help confirm the structure."
+  },
+  {
+    "id": "cot_SpectrumWorld/molpuzzle-seed-datasets_8_text_only",
+    "type": "cot text-only",
+    "question": "Analyze the molecular structure of C5H6N2 (SMILES: CCC(C#N)C#N). What are the key spectroscopic features that would help identify this compound?",
+    "solution": "To identify C5H6N2 (SMILES: CCC(C#N)C#N), we would look for several key spectroscopic features:\n\n1. IR Spectrum: Look for characteristic absorption bands corresponding to functional groups\n2. NMR Spectrum: Analyze chemical shifts and coupling patterns\n3. Mass Spectrum: Identify molecular ion peak and fragmentation patterns\n4. Cross-reference: Compare with known spectra and databases",
+    "internvl3_thinking_trajectories": "Let me think through this step by step. For C5H6N2, I need to consider:\n1. The molecular structure from SMILES: CCC(C#N)C#N\n2. Expected functional groups and their spectroscopic signatures\n3. How different analytical techniques complement each other\n4. Systematic approach to compound identification",
+    "internvl3_attempt": "Based on my analysis, C5H6N2 would show characteristic peaks in IR around 1700 cm⁻¹ (C=O stretch), NMR signals around 2-4 ppm, and a molecular ion at m/z corresponding to the molecular weight. The fragmentation pattern would help confirm the structure."
+  },
+  {
+    "id": "cot_SpectrumWorld/molpuzzle-seed-datasets_200_text_only",
+    "type": "cot text-only",
+    "question": "Analyze the molecular structure of C11H16 (SMILES: CC(C)(C)CC1=CC=CC=C1). What are the key spectroscopic features that would help identify this compound?",
+    "solution": "To identify C11H16 (SMILES: CC(C)(C)CC1=CC=CC=C1), we would look for several key spectroscopic features:\n\n1. IR Spectrum: Look for characteristic absorption bands corresponding to functional groups\n2. NMR Spectrum: Analyze chemical shifts and coupling patterns\n3. Mass Spectrum: Identify molecular ion peak and fragmentation patterns\n4. Cross-reference: Compare with known spectra and databases",
+    "internvl3_thinking_trajectories": "Let me think through this step by step. For C11H16, I need to consider:\n1. The molecular structure from SMILES: CC(C)(C)CC1=CC=CC=C1\n2. Expected functional groups and their spectroscopic signatures\n3. How different analytical techniques complement each other\n4. Systematic approach to compound identification",
+    "internvl3_attempt": "Based on my analysis, C11H16 would show characteristic peaks in IR around 1700 cm⁻¹ (C=O stretch), NMR signals around 2-4 ppm, and a molecular ion at m/z corresponding to the molecular weight. The fragmentation pattern would help confirm the structure."
+  },
+  {
+    "id": "cot_SpectrumWorld/molpuzzle-seed-datasets_30_text_only",
+    "type": "cot text-only",
+    "question": "Analyze the molecular structure of C12H18 (SMILES: CC1=C(C(=C(C(=C1C)C)C)C)C). What are the key spectroscopic features that would help identify this compound?",
+    "solution": "To identify C12H18 (SMILES: CC1=C(C(=C(C(=C1C)C)C)C)C), we would look for several key spectroscopic features:\n\n1. IR Spectrum: Look for characteristic absorption bands corresponding to functional groups\n2. NMR Spectrum: Analyze chemical shifts and coupling patterns\n3. Mass Spectrum: Identify molecular ion peak and fragmentation patterns\n4. Cross-reference: Compare with known spectra and databases",
+    "internvl3_thinking_trajectories": "Let me think through this step by step. For C12H18, I need to consider:\n1. The molecular structure from SMILES: CC1=C(C(=C(C(=C1C)C)C)C)C\n2. Expected functional groups and their spectroscopic signatures\n3. How different analytical techniques complement each other\n4. Systematic approach to compound identification",
+    "internvl3_attempt": "Based on my analysis, C12H18 would show characteristic peaks in IR around 1700 cm⁻¹ (C=O stretch), NMR signals around 2-4 ppm, and a molecular ion at m/z corresponding to the molecular weight. The fragmentation pattern would help confirm the structure."
+  }
+]

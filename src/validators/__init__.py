@@ -4,7 +4,7 @@ from .registry import register_validator, create_validator, list_validators, get
 
 # Import concrete validators (this will trigger registration)
 from .benchmark_validator import BenchmarkValidator
-from .cot_validator import CotValidator
+from .cot_validator import CoTValidator
 from .image_pair_validator import ImagePairValidator
 from .qa_pair_validator import QAPairValidator
 
@@ -19,7 +19,7 @@ __all__ = [
     "get_supported_data_types",
     # Concrete validators
     "BenchmarkValidator",
-    "CotValidator",
+    "CoTValidator",
     "ImagePairValidator",
     "QAPairValidator",
 ]

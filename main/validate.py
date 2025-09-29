@@ -150,7 +150,14 @@ def print_data_type_info(data_type: str) -> None:
             "Image relevance to conversations",
             "Question-answer flow and coherence",
         ],
-        "cot": ["Reasoning coherence", "Step completeness", "Factual accuracy", "Logical flow", "Conclusion validity"],
+        "cot": [
+            "Question quality and clarity",
+            "Solution completeness and accuracy",
+            "Reasoning trajectory quality",
+            "Model attempt quality",
+            "Image relevance to reasoning (multimodal only)",
+            "Logical flow and coherence",
+        ],
     }
 
     print(f"\n🔍 Validation checks for {data_type} data:")
