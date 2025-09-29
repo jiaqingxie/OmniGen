@@ -70,8 +70,8 @@ def add_type_specific_generation_args(parser: argparse.ArgumentParser, data_type
             "--stages",
             type=str,
             nargs="+",
-            choices=["core_generation", "reasoning_generation"],
-            help="Stages to run: core_generation (question/solution), reasoning_generation (thinking trajectories)",
+            choices=["draft", "reason"],
+            help="Stages to run: draft (question/solution), reason (thinking trajectories)",
         )
         parser.add_argument("--reasoning-steps", type=int, help="Number of reasoning steps to generate")
         parser.add_argument("--use-claude", action="store_true", help="Include Claude model outputs")

@@ -12,25 +12,25 @@ generator_config:
   image_format: "png"
   
   # Two-stage generation settings (configurable via command line)
-  stages: ["core_generation"]  # Default: only core generation
-  # Available stages: ["core_generation", "reasoning_generation"]
+  stages: ["draft"]  # Default: only draft generation
+  # Available stages: ["draft", "reason"]
   
-  # Stage 1: Core generation settings (for high-quality question/solution)
-  core_generation:
+  # Stage 1: Draft generation settings (for high-quality question/solution)
+  draft:
     max_out_len: 2000
     temperature: 0.3  # Lower temperature for more focused, accurate content
     focus_quality: true
     
-  # Stage 2: Reasoning generation settings (for thinking trajectories)
-  reasoning_generation:
-    max_out_len: 1500
+  # Stage 2: Reason generation settings (for thinking trajectories using InternS1)
+  reason:
+    max_out_len: 3000  # 增加token限制以避免截断
     temperature: 0.7  # Higher temperature for more creative reasoning
-    reasoning_models: ["claude", "internvl3"]  # Future: reasoning model selection
+    reasoning_models: ["interns1"]  # Use InternS1 for reasoning generation
 
   # Prompt templates for different stages and CoT types
   prompt_templates:
-    # Stage 1: Core generation templates (focus on high-quality question/solution)
-    core_generation:
+    # Stage 1: Draft generation templates (focus on high-quality question/solution)
+    draft:
       text_only:
         template: |
           You are an expert in spectroscopic analysis and molecular structure determination. 
@@ -110,11 +110,11 @@ generator_config:
           Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
 
 # Model configuration
-model_type: internvl  # Options: internvl, interns1, gemini
+model_type: interns1  # Options: internvl, interns1, gemini
 model_config:
-  api_key: ${INTERNVL_API_KEY}
-  base_url: ${INTERNVL_BASE_URL}
-  model_name: ${INTERNVL_MODEL_NAME}
+  api_key: ${INTERNS1_API_KEY}
+  base_url: ${INTERNS1_BASE_URL}
+  model_name: ${INTERNS1_MODEL_NAME}
   max_seq_len: 4096
 
 # Generation settings

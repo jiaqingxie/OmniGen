@@ -26,12 +26,12 @@ class CoTGenerator(BaseGenerator):
         self.image_format = "png"
 
         # Two-stage generation settings
-        self.stages = config.get("stages", ["core_generation", "reasoning_generation"])
+        self.stages = config.get("stages", ["draft", "reason"])
         self.current_stage_index = 0
 
         # Model settings for different stages
-        self.core_generation_config = config.get("core_generation", {})
-        self.reasoning_generation_config = config.get("reasoning_generation", {})
+        self.draft_config = config.get("draft", {})
+        self.reason_config = config.get("reason", {})
 
         # Reasoning model settings (for future implementation)
         self.use_claude = config.get("use_claude", False)
@@ -50,22 +50,43 @@ class CoTGenerator(BaseGenerator):
             cot_type = self.cot_types[self.current_type_index]
 
             # Check which stages to run based on configuration
-            run_core_generation = "core_generation" in self.stages
-            run_reasoning_generation = "reasoning_generation" in self.stages
+            run_draft = "draft" in self.stages
+            run_reason = "reason" in self.stages
+
+            # Special handling for reason-only generation
+            if run_reason and not run_draft:
+                print(f"Error: Cannot run reason without draft. Please run draft first.")
+                return None
 
             result = {}
 
-            # Stage 1: Core generation (question, solution) - if enabled
-            if run_core_generation:
-                core_result = self._generate_core_content(sample, cot_type)
-                if not core_result:
+            # Stage 1: Draft generation (question, solution) - if enabled
+            if run_draft:
+                draft_result = self._generate_draft(sample, cot_type)
+                if not draft_result:
                     return None
-                result.update(core_result)
+                result.update(draft_result)
 
-            # Stage 2: Reasoning generation (thinking trajectories, attempts) - if enabled
-            if run_reasoning_generation:
-                reasoning_result = self._generate_reasoning_content(result, sample, cot_type)
-                result.update(reasoning_result)
+            # Stage 2: Reason generation (thinking trajectories, attempts) - if enabled
+            if run_reason:
+                reason_result = self._generate_reason(result, sample, cot_type)
+                result.update(reason_result)
+
+                # If we only ran reasoning generation, ensure we have basic structure
+                if not run_content_generation:
+                    # Create basic structure with sample info
+                    sample_id = f"cot_{sample.id}_{cot_type}"
+                    type_string = f"cot {cot_type.replace('_', '-')}"
+
+                    # Add basic fields if they don't exist
+                    if "id" not in result:
+                        result["id"] = sample_id
+                    if "type" not in result:
+                        result["type"] = type_string
+                    if "question" not in result:
+                        result["question"] = "N/A"
+                    if "solution" not in result:
+                        result["solution"] = "N/A"
 
             if result:
                 self.current_type_index = (self.current_type_index + 1) % len(self.cot_types)
@@ -175,29 +196,36 @@ class CoTGenerator(BaseGenerator):
             # Clean the output first
             cleaned_output = raw_output.strip()
 
+            # Debug: print first 200 chars of output
+            print(f"Debug - Raw output preview: {cleaned_output[:200]}...")
+
             # Try to find JSON object in the output
             start_idx = cleaned_output.find('{')
             end_idx = cleaned_output.rfind('}')
 
             if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
                 json_str = cleaned_output[start_idx : end_idx + 1]
+                print(f"Debug - Extracted JSON: {json_str[:200]}...")
                 try:
                     parsed = json.loads(json_str)
                     if isinstance(parsed, dict):
+                        print(f"Debug - Successfully parsed JSON with keys: {list(parsed.keys())}")
                         return parsed
-                except json.JSONDecodeError:
-                    pass
+                except json.JSONDecodeError as e:
+                    print(f"Debug - JSON decode error: {e}")
 
             # Try to parse the entire output as JSON
             if cleaned_output.startswith('{'):
                 try:
                     parsed = json.loads(cleaned_output)
                     if isinstance(parsed, dict):
+                        print(f"Debug - Successfully parsed full JSON with keys: {list(parsed.keys())}")
                         return parsed
-                except json.JSONDecodeError:
-                    pass
+                except json.JSONDecodeError as e:
+                    print(f"Debug - Full JSON decode error: {e}")
 
             # Fallback: try to extract fields from text
+            print("Debug - Falling back to text extraction")
             return self._extract_fields_from_text(cleaned_output)
 
         except Exception as e:
@@ -372,44 +400,119 @@ class CoTGenerator(BaseGenerator):
 
         return schema
 
-    def _generate_core_content(self, sample: DataSample, cot_type: str) -> Optional[Dict[str, Any]]:
-        """Stage 1: Generate core content (id, type, question, solution)."""
+    def _generate_draft(self, sample: DataSample, cot_type: str) -> Optional[Dict[str, Any]]:
+        """Stage 1: Generate draft content (id, type, question, solution)."""
         try:
-            # Get core generation template
-            core_template = self.prompt_templates.get("core_generation", {}).get(cot_type)
-            if not core_template:
+            # Get draft template
+            draft_template = self.prompt_templates.get("draft", {}).get(cot_type)
+            if not draft_template:
                 # Fallback to old template structure
-                core_template = self.prompt_templates.get(cot_type)
+                draft_template = self.prompt_templates.get(cot_type)
 
-            if isinstance(core_template, dict):
-                template_str = core_template["template"]
+            if isinstance(draft_template, dict):
+                template_str = draft_template["template"]
             else:
-                template_str = core_template
+                template_str = draft_template
 
             # Prepare model input
             model_input = self._prepare_model_input(sample, cot_type, template_str)
 
-            # Generate with core generation settings
-            max_out_len = self.core_generation_config.get("max_out_len", 2000)
+            # Generate with draft settings
+            max_out_len = self.draft_config.get("max_out_len", 2000)
             raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
 
             if raw_output:
-                return self._parse_core_content(sample, cot_type, raw_output)
+                return self._parse_draft(sample, cot_type, raw_output)
 
             return None
         except Exception as e:
-            print(f"Error in core generation for sample {sample.id}: {e}")
+            print(f"Error in content generation for sample {sample.id}: {e}")
             return None
 
-    def _generate_reasoning_content(
-        self, core_result: Dict[str, Any], sample: DataSample, cot_type: str
-    ) -> Dict[str, Any]:
-        """Stage 2: Generate reasoning content (thinking trajectories, attempts)."""
-        # For now, return empty reasoning content since reasoning models aren't ready
-        # In the future, this would use reasoning models to generate thinking trajectories and attempts
+    def _generate_reason(self, content_result: Dict[str, Any], sample: DataSample, cot_type: str) -> Dict[str, Any]:
+        """Stage 2: Generate reason content using InternS1 model."""
         reasoning_result = {}
 
-        # Placeholder reasoning content (will be replaced with actual reasoning model calls)
+        try:
+            # Use InternS1 for reasoning generation
+            if hasattr(self.model_client, 'generate_with_reasoning'):
+                # InternS1 model - get both content and reasoning
+                question = content_result.get("question", "")
+                solution = content_result.get("solution", "")
+
+                # If no content from previous stage, create a generic reasoning prompt
+                if not question and not solution:
+                    # Create a generic reasoning prompt based on sample data
+                    molecule_info = sample.metadata.get("molecule_info", {})
+                    formula = molecule_info.get("formula", "Unknown")
+                    smiles = molecule_info.get("smiles", "Unknown")
+
+                    reasoning_prompt = f"""
+                    Generate detailed reasoning trajectories and model attempts for a spectroscopic analysis problem.
+                    
+                    Molecular Information:
+                    - Formula: {formula}
+                    - SMILES: {smiles}
+                    
+                    Please provide:
+                    1. Thinking trajectories (step-by-step reasoning process for spectroscopic analysis)
+                    2. Model attempt (final answer attempt for the molecular structure)
+                    """
+                else:
+                    # Create reasoning prompt based on existing content
+                    reasoning_prompt = f"""
+                    Based on the following question and solution, generate detailed reasoning trajectories and model attempts.
+                    
+                    Question: {question}
+                    Solution: {solution}
+                    
+                    Please provide:
+                    1. Thinking trajectories (step-by-step reasoning process)
+                    2. Model attempt (final answer attempt)
+                    """
+
+                # Generate with InternS1
+                max_out_len = self.reason_config.get("max_out_len", 3000)  # 增加token限制
+                print(f"Debug - Reasoning generation with max_out_len: {max_out_len}")
+                reasoning_response = self.model_client.generate_with_reasoning(
+                    reasoning_prompt, max_out_len=max_out_len
+                )
+                print(
+                    f"Debug - Reasoning response keys: {list(reasoning_response.keys()) if isinstance(reasoning_response, dict) else 'Not a dict'}"
+                )
+
+                # Extract reasoning content
+                reasoning_content = reasoning_response.get("reasoning_content", "")
+                model_attempt = reasoning_response.get("content", "")
+
+                # Store in appropriate fields
+                if self.use_internvl3:
+                    reasoning_result["internvl3_thinking_trajectories"] = reasoning_content
+                    reasoning_result["internvl3_attempt"] = model_attempt
+
+                if self.use_claude:
+                    # For now, use the same content for Claude (can be replaced with actual Claude model later)
+                    reasoning_result["claude_thinking_trajectories"] = reasoning_content
+                    reasoning_result["claude_attempt"] = model_attempt
+
+            else:
+                # Fallback for non-InternS1 models
+                reasoning_result = self._generate_reason_fallback(content_result, sample, cot_type)
+
+        except Exception as e:
+            print(f"Error in reasoning generation for sample {sample.id}: {e}")
+            # Return empty reasoning content on error
+            reasoning_result = self._generate_reason_fallback(content_result, sample, cot_type)
+
+        return reasoning_result
+
+    def _generate_reason_fallback(
+        self, content_result: Dict[str, Any], sample: DataSample, cot_type: str
+    ) -> Dict[str, Any]:
+        """Fallback reason generation when InternS1 is not available."""
+        reasoning_result = {}
+
+        # Placeholder reasoning content
         if self.use_claude:
             reasoning_result["claude_thinking_trajectories"] = ""
             reasoning_result["claude_attempt"] = ""
@@ -420,8 +523,8 @@ class CoTGenerator(BaseGenerator):
 
         return reasoning_result
 
-    def _parse_core_content(self, sample: DataSample, cot_type: str, raw_output: str) -> Optional[Dict[str, Any]]:
-        """Parse core content from model output."""
+    def _parse_draft(self, sample: DataSample, cot_type: str, raw_output: str) -> Optional[Dict[str, Any]]:
+        """Parse draft content from model output."""
         try:
             # Parse the JSON response
             parsed_data = self._parse_cot_output(raw_output)

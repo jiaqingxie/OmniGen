@@ -67,7 +67,6 @@ class InternS1(BaseAPIModel):
 
             # InternS1 model returns both content and reasoning_content
             message = response.choices[0].message
-            print(message)
 
             # Get reasoning content if available (this is the thinking process)
             reasoning_content = ""
