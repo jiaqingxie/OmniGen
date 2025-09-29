@@ -73,7 +73,6 @@ def add_type_specific_generation_args(parser: argparse.ArgumentParser, data_type
             choices=["draft", "reason"],
             help="Stages to run: draft (question/solution), reason (thinking trajectories)",
         )
-        parser.add_argument("--reasoning-steps", type=int, help="Number of reasoning steps to generate")
 
 
 def load_config_for_type(data_type: str, config_path: Optional[str] = None) -> OmniGenConfig:
@@ -129,8 +128,6 @@ def apply_generation_overrides(config: OmniGenConfig, args: argparse.Namespace, 
             config.generator_config["cot_types"] = [args.cot_type]
         if hasattr(args, 'stages') and args.stages:
             config.generator_config["stages"] = args.stages
-        if hasattr(args, 'reasoning_steps') and args.reasoning_steps:
-            config.generator_config["reasoning_steps"] = args.reasoning_steps
 
 
 def apply_validation_overrides(config: OmniGenConfig, args: argparse.Namespace) -> None:

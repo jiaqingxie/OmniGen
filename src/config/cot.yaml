@@ -25,7 +25,6 @@ generator_config:
   reason:
     max_out_len: 3000  # 增加token限制以避免截断
     temperature: 0.7  # Higher temperature for more creative reasoning
-    reasoning_models: ["interns1"]  # Use InternS1 for reasoning generation
 
   # Prompt templates for different stages and CoT types
   prompt_templates:
@@ -46,11 +45,11 @@ generator_config:
           - Use the EXACT JSON format shown below
 
           Examples of problem types:
-          - IR spectrum interpretation with functional group identification
-          - NMR spectrum analysis with chemical shift assignments
-          - Mass spectrometry molecular weight determination
-          - Multi-spectral analysis combining different techniques
-          - Complex molecular structure elucidation
+          - IR spectrum interpretation: "Identify functional groups from IR peaks at 1700, 1600, 1250 cm⁻¹"
+          - NMR analysis: "Assign chemical shifts and coupling patterns in ¹H NMR spectrum"
+          - Mass spectrometry: "Determine molecular weight and fragmentation patterns"
+          - Multi-spectral: "Combine IR, NMR, and MS data for structure elucidation"
+          - Complex structures: "Elucidate stereochemistry and conformational analysis"
 
           JSON Format (CORE CONTENT ONLY):
           {
@@ -62,7 +61,7 @@ generator_config:
           - Molecular formula: {formula}
           - SMILES: {smiles}
           - Available spectra: {available_spectra}
-          - Problem type: {cot_type}
+          - Data type: {cot_type}
 
           Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
 
@@ -89,11 +88,11 @@ generator_config:
           - Comparative analysis with reference spectra
 
           Examples of question types:
-          - "What functional groups are present in this spectrum?"
-          - "Identify the molecular structure from this spectrum"
-          - "Explain the key features and their significance"
-          - "Compare this spectrum with expected patterns"
-          - "What additional information would help confirm the structure?"
+          - "Analyze the IR spectrum: identify functional groups and their characteristic peaks"
+          - "Interpret the ¹H NMR spectrum: assign chemical shifts and coupling patterns"
+          - "Examine the ¹³C NMR: determine carbon environments and molecular symmetry"
+          - "Study the mass spectrum: identify molecular ion and key fragments"
+          - "Integrate all spectral data: propose the complete molecular structure"
 
           JSON Format (CORE CONTENT ONLY):
           {
@@ -105,12 +104,12 @@ generator_config:
           - Molecular formula: {formula}
           - SMILES: {smiles}
           - Available spectra: {available_spectra}
-          - Problem type: {cot_type}
+          - Data type: {cot_type}
 
           Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
 
 # Model configuration
-model_type: interns1  # Options: internvl, interns1, gemini
+model_type: interns1
 model_config:
   api_key: ${INTERNS1_API_KEY}
   base_url: ${INTERNS1_BASE_URL}

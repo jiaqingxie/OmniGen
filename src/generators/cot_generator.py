@@ -134,50 +134,6 @@ class CoTGenerator(BaseGenerator):
 
         return formatted_prompt
 
-    def _create_cot_sample(self, sample: DataSample, cot_type: str, raw_output: str) -> Optional[Dict[str, Any]]:
-        """Create CoT sample from generated output."""
-        try:
-            # Parse the JSON response
-            parsed_data = self._parse_cot_output(raw_output)
-            if not parsed_data:
-                return None
-
-            # Create unique ID
-            sample_id = f"cot_{sample.id}_{cot_type}"
-
-            # Determine the type string
-            type_string = f"cot {cot_type.replace('_', '-')}"
-
-            # Create the base CoT sample
-            result = {
-                "id": sample_id,
-                "type": type_string,
-                "question": parsed_data.get("question", ""),
-                "solution": parsed_data.get("solution", ""),
-            }
-
-            # Add model-specific fields based on configuration
-            if self.use_claude:
-                result["claude_thinking_trajectories"] = parsed_data.get("claude_thinking_trajectories", "")
-                result["claude_attempt"] = parsed_data.get("claude_attempt", "")
-
-            if self.use_interns1:
-                result["interns1_thinking_trajectories"] = parsed_data.get("interns1_thinking_trajectories", "")
-                result["interns1_attempt"] = parsed_data.get("interns1_attempt", "")
-
-            # Add image for multimodal
-            if cot_type == "multimodal":
-                image_path = self._save_spectrum_image(sample)
-                if image_path:
-                    result["image"] = image_path
-                else:
-                    return None
-
-            return result
-
-        except Exception as e:
-            return None
-
     def _parse_cot_output(self, raw_output: str) -> Optional[Dict[str, Any]]:
         """Parse CoT output from model response."""
         try:
