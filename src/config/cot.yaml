@@ -7,7 +7,7 @@ generator_config:
   # CoT generation settings
   cot_types: ["text_only", "multimodal"]  # Support both types
   use_claude: false
-  use_internvl3: true
+  use_interns1: true
   image_output_dir: "output/cot_spectrum_images"
   image_format: "png"
   

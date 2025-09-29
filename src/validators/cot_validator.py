@@ -39,14 +39,14 @@ class CoTValidator(BaseValidator):
             metric_scores["solution_quality"] = solution_score
 
         # Validate reasoning trajectories (only if they exist and are not empty)
-        reasoning_fields = ["claude_thinking_trajectories", "internvl3_thinking_trajectories"]
+        reasoning_fields = ["claude_thinking_trajectories", "interns1_thinking_trajectories"]
         has_reasoning = any(sample.get(field, "").strip() for field in reasoning_fields)
         if has_reasoning:
             reasoning_score = await self._validate_reasoning_quality(sample)
             metric_scores["reasoning_quality"] = reasoning_score
 
         # Validate model attempts (only if they exist and are not empty)
-        attempt_fields = ["claude_attempt", "internvl3_attempt"]
+        attempt_fields = ["claude_attempt", "interns1_attempt"]
         has_attempts = any(sample.get(field, "").strip() for field in attempt_fields)
         if has_attempts:
             attempt_score = await self._validate_attempt_quality(sample)
@@ -73,9 +73,9 @@ class CoTValidator(BaseValidator):
         # Check for required model outputs (only if reasoning fields are present and not empty)
         reasoning_fields = [
             "claude_thinking_trajectories",
-            "internvl3_thinking_trajectories",
+            "interns1_thinking_trajectories",
             "claude_attempt",
-            "internvl3_attempt",
+            "interns1_attempt",
         ]
         has_any_reasoning = any(sample.get(field, "").strip() for field in reasoning_fields)
 
@@ -83,11 +83,11 @@ class CoTValidator(BaseValidator):
             has_claude = any(
                 sample.get(field, "").strip() for field in ["claude_thinking_trajectories", "claude_attempt"]
             )
-            has_internvl3 = any(
-                sample.get(field, "").strip() for field in ["internvl3_thinking_trajectories", "internvl3_attempt"]
+            has_interns1 = any(
+                sample.get(field, "").strip() for field in ["interns1_thinking_trajectories", "interns1_attempt"]
             )
 
-            if not has_claude and not has_internvl3:
+            if not has_claude and not has_interns1:
                 issues.append("Missing model reasoning outputs (need at least one model)")
 
         # Check content length
@@ -119,7 +119,7 @@ class CoTValidator(BaseValidator):
             "question_length": question_length,
             "solution_length": solution_length,
             "has_claude": any(field in sample for field in ["claude_thinking_trajectories", "claude_attempt"]),
-            "has_internvl3": any(field in sample for field in ["internvl3_thinking_trajectories", "internvl3_attempt"]),
+            "has_interns1": any(field in sample for field in ["interns1_thinking_trajectories", "interns1_attempt"]),
             "cot_type": sample.get("type", ""),
             "has_image": bool(sample.get("image")),
         }
@@ -201,8 +201,8 @@ class CoTValidator(BaseValidator):
 
         if "claude_thinking_trajectories" in sample:
             trajectories.append(sample["claude_thinking_trajectories"])
-        if "internvl3_thinking_trajectories" in sample:
-            trajectories.append(sample["internvl3_thinking_trajectories"])
+        if "interns1_thinking_trajectories" in sample:
+            trajectories.append(sample["interns1_thinking_trajectories"])
 
         if not trajectories:
             return 0.0
@@ -237,8 +237,8 @@ class CoTValidator(BaseValidator):
 
         if "claude_attempt" in sample:
             attempts.append(sample["claude_attempt"])
-        if "internvl3_attempt" in sample:
-            attempts.append(sample["internvl3_attempt"])
+        if "interns1_attempt" in sample:
+            attempts.append(sample["interns1_attempt"])
 
         if not attempts:
             return 0.0

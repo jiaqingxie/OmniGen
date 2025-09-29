@@ -35,7 +35,7 @@ class CoTGenerator(BaseGenerator):
 
         # Reasoning model settings (for future implementation)
         self.use_claude = config.get("use_claude", False)
-        self.use_internvl3 = config.get("use_internvl3", True)
+        self.use_interns1 = config.get("use_interns1", True)
 
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
         """Generate a single CoT reasoning sample using configurable stage approach."""
@@ -72,29 +72,17 @@ class CoTGenerator(BaseGenerator):
                 reason_result = self._generate_reason(result, sample, cot_type)
                 result.update(reason_result)
 
-                # If we only ran reasoning generation, ensure we have basic structure
-                if not run_content_generation:
-                    # Create basic structure with sample info
-                    sample_id = f"cot_{sample.id}_{cot_type}"
-                    type_string = f"cot {cot_type.replace('_', '-')}"
-
-                    # Add basic fields if they don't exist
-                    if "id" not in result:
-                        result["id"] = sample_id
-                    if "type" not in result:
-                        result["type"] = type_string
-                    if "question" not in result:
-                        result["question"] = "N/A"
-                    if "solution" not in result:
-                        result["solution"] = "N/A"
-
             if result:
                 self.current_type_index = (self.current_type_index + 1) % len(self.cot_types)
                 return result
-
-            return None
+            else:
+                print(f"Debug - No result generated for sample {sample.id}")
+                return None
         except Exception as e:
             print(f"Exception in generate_single for sample {sample.id}: {e}")
+            import traceback
+
+            traceback.print_exc()
             return None
 
     def _prepare_model_input(self, sample: DataSample, cot_type: str, template_str: str):
@@ -173,9 +161,9 @@ class CoTGenerator(BaseGenerator):
                 result["claude_thinking_trajectories"] = parsed_data.get("claude_thinking_trajectories", "")
                 result["claude_attempt"] = parsed_data.get("claude_attempt", "")
 
-            if self.use_internvl3:
-                result["internvl3_thinking_trajectories"] = parsed_data.get("internvl3_thinking_trajectories", "")
-                result["internvl3_attempt"] = parsed_data.get("internvl3_attempt", "")
+            if self.use_interns1:
+                result["interns1_thinking_trajectories"] = parsed_data.get("interns1_thinking_trajectories", "")
+                result["interns1_attempt"] = parsed_data.get("interns1_attempt", "")
 
             # Add image for multimodal
             if cot_type == "multimodal":
@@ -226,7 +214,13 @@ class CoTGenerator(BaseGenerator):
 
             # Fallback: try to extract fields from text
             print("Debug - Falling back to text extraction")
-            return self._extract_fields_from_text(cleaned_output)
+            extracted_fields = self._extract_fields_from_text(cleaned_output)
+            if extracted_fields:
+                print(f"Debug - Extracted fields: {list(extracted_fields.keys())}")
+                return extracted_fields
+            else:
+                print("Debug - No fields extracted from text")
+                return None
 
         except Exception as e:
             print(f"Error parsing CoT output: {e}")
@@ -242,12 +236,12 @@ class CoTGenerator(BaseGenerator):
             "solution": ["solution:", "solution", "answer:", "answer"],
             "claude_thinking_trajectories": ["claude_thinking_trajectories:", "claude thinking:", "claude reasoning:"],
             "claude_attempt": ["claude_attempt:", "claude attempt:", "claude response:"],
-            "internvl3_thinking_trajectories": [
-                "internvl3_thinking_trajectories:",
-                "internvl3 thinking:",
-                "internvl3 reasoning:",
+            "interns1_thinking_trajectories": [
+                "interns1_thinking_trajectories:",
+                "interns1 thinking:",
+                "interns1 reasoning:",
             ],
-            "internvl3_attempt": ["internvl3_attempt:", "internvl3 attempt:", "internvl3 response:"],
+            "interns1_attempt": ["interns1_attempt:", "interns1 attempt:", "interns1 response:"],
         }
 
         lines = text.split('\n')
@@ -345,9 +339,9 @@ class CoTGenerator(BaseGenerator):
 
         # Check for at least one model's output
         has_claude = "claude_thinking_trajectories" in output or "claude_attempt" in output
-        has_internvl3 = "internvl3_thinking_trajectories" in output or "internvl3_attempt" in output
+        has_interns1 = "interns1_thinking_trajectories" in output or "interns1_attempt" in output
 
-        if not (has_claude or has_internvl3):
+        if not (has_claude or has_interns1):
             return False
 
         # For multimodal, check image field
@@ -382,14 +376,14 @@ class CoTGenerator(BaseGenerator):
             }
             schema["properties"]["claude_attempt"] = {"type": "string", "description": "Claude's attempt at solving"}
 
-        if self.use_internvl3:
-            schema["properties"]["internvl3_thinking_trajectories"] = {
+        if self.use_interns1:
+            schema["properties"]["interns1_thinking_trajectories"] = {
                 "type": "string",
-                "description": "InternVL3's thinking process",
+                "description": "InternS1's thinking process",
             }
-            schema["properties"]["internvl3_attempt"] = {
+            schema["properties"]["interns1_attempt"] = {
                 "type": "string",
-                "description": "InternVL3's attempt at solving",
+                "description": "InternS1's attempt at solving",
             }
 
         # Add image field for multimodal
@@ -486,9 +480,9 @@ class CoTGenerator(BaseGenerator):
                 model_attempt = reasoning_response.get("content", "")
 
                 # Store in appropriate fields
-                if self.use_internvl3:
-                    reasoning_result["internvl3_thinking_trajectories"] = reasoning_content
-                    reasoning_result["internvl3_attempt"] = model_attempt
+                if self.use_interns1:
+                    reasoning_result["interns1_thinking_trajectories"] = reasoning_content
+                    reasoning_result["interns1_attempt"] = model_attempt
 
                 if self.use_claude:
                     # For now, use the same content for Claude (can be replaced with actual Claude model later)
@@ -517,9 +511,9 @@ class CoTGenerator(BaseGenerator):
             reasoning_result["claude_thinking_trajectories"] = ""
             reasoning_result["claude_attempt"] = ""
 
-        if self.use_internvl3:
-            reasoning_result["internvl3_thinking_trajectories"] = ""
-            reasoning_result["internvl3_attempt"] = ""
+        if self.use_interns1:
+            reasoning_result["interns1_thinking_trajectories"] = ""
+            reasoning_result["interns1_attempt"] = ""
 
         return reasoning_result
 

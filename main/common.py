@@ -74,10 +74,6 @@ def add_type_specific_generation_args(parser: argparse.ArgumentParser, data_type
             help="Stages to run: draft (question/solution), reason (thinking trajectories)",
         )
         parser.add_argument("--reasoning-steps", type=int, help="Number of reasoning steps to generate")
-        parser.add_argument("--use-claude", action="store_true", help="Include Claude model outputs")
-        parser.add_argument(
-            "--use-internvl3", action="store_true", default=True, help="Include InternVL3 model outputs"
-        )
 
 
 def load_config_for_type(data_type: str, config_path: Optional[str] = None) -> OmniGenConfig:
@@ -135,10 +131,6 @@ def apply_generation_overrides(config: OmniGenConfig, args: argparse.Namespace, 
             config.generator_config["stages"] = args.stages
         if hasattr(args, 'reasoning_steps') and args.reasoning_steps:
             config.generator_config["reasoning_steps"] = args.reasoning_steps
-        if hasattr(args, 'use_claude') and args.use_claude:
-            config.generator_config["use_claude"] = True
-        if hasattr(args, 'use_internvl3') and args.use_internvl3:
-            config.generator_config["use_internvl3"] = True
 
 
 def apply_validation_overrides(config: OmniGenConfig, args: argparse.Namespace) -> None:
