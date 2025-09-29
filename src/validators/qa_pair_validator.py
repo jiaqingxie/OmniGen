@@ -121,18 +121,6 @@ class QAPairValidator(BaseValidator):
 
         score = 7.0  # Default score
 
-        # Check for educational value
-        all_text = " ".join(conv.get("value", "") for conv in conversations).lower()
-
-        # Look for scientific keywords
-        scientific_keywords = ["spectrum", "molecule", "formula", "smiles", "chemical", "structure", "analysis"]
-        keyword_count = sum(1 for keyword in scientific_keywords if keyword in all_text)
-
-        if keyword_count >= 3:
-            score += 1.0
-        elif keyword_count >= 1:
-            score += 0.5
-
         # Check for question-answer pattern
         if len(conversations) >= 2:
             first_conv = conversations[0]

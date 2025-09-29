@@ -144,6 +144,12 @@ def print_data_type_info(data_type: str) -> None:
             "Scientific accuracy",
             "Proper formatting",
         ],
+        "qa_pair": [
+            "Conversation structure and format",
+            "Speaker alternation pattern",
+            "Image relevance to conversations",
+            "Question-answer flow and coherence",
+        ],
         "cot": ["Reasoning coherence", "Step completeness", "Factual accuracy", "Logical flow", "Conclusion validity"],
     }
 

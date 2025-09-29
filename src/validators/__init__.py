@@ -6,6 +6,7 @@ from .registry import register_validator, create_validator, list_validators, get
 from .benchmark_validator import BenchmarkValidator
 from .cot_validator import CotValidator
 from .image_pair_validator import ImagePairValidator
+from .qa_pair_validator import QAPairValidator
 
 __all__ = [
     # Base classes
@@ -20,4 +21,5 @@ __all__ = [
     "BenchmarkValidator",
     "CotValidator",
     "ImagePairValidator",
+    "QAPairValidator",
 ]
