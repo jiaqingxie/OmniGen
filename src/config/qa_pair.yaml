@@ -1,0 +1,101 @@
+# QA Pair Generation Configuration
+dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+generator_type: qa_pair
+generator_config:
+  prompt_templates:
+    single_step:
+      template: |
+        You are analyzing a molecular spectrum image. Generate a single-step question-answer conversation about this spectrum.
+
+        IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
+        - Molecular formula: {formula} (DO NOT CHANGE THIS)
+        - SMILES notation: {smiles} (DO NOT CHANGE THIS)
+        - Spectrum type: {spectrum_type}
+
+        TASK: Generate a conversation in the following JSON format:
+        [
+          {
+            "from": "human",
+            "value": "This is a {spectrum_type} spectrum. What is the corresponding chemical formula and SMILES?"
+          },
+          {
+            "from": "gpt", 
+            "value": "Based on this spectrum, the chemical formula is {formula}, and the SMILES is {smiles}."
+          }
+        ]
+
+        Requirements:
+        - MUST use the exact formula and SMILES provided above
+        - Create a natural, educational conversation
+        - Focus on the spectrum analysis and molecular identification
+        - Write in clear, scientific English
+        - Keep the conversation concise but informative
+        - The human question should be about spectrum analysis
+        - The GPT response should provide the molecular information
+
+        Please provide only the JSON conversation, no additional text.
+
+    multi_step:
+      template: |
+        You are analyzing a molecular spectrum image. Generate a multi-step question-answer conversation about this spectrum.
+
+        IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
+        - Molecular formula: {formula} (DO NOT CHANGE THIS)
+        - SMILES notation: {smiles} (DO NOT CHANGE THIS)
+        - Spectrum type: {spectrum_type}
+
+        TASK: Generate a multi-step conversation in the following JSON format:
+        [
+          {
+            "from": "human",
+            "value": "This is a {spectrum_type} spectrum. What is the corresponding chemical formula and SMILES?"
+          },
+          {
+            "from": "gpt",
+            "value": "Based on this spectrum, the chemical formula is {formula}, and the SMILES is {smiles}."
+          },
+          {
+            "from": "human",
+            "value": "Can you provide a detailed description of this spectrum?"
+          },
+          {
+            "from": "gpt",
+            "value": "The spectrum shows [describe the key features, peaks, chemical shifts, etc. based on the {spectrum_type} analysis]. [Provide educational interpretation of the spectral features]."
+          }
+        ]
+
+        Requirements:
+        - MUST use the exact formula and SMILES provided above
+        - Create a natural, educational multi-step conversation
+        - First exchange: molecular identification
+        - Second exchange: detailed spectral analysis
+        - Focus on educational value and scientific accuracy
+        - Write in clear, scientific English
+        - Provide detailed interpretation of spectral features
+        - Make it suitable for chemistry education
+
+        Please provide only the JSON conversation, no additional text.
+
+  qa_types: ["single_step", "multi_step"]
+  
+  # Conversation settings
+  min_conversation_length: 2
+  max_conversation_length: 6
+  
+  # Image output settings
+  image_output_dir: "output/qa_spectrum_images"
+  
+  # Text generation settings
+  max_out_len: 2000
+
+model_type: internvl
+model_config:
+  api_key: ${INTERNVL_API_KEY}
+  base_url: ${INTERNVL_BASE_URL}
+  model_name: ${INTERNVL_MODEL_NAME}
+  max_seq_len: 2048
+
+num_samples: 20
+output_path: output/qa_pairs.json
+verbose: true
+max_retries: 3

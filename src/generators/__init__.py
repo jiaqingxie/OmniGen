@@ -3,5 +3,13 @@
 from .base import BaseGenerator, register_generator, create_generator
 from .benchmark import BenchmarkGenerator
 from .image_pair_generator import ImagePairGenerator
+from .qa_pair_generator import QAPairGenerator
 
-__all__ = ['BaseGenerator', 'BenchmarkGenerator', 'ImagePairGenerator', 'register_generator', 'create_generator']
+__all__ = [
+    'BaseGenerator',
+    'BenchmarkGenerator',
+    'ImagePairGenerator',
+    'QAPairGenerator',
+    'register_generator',
+    'create_generator',
+]

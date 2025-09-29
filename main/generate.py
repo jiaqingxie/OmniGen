@@ -52,6 +52,15 @@ async def run_generation(config: OmniGenConfig, data_type: str) -> bool:
                     print(f"   Type: {sample.get('type', 'N/A')}")
                     print(f"   Image: {sample.get('image', 'N/A')}")
                     print(f"   Text: {sample.get('text', 'N/A')[:100]}...")
+                elif data_type == "qa_pair":
+                    print(f"   Type: {sample.get('type', 'N/A')}")
+                    print(f"   Image: {sample.get('image', 'N/A')}")
+                    conversations = sample.get('conversations', [])
+                    print(f"   Conversations: {len(conversations)}")
+                    if conversations:
+                        print(f"   First Q: {conversations[0].get('value', 'N/A')[:100]}...")
+                        if len(conversations) > 1:
+                            print(f"   First A: {conversations[1].get('value', 'N/A')[:100]}...")
                 else:
                     print(f"   Content: {str(sample)[:200]}...")
 

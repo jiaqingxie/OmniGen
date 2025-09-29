@@ -70,6 +70,16 @@ class ValidatorConfig:
 
     image_pair_config: Dict[str, Any] = field(default_factory=lambda: {})
 
+    qa_pair_config: Dict[str, Any] = field(
+        default_factory=lambda: {
+            "conversation_structure_weight": 1.0,
+            "conversation_quality_weight": 1.5,
+            "image_relevance_weight": 1.0,
+            "min_conversations": 2,
+            "max_conversations": 8,
+        }
+    )
+
 
 @dataclass
 class OmniGenConfig:
