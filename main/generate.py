@@ -1,10 +1,5 @@
 """
 Unified generation entry point for OmniGen.
-
-Usage:
-    python -m main.generate --type benchmark --config src/config/benchmark.yaml --samples 10
-    python -m main.generate --type image_pair --data-source "SpectrumWorld/molpuzzle-seed-datasets" --samples 5
-    python -m main.generate --type cot --config src/config/cot.yaml --output cot_data.json
 """
 
 import asyncio
@@ -69,10 +64,8 @@ async def run_generation(config: OmniGenConfig, data_type: str) -> bool:
                     print(f"   Solution: {sample.get('solution', 'N/A')[:100]}...")
                     if 'claude_thinking_trajectories' in sample:
                         print(f"   Claude reasoning: {sample.get('claude_thinking_trajectories', 'N/A')[:100]}...")
-                    if 'internvl3_thinking_trajectories' in sample:
-                        print(
-                            f"   InternVL3 reasoning: {sample.get('internvl3_thinking_trajectories', 'N/A')[:100]}..."
-                        )
+                    if 'interns1_thinking_trajectories' in sample:
+                        print(f"   InternS1 reasoning: {sample.get('interns1_thinking_trajectories', 'N/A')[:100]}...")
                 else:
                     print(f"   Content: {str(sample)[:200]}...")
 

@@ -38,6 +38,9 @@ class OmniGenEngine:
             except ImportError as e:
                 print(f"Warning: Failed to import InternVL: {e}")
                 self.model_client = None
+            except Exception as e:
+                print(f"Warning: InternVL initialization failed: {e}")
+                self.model_client = None
         elif model_type == "interns1":
             try:
                 from ..models import InternS1
