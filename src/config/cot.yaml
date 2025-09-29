@@ -110,7 +110,7 @@ generator_config:
           Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
 
 # Model configuration
-model_type: internvl
+model_type: internvl  # Options: internvl, interns1, gemini
 model_config:
   api_key: ${INTERNVL_API_KEY}
   base_url: ${INTERNVL_BASE_URL}

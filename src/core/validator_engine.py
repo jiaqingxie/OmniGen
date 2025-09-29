@@ -34,6 +34,21 @@ class ValidatorEngine:
                 raise ImportError(f"Failed to import InternVL: {e}")
             except Exception as e:
                 raise RuntimeError(f"InternVL initialization failed: {e}")
+        elif model_type == "interns1":
+            try:
+                from ..models import InternS1
+
+                model_config = self.config.model_config
+                self.model_client = InternS1(
+                    model_name=model_config.get("model_name"),
+                    api_key=model_config.get("api_key"),
+                    base_url=model_config.get("base_url"),
+                    max_seq_len=model_config.get("max_seq_len", 2048),
+                )
+            except ImportError as e:
+                raise ImportError(f"Failed to import InternS1: {e}")
+            except Exception as e:
+                raise RuntimeError(f"InternS1 initialization failed: {e}")
         else:
             raise ValueError(f"Unsupported model type: {model_type}")
 

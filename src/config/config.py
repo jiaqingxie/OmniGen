@@ -36,6 +36,11 @@ class ModelConfig:
     internvl_base_url: str = os.getenv("INTERNVL_BASE_URL")
     internvl_model_name: str = os.getenv("INTERNVL_MODEL_NAME")
 
+    # InternS1 API Configuration
+    interns1_api_key: str = os.getenv("INTERNS1_API_KEY")
+    interns1_base_url: str = os.getenv("INTERNS1_BASE_URL")
+    interns1_model_name: str = os.getenv("INTERNS1_MODEL_NAME")
+
     # Gemini API Configuration (via OpenRouter)
     gemini_api_key: str = os.getenv("GEMINI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
     gemini_base_url: str = os.getenv("GEMINI_BASE_URL", "https://openrouter.ai/api/v1")
@@ -120,6 +125,13 @@ class OmniGenConfig:
                 "api_key": model_configs.internvl_api_key,
                 "base_url": model_configs.internvl_base_url,
                 "model_name": model_configs.internvl_model_name,
+                "max_seq_len": 4096,
+            }
+        elif model_type.lower() == "interns1":
+            return {
+                "api_key": model_configs.interns1_api_key,
+                "base_url": model_configs.interns1_base_url,
+                "model_name": model_configs.interns1_model_name,
                 "max_seq_len": 4096,
             }
         elif model_type.lower() == "gemini":
