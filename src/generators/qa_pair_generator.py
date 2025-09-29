@@ -128,6 +128,9 @@ class QAPairGenerator(BaseGenerator):
             # Replace template variables in conversations
             conversations = self._replace_template_variables(conversations, sample, spectrum_type)
 
+            # Limit conversations based on QA type
+            conversations = self._limit_conversations(conversations, qa_type)
+
             # Save the spectrum image
             image_path = self._save_spectrum_image(sample, spectrum_type)
             if not image_path:
@@ -250,6 +253,17 @@ class QAPairGenerator(BaseGenerator):
             updated_conversations.append(updated_conv)
 
         return updated_conversations
+
+    def _limit_conversations(self, conversations: List[Dict[str, str]], qa_type: str) -> List[Dict[str, str]]:
+        """Limit conversations based on QA type."""
+        if qa_type == "single_step":
+            # Single step should have exactly 2 conversations (1 Q + 1 A)
+            return conversations[:2] if len(conversations) >= 2 else conversations
+        elif qa_type == "multi_step":
+            # Multi step should have 4-6 conversations (2-3 Q + 2-3 A)
+            return conversations[:6] if len(conversations) >= 4 else conversations
+        else:
+            return conversations
 
     def _save_spectrum_image(self, sample: DataSample, spectrum_type: str) -> Optional[str]:
         """Save spectrum image to output directory and return path."""

@@ -5,74 +5,111 @@ generator_config:
   prompt_templates:
     single_step:
       template: |
-        You are analyzing a molecular spectrum image. Generate a single-step question-answer conversation about this spectrum.
+        You are analyzing a molecular spectrum image. Generate a diverse, natural single-step question-answer conversation about this spectrum.
 
         IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
         - Spectrum type: {spectrum_type}
 
-        TASK: Generate a conversation in the following JSON format:
+        TASK: Generate a natural conversation in the following JSON format:
         [
           {
             "from": "human",
-            "value": "This is a {spectrum_type} spectrum. What is the corresponding chemical formula and SMILES?"
+            "value": "Your question here"
           },
           {
-            "from": "gpt", 
-            "value": "Based on this spectrum, the chemical formula is {formula}, and the SMILES is {smiles}."
+            "from": "gpt",
+            "value": "Your response here"
           }
         ]
 
+        Vary your approach - use different question styles, response formats, and educational approaches.
+
+        Examples of diverse question styles:
+        - "What can you tell me about this {spectrum_type} spectrum?"
+        - "Analyze this {spectrum_type} spectrum and identify the compound."
+        - "What molecular information can be extracted from this {spectrum_type} spectrum?"
+        - "Can you determine the structure from this {spectrum_type} spectrum?"
+        - "What does this {spectrum_type} spectrum reveal about the molecule?"
+
+        Examples of diverse response styles:
+        - Direct identification: "The compound is {formula} (SMILES: {smiles})."
+        - Analytical approach: "Based on the spectral features, this appears to be {formula}..."
+        - Educational explanation: "Looking at this {spectrum_type} spectrum, I can identify {formula}..."
+        - Step-by-step reasoning: "From the spectral data, I can deduce that this is {formula}..."
+
         Requirements:
         - MUST use the exact formula and SMILES provided above
-        - Create a natural, educational conversation
-        - Focus on the spectrum analysis and molecular identification
+        - Create natural, varied conversations (not template-like)
+        - Use different question phrasings and response styles
+        - Make it educational and engaging
         - Write in clear, scientific English
-        - Keep the conversation concise but informative
-        - The human question should be about spectrum analysis
-        - The GPT response should provide the molecular information
+        - Vary the conversation tone and approach
+        - Focus on spectrum analysis and molecular identification
+        - Use the EXACT JSON format shown above with "from" and "value" fields
 
         Please provide only the JSON conversation, no additional text.
 
     multi_step:
       template: |
-        You are analyzing a molecular spectrum image. Generate a multi-step question-answer conversation about this spectrum.
+        You are analyzing a molecular spectrum image. Generate a diverse, natural multi-step question-answer conversation about this spectrum.
 
         IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
         - Spectrum type: {spectrum_type}
 
-        TASK: Generate a multi-step conversation in the following JSON format:
+        TASK: Generate a natural multi-step conversation in the following JSON format:
         [
           {
             "from": "human",
-            "value": "This is a {spectrum_type} spectrum. What is the corresponding chemical formula and SMILES?"
+            "value": "First question here"
           },
           {
             "from": "gpt",
-            "value": "Based on this spectrum, the chemical formula is {formula}, and the SMILES is {smiles}."
+            "value": "First response here"
           },
           {
             "from": "human",
-            "value": "Can you provide a detailed description of this spectrum?"
+            "value": "Follow-up question here"
           },
           {
             "from": "gpt",
-            "value": "The spectrum shows [describe the key features, peaks, chemical shifts, etc. based on the {spectrum_type} analysis]. [Provide educational interpretation of the spectral features]."
+            "value": "Follow-up response here"
           }
         ]
 
+        Create varied, educational exchanges that build upon each other.
+
+        Examples of diverse conversation flows:
+        
+        Flow 1 - Identification → Analysis:
+        - Q: "What compound is this?" → A: "This is {formula}..."
+        - Q: "What can you tell me about the spectral features?" → A: "The spectrum shows..."
+
+        Flow 2 - Analysis → Confirmation:
+        - Q: "Analyze this {spectrum_type} spectrum." → A: "Looking at the peaks, this appears to be {formula}..."
+        - Q: "How confident are you in that identification?" → A: "Very confident because..."
+
+        Flow 3 - Educational → Deep Dive:
+        - Q: "Can you help me understand this spectrum?" → A: "Of course! This {spectrum_type} spectrum shows {formula}..."
+        - Q: "What specific features should I look for?" → A: "The key features are..."
+
+        Flow 4 - Problem-solving → Explanation:
+        - Q: "I'm having trouble interpreting this spectrum." → A: "Let me help you identify this as {formula}..."
+        - Q: "What's the reasoning behind that conclusion?" → A: "The evidence comes from..."
+
         Requirements:
         - MUST use the exact formula and SMILES provided above
-        - Create a natural, educational multi-step conversation
-        - First exchange: molecular identification
-        - Second exchange: detailed spectral analysis
-        - Focus on educational value and scientific accuracy
-        - Write in clear, scientific English
-        - Provide detailed interpretation of spectral features
-        - Make it suitable for chemistry education
+        - Create natural, varied multi-step conversations
+        - Use different question styles and response approaches
+        - Build educational progression between exchanges
+        - Vary conversation tone and teaching style
+        - Make it engaging and informative
+        - Focus on spectrum analysis and molecular identification
+        - Ensure logical flow between questions and answers
+        - Use the EXACT JSON format shown above with "from" and "value" fields
 
         Please provide only the JSON conversation, no additional text.
 
