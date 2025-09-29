@@ -1,0 +1,123 @@
+# CoT (Chain-of-Thought) Configuration
+# Unified configuration for both text-only and multimodal CoT generation
+
+dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+generator_type: cot
+generator_config:
+  # CoT generation settings
+  cot_types: ["text_only", "multimodal"]  # Support both types
+  use_claude: false
+  use_interns1: true
+  image_output_dir: "output/cot_spectrum_images"
+  image_format: "png"
+  
+  # Two-stage generation settings (configurable via command line)
+  stages: ["draft"]  # Default: only draft generation
+  # Available stages: ["draft", "reason"]
+  
+  # Stage 1: Draft generation settings (for high-quality question/solution)
+  draft:
+    max_out_len: 2000
+    temperature: 0.3  # Lower temperature for more focused, accurate content
+    focus_quality: true
+    
+  # Stage 2: Reason generation settings (for thinking trajectories using InternS1)
+  reason:
+    max_out_len: 3000  # 增加token限制以避免截断
+    temperature: 0.7  # Higher temperature for more creative reasoning
+
+  # Prompt templates for different stages and CoT types
+  prompt_templates:
+    # Stage 1: Draft generation templates (focus on high-quality question/solution)
+    draft:
+      text_only:
+        template: |
+          You are an expert in spectroscopic analysis and molecular structure determination. 
+          Generate a high-quality reasoning problem and solution for molecular structure analysis.
+
+          TASK: Create a detailed reasoning problem with step-by-step solution. 
+          Focus on accuracy, clarity, and educational value.
+
+          Requirements:
+          - Generate a challenging but solvable spectroscopic analysis problem
+          - Provide a detailed, step-by-step solution with clear explanations
+          - Ensure scientific accuracy and proper terminology
+          - Use the EXACT JSON format shown below
+
+          Examples of problem types:
+          - IR spectrum interpretation: "Identify functional groups from IR peaks at 1700, 1600, 1250 cm⁻¹"
+          - NMR analysis: "Assign chemical shifts and coupling patterns in ¹H NMR spectrum"
+          - Mass spectrometry: "Determine molecular weight and fragmentation patterns"
+          - Multi-spectral: "Combine IR, NMR, and MS data for structure elucidation"
+          - Complex structures: "Elucidate stereochemistry and conformational analysis"
+
+          JSON Format (CORE CONTENT ONLY):
+          {
+            "question": "Detailed reasoning problem here...",
+            "solution": "Step-by-step solution with explanations..."
+          }
+
+          Context:
+          - Molecular formula: {formula}
+          - SMILES: {smiles}
+          - Available spectra: {available_spectra}
+          - Data type: {cot_type}
+
+          Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
+
+      multimodal:
+        template: |
+          You are an expert in spectroscopic analysis and molecular structure determination. 
+          Analyze the provided spectrum image and generate a high-quality reasoning problem with solution.
+
+          TASK: Create a detailed reasoning problem based on the spectrum image with step-by-step solution. 
+          Focus on accuracy, clarity, and educational value.
+
+          Requirements:
+          - Analyze the provided spectrum image carefully
+          - Generate a challenging but solvable spectroscopic analysis problem
+          - Provide a detailed, step-by-step solution with clear explanations
+          - Ensure scientific accuracy and proper terminology
+          - Use the EXACT JSON format shown below
+
+          Examples of analysis approaches:
+          - Peak identification and assignment
+          - Functional group analysis
+          - Molecular structure elucidation
+          - Quantitative analysis
+          - Comparative analysis with reference spectra
+
+          Examples of question types:
+          - "Analyze the IR spectrum: identify functional groups and their characteristic peaks"
+          - "Interpret the ¹H NMR spectrum: assign chemical shifts and coupling patterns"
+          - "Examine the ¹³C NMR: determine carbon environments and molecular symmetry"
+          - "Study the mass spectrum: identify molecular ion and key fragments"
+          - "Integrate all spectral data: propose the complete molecular structure"
+
+          JSON Format (CORE CONTENT ONLY):
+          {
+            "question": "Detailed reasoning problem based on the spectrum...",
+            "solution": "Step-by-step solution with explanations..."
+          }
+
+          Context:
+          - Molecular formula: {formula}
+          - SMILES: {smiles}
+          - Available spectra: {available_spectra}
+          - Data type: {cot_type}
+
+          Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
+
+# Model configuration
+model_type: interns1
+model_config:
+  api_key: ${INTERNS1_API_KEY}
+  base_url: ${INTERNS1_BASE_URL}
+  model_name: ${INTERNS1_MODEL_NAME}
+  max_seq_len: 4096
+
+# Generation settings
+num_samples: 10
+output_path: output/cot_data.json
+verbose: true
+max_retries: 3

@@ -4,7 +4,7 @@ from ..data_loaders.data_structures import DataSample
 
 
 class BaseGenerator(ABC):
-    """数据生成器基类"""
+    """Base data generator class"""
 
     def __init__(self, config: Dict[str, Any], model_client=None):
         self.config = config
@@ -12,77 +12,75 @@ class BaseGenerator(ABC):
 
     @abstractmethod
     def generate_single(self, sample: DataSample) -> Optional[Dict[str, Any]]:
-        """生成单个数据样本
+        """Generate a single data sample
 
         Args:
-            sample: 输入的数据样本
+            sample: Input data sample
 
         Returns:
-            生成的数据字典，如果生成失败返回None
+            Generated data dictionary, or None if generation fails
         """
         pass
 
     @abstractmethod
     def get_output_schema(self) -> Dict[str, Any]:
-        """返回输出数据的schema描述
+        """Return the schema description of output data
 
         Returns:
-            描述输出格式的字典
+            Dictionary describing the output format
         """
         pass
 
     def validate_input(self, sample: DataSample) -> bool:
-        """验证输入数据是否符合要求
+        """Validate if input data meets requirements
 
         Args:
-            sample: 输入数据样本
+            sample: Input data sample
 
         Returns:
-            是否通过验证
+            Whether validation passes
         """
         return True
 
     def validate_output(self, output: Dict[str, Any]) -> bool:
-        """验证输出数据是否符合要求
+        """Validate if output data meets requirements
 
         Args:
-            output: 生成的输出数据
+            output: Generated output data
 
         Returns:
-            是否通过验证
+            Whether validation passes
         """
         return output is not None and isinstance(output, dict)
 
 
 class PromptTemplate:
-    """提示词模板基类"""
+    """Base prompt template class"""
 
     def __init__(self, template: str):
         self.template = template
 
     def build_prompt(self, sample: DataSample) -> str:
-        """构建提示词
+        """Build prompt
 
         Args:
-            sample: 输入数据样本
+            sample: Input data sample
 
         Returns:
-            构建好的提示词
+            Built prompt
         """
-        # 基础实现：简单的字符串格式化
-        # 子类可以重写这个方法实现复杂逻辑
         return self.template.format(**sample.metadata)
 
 
-# 生成器注册机制
+# Generator registry mechanism
 _GENERATOR_REGISTRY: Dict[str, Type[BaseGenerator]] = {}
 
 
 def register_generator(name: str):
-    """注册生成器装饰器
+    """Generator registration decorator
 
     Args:
-        name: 生成器名称
+        name: Generator name
     """
 
     def decorator(generator_class: Type[BaseGenerator]):
@@ -96,36 +94,36 @@ def register_generator(name: str):
 
 
 def get_generator(name: str) -> Optional[Type[BaseGenerator]]:
-    """获取注册的生成器类
+    """Get registered generator class
 
     Args:
-        name: 生成器名称
+        name: Generator name
 
     Returns:
-        生成器类，如果不存在返回None
+        Generator class, or None if not found
     """
     return _GENERATOR_REGISTRY.get(name)
 
 
 def list_generators() -> Dict[str, Type[BaseGenerator]]:
-    """列出所有注册的生成器
+    """List all registered generators
 
     Returns:
-        生成器名称到类的映射
+        Mapping from generator names to classes
     """
     return _GENERATOR_REGISTRY.copy()
 
 
 def create_generator(name: str, config: Dict[str, Any], model_client=None) -> Optional[BaseGenerator]:
-    """创建生成器实例
+    """Create generator instance
 
     Args:
-        name: 生成器名称
-        config: 配置参数
-        model_client: 模型客户端
+        name: Generator name
+        config: Configuration parameters
+        model_client: Model client
 
     Returns:
-        生成器实例，如果创建失败返回None
+        Generator instance, or None if creation fails
     """
     generator_class = get_generator(name)
     if generator_class is None:
