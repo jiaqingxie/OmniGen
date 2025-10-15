@@ -1,9 +1,11 @@
 import os
 import base64
+import io
 from typing import Optional, Union, Dict, Any, List
 from pathlib import Path
 from .base_api import BaseAPIModel
 from openai import OpenAI
+from PIL import Image as PILImage
 
 
 class InternVL(BaseAPIModel):
@@ -85,6 +87,11 @@ class InternVL(BaseAPIModel):
             for image_data in images:
                 if isinstance(image_data, dict):
                     content.append(image_data)
+                elif isinstance(image_data, PILImage.Image):
+                    # If it's a PIL Image object, convert to base64 format
+                    image_content = self._process_image_data(image_data)
+                    if image_content:
+                        content.append(image_content)
                 elif isinstance(image_data, str):
                     # If it's an image path, convert to base64 format
                     image_content = self._process_image_path(image_data)
@@ -99,6 +106,22 @@ class InternVL(BaseAPIModel):
             messages.append({"role": "user", "content": text_content})
 
         return messages
+
+    def _process_image_data(self, image: PILImage.Image) -> Optional[Dict[str, Any]]:
+        """Process PIL Image object, convert to API required format"""
+        try:
+            # Convert PIL Image to base64
+            buffered = io.BytesIO()
+            # Save in PNG format to preserve quality
+            image_format = 'png'
+            image.save(buffered, format='PNG')
+            image_data = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+            return {"type": "image_url", "image_url": {"url": f"data:image/{image_format};base64,{image_data}"}}
+
+        except Exception as e:
+            print(f"Failed to process PIL Image: {e}")
+            return None
 
     def _process_image_path(self, image_path: str) -> Optional[Dict[str, Any]]:
         """Process image path, convert to API required format"""

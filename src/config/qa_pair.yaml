@@ -1,5 +1,5 @@
 # QA Pair Generation Configuration
-dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+dataset_path: SpectrumWorld/qm9s-seed-datasets-small
 generator_type: qa_pair
 generator_config:
   prompt_templates:
@@ -120,19 +120,19 @@ generator_config:
   max_conversation_length: 6
   
   # Image output settings
-  image_output_dir: "output/qa_spectrum_images"
+  image_output_dir: "qm9s_output/qa_interns1_spectrum_images"
   
   # Text generation settings
-  max_out_len: 2000
+  max_out_len: 4096
 
-model_type: internvl
+model_type: interns1
 model_config:
-  api_key: ${INTERNVL_API_KEY}
-  base_url: ${INTERNVL_BASE_URL}
-  model_name: ${INTERNVL_MODEL_NAME}
-  max_seq_len: 2048
+  api_key: ${INTERNS1_API_KEY}
+  base_url: ${INTERNS1_BASE_URL}
+  model_name: ${INTERNS1_MODEL_NAME}
+  max_seq_len: 8192
 
-num_samples: 20
-output_path: output/qa_pairs.json
+num_samples: 1500
+output_path: qm9s_output/qa_pairs_interns1_1500.json
 verbose: true
 max_retries: 3

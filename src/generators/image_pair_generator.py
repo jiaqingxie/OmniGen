@@ -23,7 +23,8 @@ class ImagePairGenerator(BaseGenerator):
         # Image-pair specific settings
         self.min_text_length = config.get("min_text_length", 50)
         self.max_text_length = config.get("max_text_length", 2500)
-        self.supported_spectrum_types = ["IR", "H-NMR", "C-NMR", "MASS"]  # Standard spectrum types
+        # Note: Supported spectrum types are now automatically detected from DataSample
+        # No hardcoded spectrum types - the generator works with any image types in the data
         self.image_output_dir = config.get("image_output_dir", "output/spectrum_images")
         self.image_format = "png"  # Default format
         self.default_description_type = config.get("default_description_type", "basic_description")
@@ -38,10 +39,9 @@ class ImagePairGenerator(BaseGenerator):
             return None
 
         try:
-            # Select spectrum type from available images
-            available_spectrum_types = [
-                spec_type for spec_type in sample.get_image_types() if spec_type in self.supported_spectrum_types
-            ]
+            # Get all available spectrum types from the sample
+            # This is dataset-agnostic and works with any spectrum types
+            available_spectrum_types = sample.get_image_types()
 
             if not available_spectrum_types:
                 return None
@@ -62,21 +62,16 @@ class ImagePairGenerator(BaseGenerator):
 
             try:
                 # Generate description using LLM
-                # Use a higher max_out_len to accommodate longer descriptions
-                max_out_len = self.config.get("max_out_len", 1500)  # Default to 1500 tokens for longer descriptions
+                max_out_len = self.config.get("max_out_len", 1500)
                 raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
+
                 if raw_output:
                     result = self._create_image_pair(sample, selected_spectrum_type, raw_output)
                     if result:
                         self.current_type_index = (self.current_type_index + 1) % len(self.description_types)
                         return result
-                else:
-                    print(f"  Model returned empty output for sample {sample.id}")
             except Exception as e:
-                print(f"  Exception in generate_single for sample {sample.id}: {e}")
-                import traceback
-
-                traceback.print_exc()
+                pass
 
             return None
         except Exception as e:
@@ -132,6 +127,7 @@ class ImagePairGenerator(BaseGenerator):
         try:
             # Clean and validate the description
             description = self._clean_description(raw_description)
+
             if not self._validate_description(description):
                 return None
 
@@ -175,10 +171,11 @@ class ImagePairGenerator(BaseGenerator):
             return False
 
         # Check length constraints
-        if len(description) < self.min_text_length:
+        desc_len = len(description)
+        if desc_len < self.min_text_length:
             return False
 
-        if len(description) > self.max_text_length:
+        if desc_len > self.max_text_length:
             return False
 
         # Basic quality checks
@@ -219,15 +216,9 @@ class ImagePairGenerator(BaseGenerator):
 
     def validate_input(self, sample: DataSample) -> bool:
         """Validate input sample has required data."""
-        # Must have images
-        if not sample.has_images():
-            return False
-
-        # Must have at least one supported spectrum type
-        available_types = sample.get_image_types()
-        supported_available = [t for t in available_types if t in self.supported_spectrum_types]
-
-        return len(supported_available) > 0
+        # Simply check if sample has any images
+        # No restriction on spectrum types - works with any image types
+        return sample.has_images()
 
     def validate_output(self, output: Dict[str, Any]) -> bool:
         """Validate generated output format."""

@@ -20,6 +20,7 @@ data/
 playground/
 /seed_datasets
 /output
+**/*_output/
 
 # logs
 omnigenlog/

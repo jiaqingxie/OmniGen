@@ -110,8 +110,56 @@ class OmniGenEngine:
             print(f"Dataset loaded: {stats}")
         return self.dataset
 
-    async def generate(self, num_samples: Optional[int] = None) -> List[Dict[str, Any]]:
-        """Generate data samples."""
+    def load_from_json(self, json_path: str) -> Dataset:
+        """Load dataset from existing JSON file for incremental generation.
+
+        This is typically used for reason-only generation where draft results already exist.
+        Each JSON item should contain at minimum: id, question, solution.
+        """
+        json_path = Path(json_path)
+        if not json_path.exists():
+            raise FileNotFoundError(f"JSON file not found: {json_path}")
+
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        if not isinstance(data, list):
+            raise ValueError(f"Expected JSON array, got {type(data)}")
+
+        # Convert JSON items to DataSample objects
+        samples = []
+        for item in data:
+            # Clean up ID: remove cot_ prefix and type suffix
+            original_id = item.get('id', f'unknown_{len(samples)}')
+            cleaned_id = original_id.replace('cot_', '').replace('_text_only', '').replace('_multimodal', '')
+
+            # Create DataSample with existing content in metadata
+            sample = DataSample(
+                id=cleaned_id,
+                metadata={
+                    'existing_question': item.get('question', ''),
+                    'existing_solution': item.get('solution', ''),
+                    'original_data': item,  # Keep all original data for merging later
+                },
+                images={},  # No images needed for reason-only generation
+            )
+            samples.append(sample)
+
+        self.dataset = Dataset(samples=samples)
+
+        if self.config.verbose:
+            print(f"Loaded {len(samples)} samples from JSON: {json_path}")
+
+        return self.dataset
+
+    async def generate(self, num_samples: Optional[int] = None, use_sequential: bool = False) -> List[Dict[str, Any]]:
+        """Generate data samples.
+
+        Args:
+            num_samples: Number of samples to generate. If None, uses config.num_samples
+            use_sequential: If True, process samples sequentially instead of randomly.
+                           This is useful for incremental generation where order matters.
+        """
         if self.dataset is None:
             raise ValueError("Please load dataset first.")
         if num_samples is None:
@@ -119,18 +167,60 @@ class OmniGenEngine:
         if self.config.verbose:
             print(f"Generating {num_samples} samples...")
         generated_data = []
+
+        # Determine which samples to process
+        if use_sequential:
+            # For incremental generation: process samples in order
+            samples_to_process = self.dataset.samples[:num_samples]
+        else:
+            # For normal generation: select samples randomly
+            samples_to_process = None
+
         for i in range(num_samples):
             if self.config.verbose:
                 print(f"Generating sample {i+1}/{num_samples} ...")
-            sample = self._select_sample()
+
+            # Select sample
+            if use_sequential:
+                if i >= len(samples_to_process):
+                    break
+                sample = samples_to_process[i]
+                if self.config.verbose:
+                    print(f"Processing sample: {sample.id}")
+            else:
+                sample = self._select_sample()
+
             result = await self._generate_with_retry(sample)
             if result is not None:
-                generated_data.append(result)
+                # For incremental generation, merge with original data
+                if use_sequential and sample.metadata.get('original_data'):
+                    original = sample.metadata['original_data']
+                    merged = original.copy()
+                    merged.update(result)
+                    generated_data.append(merged)
+                    final_result = merged
+                else:
+                    generated_data.append(result)
+                    final_result = result
+
+                # Incremental save: save after each successful generation
+                try:
+                    self.save_results_incremental(final_result)
+                except Exception as e:
+                    if self.config.verbose:
+                        print(f"  Warning: Failed to save incrementally: {e}")
+
                 if self.config.verbose:
                     print(f"  Success: {len(generated_data)}/{num_samples}")
             else:
                 if self.config.verbose:
                     print(f"  Failed to generate sample {i+1}, skipped after max retries.")
+                # For incremental generation, keep original data on failure
+                if use_sequential and sample.metadata.get('original_data'):
+                    generated_data.append(sample.metadata['original_data'])
+                    if self.config.verbose:
+                        print(f"  Kept original data without reasoning")
+
         if self.config.verbose:
             print(f"Generation finished. {len(generated_data)} valid samples generated.")
         return generated_data
@@ -187,10 +277,50 @@ class OmniGenEngine:
         if self.config.verbose:
             print(f"Results saved to: {output_path}")
 
-    async def run(self) -> List[Dict[str, Any]]:
-        """Run the full generation pipeline."""
-        self.load_dataset()
-        results = await self.generate()
+    def save_results_incremental(self, new_result: Dict[str, Any], output_path: Optional[str] = None):
+        """
+        Incrementally save a single result to JSON file.
+
+        This method appends new results to existing file, preventing data loss
+        in case of interruption during large batch generation.
+        """
+        if output_path is None:
+            output_path = self.config.output_path
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 确保输出文件为JSON格式
+        if output_path.suffix.lower() != '.json':
+            output_path = output_path.with_suffix('.json')
+
+        # Load existing results if file exists
+        existing_results = []
+        if output_path.exists():
+            try:
+                with open(output_path, 'r', encoding='utf-8') as f:
+                    existing_results = json.load(f)
+                if not isinstance(existing_results, list):
+                    existing_results = []
+            except:
+                existing_results = []
+
+        # Append new result
+        existing_results.append(new_result)
+
+        # Save updated results
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(existing_results, f, ensure_ascii=False, indent=2)
+
+    async def run(self, use_sequential: bool = False) -> List[Dict[str, Any]]:
+        """Run the full generation pipeline.
+
+        Args:
+            use_sequential: If True, process samples sequentially (for incremental generation)
+        """
+        # Note: dataset should already be loaded via load_dataset() or load_from_json()
+        if self.dataset is None:
+            self.load_dataset()
+        results = await self.generate(use_sequential=use_sequential)
         if results:
             self.save_results(results)
         return results

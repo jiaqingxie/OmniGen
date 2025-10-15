@@ -23,7 +23,8 @@ class QAPairGenerator(BaseGenerator):
         # QA-specific settings
         self.min_conversation_length = config.get("min_conversation_length", 2)
         self.max_conversation_length = config.get("max_conversation_length", 6)
-        self.supported_spectrum_types = ["IR", "H-NMR", "C-NMR", "MASS"]
+        # Note: Supported spectrum types are now automatically detected from DataSample
+        # No hardcoded spectrum types - works with any image types in the data
         self.image_output_dir = config.get("image_output_dir", "output/qa_spectrum_images")
         self.image_format = "png"
 
@@ -36,10 +37,8 @@ class QAPairGenerator(BaseGenerator):
             return None
 
         try:
-            # Select spectrum type
-            available_spectrum_types = [
-                spec_type for spec_type in sample.get_image_types() if spec_type in self.supported_spectrum_types
-            ]
+            # Get all available spectrum types from the sample (dataset-agnostic)
+            available_spectrum_types = sample.get_image_types()
 
             if not available_spectrum_types:
                 return None
@@ -291,13 +290,8 @@ class QAPairGenerator(BaseGenerator):
 
     def validate_input(self, sample: DataSample) -> bool:
         """Validate input sample has required data."""
-        if not sample.has_images():
-            return False
-
-        available_types = sample.get_image_types()
-        supported_available = [t for t in available_types if t in self.supported_spectrum_types]
-
-        return len(supported_available) > 0
+        # Simply check if sample has any images (dataset-agnostic)
+        return sample.has_images()
 
     def validate_output(self, output: Dict[str, Any]) -> bool:
         """Validate generated output format."""

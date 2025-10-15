@@ -21,7 +21,8 @@ class CoTGenerator(BaseGenerator):
         self.current_type_index = 0
 
         # CoT-specific settings
-        self.supported_spectrum_types = ["IR", "H-NMR", "C-NMR", "MASS"]
+        # Note: Supported spectrum types are now automatically detected from DataSample
+        # No hardcoded spectrum types - works with any image types in the data
         self.image_output_dir = config.get("image_output_dir", "output/cot_spectrum_images")
         self.image_format = "png"
 
@@ -55,8 +56,9 @@ class CoTGenerator(BaseGenerator):
 
             # Special handling for reason-only generation
             if run_reason and not run_draft:
-                print(f"Error: Cannot run reason without draft. Please run draft first.")
-                return None
+                # Allow reason-only generation for incremental processing
+                # We'll use existing content from the sample if available
+                pass
 
             result = {}
 
@@ -69,7 +71,9 @@ class CoTGenerator(BaseGenerator):
 
             # Stage 2: Reason generation (thinking trajectories, attempts) - if enabled
             if run_reason:
-                reason_result = self._generate_reason(result, sample, cot_type)
+                # For reason-only mode, pass empty result if no draft was generated
+                content_for_reason = result if result else {}
+                reason_result = self._generate_reason(content_for_reason, sample, cot_type)
                 result.update(reason_result)
 
             if result:
@@ -87,22 +91,30 @@ class CoTGenerator(BaseGenerator):
 
     def _prepare_model_input(self, sample: DataSample, cot_type: str, template_str: str):
         """Prepare input for the model including text prompt and optionally spectrum image."""
-        prompt_text = self._build_prompt(sample, cot_type, template_str)
+        selected_spectrum_type = None
 
         if cot_type == "multimodal" and sample.has_images():
             # Select a spectrum type for multimodal
-            available_spectrum_types = [
-                spec_type for spec_type in sample.get_image_types() if spec_type in self.supported_spectrum_types
-            ]
+            # Use all available spectrum types from the sample (dataset-agnostic)
+            available_spectrum_types = sample.get_image_types()
 
             if available_spectrum_types:
                 selected_spectrum_type = random.choice(available_spectrum_types)
-                image_path = sample.images[selected_spectrum_type]
-                return {"text": prompt_text, "images": [image_path]}
+                # Save to metadata for later use in _save_spectrum_image
+                sample.metadata["_selected_spectrum_type"] = selected_spectrum_type
+
+        # Build prompt with selected spectrum type
+        prompt_text = self._build_prompt(sample, cot_type, template_str, selected_spectrum_type)
+
+        if selected_spectrum_type:
+            image_path = sample.images[selected_spectrum_type]
+            return {"text": prompt_text, "images": [image_path]}
 
         return prompt_text
 
-    def _build_prompt(self, sample: DataSample, cot_type: str, template_str: str) -> str:
+    def _build_prompt(
+        self, sample: DataSample, cot_type: str, template_str: str, selected_spectrum_type: Optional[str] = None
+    ) -> str:
         """Build the text prompt using template and sample data."""
         # Extract molecular information
         molecule_info = sample.metadata.get("molecule_info", {})
@@ -118,6 +130,7 @@ class CoTGenerator(BaseGenerator):
             "smiles": smiles,
             "available_spectra": available_spectra,
             "cot_type": cot_type,
+            "spectrum_type": selected_spectrum_type if selected_spectrum_type else "N/A",
         }
 
         # Add any additional metadata
@@ -140,42 +153,33 @@ class CoTGenerator(BaseGenerator):
             # Clean the output first
             cleaned_output = raw_output.strip()
 
-            # Debug: print first 200 chars of output
-            print(f"Debug - Raw output preview: {cleaned_output[:200]}...")
-
             # Try to find JSON object in the output
             start_idx = cleaned_output.find('{')
             end_idx = cleaned_output.rfind('}')
 
             if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
                 json_str = cleaned_output[start_idx : end_idx + 1]
-                print(f"Debug - Extracted JSON: {json_str[:200]}...")
                 try:
                     parsed = json.loads(json_str)
                     if isinstance(parsed, dict):
-                        print(f"Debug - Successfully parsed JSON with keys: {list(parsed.keys())}")
                         return parsed
-                except json.JSONDecodeError as e:
-                    print(f"Debug - JSON decode error: {e}")
+                except json.JSONDecodeError:
+                    pass
 
             # Try to parse the entire output as JSON
             if cleaned_output.startswith('{'):
                 try:
                     parsed = json.loads(cleaned_output)
                     if isinstance(parsed, dict):
-                        print(f"Debug - Successfully parsed full JSON with keys: {list(parsed.keys())}")
                         return parsed
-                except json.JSONDecodeError as e:
-                    print(f"Debug - Full JSON decode error: {e}")
+                except json.JSONDecodeError:
+                    pass
 
             # Fallback: try to extract fields from text
-            print("Debug - Falling back to text extraction")
             extracted_fields = self._extract_fields_from_text(cleaned_output)
             if extracted_fields:
-                print(f"Debug - Extracted fields: {list(extracted_fields.keys())}")
                 return extracted_fields
             else:
-                print("Debug - No fields extracted from text")
                 return None
 
         except Exception as e:
@@ -236,21 +240,12 @@ class CoTGenerator(BaseGenerator):
 
         return fields
 
-    def _save_spectrum_image(self, sample: DataSample) -> Optional[str]:
+    def _save_spectrum_image(self, sample: DataSample, spectrum_type: str) -> Optional[str]:
         """Save spectrum image to output directory and return path."""
-        if not sample.has_images():
+        if not sample.has_images() or spectrum_type not in sample.images:
             return None
 
-        # Select a random spectrum type
-        available_spectrum_types = [
-            spec_type for spec_type in sample.get_image_types() if spec_type in self.supported_spectrum_types
-        ]
-
-        if not available_spectrum_types:
-            return None
-
-        selected_spectrum_type = random.choice(available_spectrum_types)
-        image_data = sample.images[selected_spectrum_type]
+        image_data = sample.images[spectrum_type]
 
         if not isinstance(image_data, PILImage.Image):
             return None
@@ -260,7 +255,7 @@ class CoTGenerator(BaseGenerator):
 
         # Generate safe filename
         safe_sample_id = sample.id.replace('/', '_').replace('\\', '_')
-        safe_spectrum_type = selected_spectrum_type.lower().replace('-', '_')
+        safe_spectrum_type = spectrum_type.lower().replace('-', '_')
         filename = f"cot_{safe_sample_id}_{safe_spectrum_type}.{self.image_format}"
         file_path = os.path.join(self.image_output_dir, filename)
 
@@ -272,15 +267,18 @@ class CoTGenerator(BaseGenerator):
 
     def validate_input(self, sample: DataSample) -> bool:
         """Validate input sample has required data."""
-        # For text-only CoT, we don't need images
-        # For multimodal CoT, we need at least one spectrum image
-        if "multimodal" in self.cot_types[self.current_type_index]:
-            if not sample.has_images():
-                return False
+        # For reason-only mode, we only need existing content in metadata
+        if "reason" in self.stages and "draft" not in self.stages:
+            # Check if we have existing content in metadata for incremental generation
+            has_existing_content = sample.metadata.get("existing_question") or sample.metadata.get("existing_solution")
+            if has_existing_content:
+                return True
+            # If no existing content, fall through to normal validation
 
-            available_types = sample.get_image_types()
-            supported_available = [t for t in available_types if t in self.supported_spectrum_types]
-            return len(supported_available) > 0
+        # For text-only CoT, we don't need images
+        # For multimodal CoT, we need at least one image
+        if "multimodal" in self.cot_types[self.current_type_index]:
+            return sample.has_images()
 
         return True
 
@@ -368,7 +366,7 @@ class CoTGenerator(BaseGenerator):
             model_input = self._prepare_model_input(sample, cot_type, template_str)
 
             # Generate with draft settings
-            max_out_len = self.draft_config.get("max_out_len", 2000)
+            max_out_len = self.draft_config.get("max_out_len", 8000)
             raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
 
             if raw_output:
@@ -390,7 +388,12 @@ class CoTGenerator(BaseGenerator):
                 question = content_result.get("question", "")
                 solution = content_result.get("solution", "")
 
-                # If no content from previous stage, create a generic reasoning prompt
+                # If no content from previous stage, try to get from sample metadata (for incremental generation)
+                if not question and not solution:
+                    question = sample.metadata.get("existing_question", "")
+                    solution = sample.metadata.get("existing_solution", "")
+
+                # If still no content, create a generic reasoning prompt
                 if not question and not solution:
                     # Create a generic reasoning prompt based on sample data
                     molecule_info = sample.metadata.get("molecule_info", {})
@@ -422,13 +425,9 @@ class CoTGenerator(BaseGenerator):
                     """
 
                 # Generate with InternS1
-                max_out_len = self.reason_config.get("max_out_len", 3000)  # 增加token限制
-                print(f"Debug - Reasoning generation with max_out_len: {max_out_len}")
+                max_out_len = self.reason_config.get("max_out_len", 8000)  # 增加token限制
                 reasoning_response = self.model_client.generate_with_reasoning(
                     reasoning_prompt, max_out_len=max_out_len
-                )
-                print(
-                    f"Debug - Reasoning response keys: {list(reasoning_response.keys()) if isinstance(reasoning_response, dict) else 'Not a dict'}"
                 )
 
                 # Extract reasoning content
@@ -444,6 +443,14 @@ class CoTGenerator(BaseGenerator):
                     # For now, use the same content for Claude (can be replaced with actual Claude model later)
                     reasoning_result["claude_thinking_trajectories"] = reasoning_content
                     reasoning_result["claude_attempt"] = model_attempt
+
+                # For incremental generation, preserve original content
+                if not content_result and sample.metadata.get("original_data"):
+                    original_data = sample.metadata["original_data"]
+                    reasoning_result["id"] = original_data.get("id", sample.id)
+                    reasoning_result["type"] = original_data.get("type", f"cot {cot_type}")
+                    reasoning_result["question"] = original_data.get("question", "")
+                    reasoning_result["solution"] = original_data.get("solution", "")
 
             else:
                 # Fallback for non-InternS1 models
@@ -497,9 +504,12 @@ class CoTGenerator(BaseGenerator):
 
             # Add image for multimodal
             if cot_type == "multimodal":
-                image_path = self._save_spectrum_image(sample)
-                if image_path:
-                    result["image"] = image_path
+                # Get the spectrum type from metadata (saved during _prepare_model_input)
+                spectrum_type = sample.metadata.get("_selected_spectrum_type")
+                if spectrum_type:
+                    image_path = self._save_spectrum_image(sample, spectrum_type)
+                    if image_path:
+                        result["image"] = image_path
 
             return result
 
