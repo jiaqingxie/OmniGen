@@ -1,5 +1,5 @@
-# Image-Text Pair Generation Configuration
-dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+# Image-Text Pair Generation Configuration for InternS1
+dataset_path: SpectrumWorld/qm9s-seed-datasets-small
 generator_type: image_pair
 generator_config:
   prompt_templates:
@@ -60,22 +60,23 @@ generator_config:
 
   description_types: ["basic_description", "detailed_analysis"]
   
-  # Text generation settings
-  min_text_length: 50
-  max_text_length: 3000
-  max_out_len: 600  # ~2400 characters (1 token ≈ 4 chars for English)
+  # Text generation settings - optimized for InternS1
+  min_text_length: 50      # characters
+  max_text_length: 3000    # characters
+  max_out_len: 600         # tokens  ~ 2400 characters ~ 450 words
   default_description_type: "basic_description"
   
-  image_output_dir: "qm9s_output/itpair_internvl_spectrum_images"
+  # Image output settings
+  image_output_dir: "qm9s_output/itpair_interns1_spectrum_images"
 
-model_type: internvl
+model_type: interns1
 model_config:
-  api_key: ${INTERNVL_API_KEY}
-  base_url: ${INTERNVL_BASE_URL}
-  model_name: ${INTERNVL_MODEL_NAME}
-  max_seq_len: 4096  # Must be large enough for image tokens + text
+  api_key: ${INTERNS1_API_KEY}
+  base_url: ${INTERNS1_BASE_URL}
+  model_name: ${INTERNS1_MODEL_NAME}
+  max_seq_len: 4096
 
 num_samples: 1500
-output_path: qm9s_output/image_pairs_internvl_1500.json
+output_path: qm9s_output/image_pairs_interns1_1500.json
 verbose: true
 max_retries: 3

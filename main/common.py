@@ -73,6 +73,11 @@ def add_type_specific_generation_args(parser: argparse.ArgumentParser, data_type
             choices=["draft", "reason"],
             help="Stages to run: draft (question/solution), reason (thinking trajectories)",
         )
+        parser.add_argument(
+            "--input-json",
+            type=str,
+            help="Input JSON file for incremental generation (typically used with --stages reason)",
+        )
 
 
 def load_config_for_type(data_type: str, config_path: Optional[str] = None) -> OmniGenConfig:

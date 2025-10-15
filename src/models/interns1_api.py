@@ -65,10 +65,8 @@ class InternS1(BaseAPIModel):
                 temperature=0.7,
             )
 
-            # InternS1 model returns both content and reasoning_content
             message = response.choices[0].message
 
-            # Get reasoning content if available (this is the thinking process)
             reasoning_content = ""
             if hasattr(message, 'reasoning_content') and message.reasoning_content:
                 reasoning_content = message.reasoning_content
@@ -116,9 +114,9 @@ class InternS1(BaseAPIModel):
             for image_data in images:
                 if isinstance(image_data, dict):
                     content.append(image_data)
-                elif isinstance(image_data, str):
-                    # If it's an image path, convert to base64 format
-                    image_content = self._process_image_path(image_data)
+                else:
+                    # Handle both string paths and PIL Image objects
+                    image_content = self._process_image_data(image_data)
                     if image_content:
                         content.append(image_content)
 
@@ -131,28 +129,58 @@ class InternS1(BaseAPIModel):
 
         return messages
 
-    def _process_image_path(self, image_path: str) -> Optional[Dict[str, Any]]:
-        """Process image path, convert to API required format"""
+    def _process_image_data(self, image_data: Union[str, 'PILImage.Image']) -> Optional[Dict[str, Any]]:
+        """Process image data (path or PIL Image), convert to API required format"""
         try:
-            path = Path(image_path)
-            if not path.exists():
-                print(f"Warning: image file does not exist: {image_path}")
-                return None
+            if isinstance(image_data, str):
+                # Handle file path
+                path = Path(image_data)
+                if not path.exists():
+                    print(f"Warning: image file does not exist: {image_data}")
+                    return None
 
-            # Read image and convert to base64
-            with open(path, "rb") as image_file:
-                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+                # Read image and convert to base64
+                with open(path, "rb") as image_file:
+                    image_bytes = base64.b64encode(image_file.read()).decode('utf-8')
 
-            # Get image format
-            image_format = path.suffix.lower().lstrip('.')
-            if image_format == 'jpg':
-                image_format = 'jpeg'
+                # Get image format
+                image_format = path.suffix.lower().lstrip('.')
+                if image_format == 'jpg':
+                    image_format = 'jpeg'
 
-            return {"type": "image_url", "image_url": {"url": f"data:image/{image_format};base64,{image_data}"}}
+            else:
+                # Handle PIL Image object
+                import io
+                from PIL import Image as PILImage
+
+                if not isinstance(image_data, PILImage.Image):
+                    print(f"Warning: unsupported image type: {type(image_data)}")
+                    return None
+
+                # Convert PIL Image to base64
+                buffer = io.BytesIO()
+                # Convert RGBA to RGB if necessary
+                if image_data.mode == 'RGBA':
+                    # Create white background
+                    background = PILImage.new('RGB', image_data.size, (255, 255, 255))
+                    background.paste(image_data, mask=image_data.split()[-1])  # Use alpha channel as mask
+                    image_data = background
+                elif image_data.mode != 'RGB':
+                    image_data = image_data.convert('RGB')
+
+                image_data.save(buffer, format='PNG')
+                image_bytes = base64.b64encode(buffer.getvalue()).decode('utf-8')
+                image_format = 'png'
+
+            return {"type": "image_url", "image_url": {"url": f"data:image/{image_format};base64,{image_bytes}"}}
 
         except Exception as e:
             print(f"Failed to process image: {e}")
             return None
+
+    def _process_image_path(self, image_path: str) -> Optional[Dict[str, Any]]:
+        """Process image path, convert to API required format (legacy method)"""
+        return self._process_image_data(image_path)
 
     def validate_config(self) -> bool:
         """Validate configuration"""

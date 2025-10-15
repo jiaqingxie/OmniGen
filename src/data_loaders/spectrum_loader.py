@@ -11,6 +11,7 @@ from .registry import register_loader
 from .data_structures import Dataset, DataSample
 
 
+@register_loader("molpuzzle")
 @register_loader("spectrum")  # Also register as generic spectrum loader
 class SpectrumDataLoader(BaseDataLoader):
     """

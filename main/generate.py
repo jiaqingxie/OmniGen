@@ -1,11 +1,29 @@
 """
 Unified generation entry point for OmniGen.
+
+Usage:
+    # Basic generation
+    python -m main.generate --type benchmark --config src/config/benchmark.yaml --samples 10
+    python -m main.generate --type image_pair --data-source "SpectrumWorld/molpuzzle-seed-datasets" --samples 5
+    python -m main.generate --type cot --config src/config/cot.yaml --output cot_data.json
+    python -m main.generate --type qa_pair --config src/config/qa_pair.yaml --output qa_pairs.json
+
+    # CoT staged generation
+    python -m main.generate --type cot --stages draft --cot-type text_only --samples 500
+    python -m main.generate --type cot --stages draft --cot-type multimodal --samples 500
+
+    # CoT incremental generation (add reasoning to existing draft results)
+    python -m main.generate --type cot --input-json output/cot_text_only_500.json \\
+        --stages reason --cot-type text_only --output output/cot_text_only_with_reasoning.json
+    python -m main.generate --type cot --input-json output/cot_multimodal_500.json \\
+        --stages reason --cot-type multimodal --output output/cot_multimodal_with_reasoning.json
 """
 
 import asyncio
 import argparse
 import sys
 from pathlib import Path
+from typing import Optional
 
 from src.config import OmniGenConfig
 from src.core import OmniGenEngine
@@ -20,15 +38,24 @@ from .common import (
 )
 
 
-async def run_generation(config: OmniGenConfig, data_type: str) -> bool:
+async def run_generation(config: OmniGenConfig, data_type: str, input_json: Optional[str] = None) -> bool:
     """Run the generation process."""
     try:
         # Create engine
         engine = OmniGenEngine(config)
 
+        # Load dataset
+        if input_json:
+            print(f"📂 Loading existing data from: {input_json}")
+            engine.load_from_json(input_json)
+            use_sequential = True  # Use sequential processing for incremental generation
+        else:
+            engine.load_dataset()
+            use_sequential = False
+
         # Run generation
         print(f"\n🚀 Starting {data_type} generation...")
-        results = await engine.run()
+        results = await engine.run(use_sequential=use_sequential)
 
         if results:
             print(f"\n✅ Generation completed successfully!")
@@ -114,8 +141,11 @@ Examples:
         # Print configuration summary
         print_config_summary(config, args.type, "generation")
 
+        # Get input_json if provided (for CoT incremental generation)
+        input_json = getattr(args, 'input_json', None) if hasattr(args, 'input_json') else None
+
         # Run generation
-        success = asyncio.run(run_generation(config, args.type))
+        success = asyncio.run(run_generation(config, args.type, input_json))
 
         # Exit with appropriate code
         sys.exit(0 if success else 1)
