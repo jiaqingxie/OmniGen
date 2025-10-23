@@ -24,6 +24,8 @@ class OmniGenEngine:
     def _init_model_client(self):
         """Initialize model client."""
         model_type = self.config.model_type.lower()
+        if self.config.verbose:
+            print(f"Initializing model client: {model_type}")
         if model_type == "internvl":
             try:
                 from ..models import InternVL
@@ -33,7 +35,6 @@ class OmniGenEngine:
                     model_name=model_config.get("model_name"),
                     api_key=model_config.get("api_key"),
                     base_url=model_config.get("base_url"),
-                    max_seq_len=model_config.get("max_seq_len", 2048),
                 )
             except ImportError as e:
                 print(f"Warning: Failed to import InternVL: {e}")
@@ -46,12 +47,15 @@ class OmniGenEngine:
                 from ..models import InternS1
 
                 model_config = self.config.model_config
+                if self.config.verbose:
+                    print(f"InternS1 config: {model_config}")
                 self.model_client = InternS1(
                     model_name=model_config.get("model_name"),
                     api_key=model_config.get("api_key"),
                     base_url=model_config.get("base_url"),
-                    max_seq_len=model_config.get("max_seq_len", 2048),
                 )
+                if self.config.verbose:
+                    print(f"InternS1 client initialized successfully")
             except ImportError as e:
                 print(f"Warning: Failed to import InternS1: {e}")
                 self.model_client = None
@@ -254,6 +258,10 @@ class OmniGenEngine:
                 print("All samples used, resetting usage tracker.")
             self.used_samples.clear()
             available_samples = self.dataset.samples
+
+        if not available_samples:
+            raise ValueError("No samples available in dataset")
+
         selected_sample = random.choice(available_samples)
         self.used_samples.add(selected_sample.id)
         if self.config.verbose:
