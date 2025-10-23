@@ -12,7 +12,6 @@ class Gemini(BaseAPIModel):
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 2048,
         **kwargs,
     ):
         # Set default values for Gemini
@@ -21,7 +20,7 @@ class Gemini(BaseAPIModel):
         base_url = base_url or os.getenv("GEMINI_BASE_URL", "https://openrouter.ai/api/v1")
 
         # Initialize parent class
-        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)
+        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, **kwargs)
 
         # Validate configuration
         if not self.validate_config():

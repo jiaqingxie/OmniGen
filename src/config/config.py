@@ -125,21 +125,18 @@ class OmniGenConfig:
                 "api_key": model_configs.internvl_api_key,
                 "base_url": model_configs.internvl_base_url,
                 "model_name": model_configs.internvl_model_name,
-                "max_seq_len": 4096,
             }
         elif model_type.lower() == "interns1":
             return {
                 "api_key": model_configs.interns1_api_key,
                 "base_url": model_configs.interns1_base_url,
                 "model_name": model_configs.interns1_model_name,
-                "max_seq_len": 4096,
             }
         elif model_type.lower() == "gemini":
             return {
                 "api_key": model_configs.gemini_api_key,
                 "base_url": model_configs.gemini_base_url,
                 "model_name": model_configs.gemini_model_name,
-                "max_seq_len": 1048576,  # Gemini 2.5 Pro has 1M+ context
             }
         else:
             return {}

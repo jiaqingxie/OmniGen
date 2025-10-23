@@ -8,9 +8,8 @@ class BaseModel(ABC):
 
     is_api: bool = False
 
-    def __init__(self, path: str, max_seq_len: int = 2048):
+    def __init__(self, path: str):
         self.path = path
-        self.max_seq_len = max_seq_len
 
     @abstractmethod
     def generate(self, prompt: Union[str, Dict[str, Any]], max_out_len: int = 512) -> str:

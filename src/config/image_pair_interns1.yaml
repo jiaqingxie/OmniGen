@@ -58,23 +58,22 @@ generator_config:
 
         Please provide only the analytical text content.
 
-  description_types: ["basic_description", "detailed_analysis"]
+  description_types: ["basic_description"]
   
   # Text generation settings - optimized for InternS1
   min_text_length: 50      # characters
   max_text_length: 3000    # characters
-  max_out_len: 600         # tokens  ~ 2400 characters ~ 450 words
+  max_out_len: 0         # 600 tokens  ~ 2400 characters ~ 450 words
   default_description_type: "basic_description"
   
   # Image output settings
-  image_output_dir: "qm9s_output/itpair_interns1_spectrum_images"
+  image_output_dir: "./tests_image/qm9s_output/itpair_interns1_spectrum_images"
 
 model_type: interns1
 model_config:
   api_key: ${INTERNS1_API_KEY}
   base_url: ${INTERNS1_BASE_URL}
   model_name: ${INTERNS1_MODEL_NAME}
-  max_seq_len: 4096
 
 num_samples: 1500
 output_path: qm9s_output/image_pairs_interns1_1500.json

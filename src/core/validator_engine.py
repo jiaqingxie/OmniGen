@@ -28,7 +28,6 @@ class ValidatorEngine:
                     model_name=model_config.get("model_name"),
                     api_key=model_config.get("api_key"),
                     base_url=model_config.get("base_url"),
-                    max_seq_len=model_config.get("max_seq_len", 2048),
                 )
             except ImportError as e:
                 raise ImportError(f"Failed to import InternVL: {e}")
@@ -43,7 +42,6 @@ class ValidatorEngine:
                     model_name=model_config.get("model_name"),
                     api_key=model_config.get("api_key"),
                     base_url=model_config.get("base_url"),
-                    max_seq_len=model_config.get("max_seq_len", 2048),
                 )
             except ImportError as e:
                 raise ImportError(f"Failed to import InternS1: {e}")

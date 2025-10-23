@@ -350,7 +350,6 @@ model_config:
   api_key: ${INTERNVL_API_KEY}
   base_url: ${INTERNVL_BASE_URL}
   model_name: ${INTERNVL_MODEL_NAME}
-  max_seq_len: 4096
 num_samples: 30
 output_path: output/benchmark.json
 verbose: true

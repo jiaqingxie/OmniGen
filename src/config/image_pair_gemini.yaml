@@ -74,7 +74,6 @@ model_config:
   api_key: ${GEMINI_API_KEY}
   base_url: ${GEMINI_BASE_URL}
   model_name: ${GEMINI_MODEL_NAME}
-  max_seq_len: 2048
   site_url: ${SITE_URL}
   site_name: ${SITE_NAME}
 

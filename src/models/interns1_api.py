@@ -12,7 +12,6 @@ class InternS1(BaseAPIModel):
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 2048,
         **kwargs,
     ):
         # Set default values
@@ -21,7 +20,7 @@ class InternS1(BaseAPIModel):
         base_url = base_url or os.getenv("INTERNS1_BASE_URL")
 
         # Initialize parent class
-        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)
+        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, **kwargs)
 
         # Validate configuration
         if not self.validate_config():
@@ -61,6 +60,8 @@ class InternS1(BaseAPIModel):
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
+                # don't use thinking mode
+                # thinking_mode=True,
                 max_tokens=max_out_len,
                 temperature=0.7,
             )
@@ -74,14 +75,12 @@ class InternS1(BaseAPIModel):
             # Get the actual response content
             content = message.content or ""
 
-            # Return based on return_reasoning flag
             if return_reasoning:
                 return {"content": content, "reasoning_content": reasoning_content}
-            else:
-                return content
+            return content
 
         except Exception as e:
-            raise RuntimeError(f"InternS1 API call failed: {e}")
+            raise RuntimeError(f"InternS1 API call failed: {e}") from e
 
     def generate_with_reasoning(self, prompt: Union[str, Dict[str, Any]], max_out_len: int = 512) -> Dict[str, str]:
         """
@@ -111,7 +110,7 @@ class InternS1(BaseAPIModel):
 
             # Add image content
             images = prompt.get("images", [])
-            for image_data in images:
+            for i, image_data in enumerate(images):
                 if isinstance(image_data, dict):
                     content.append(image_data)
                 else:
@@ -119,6 +118,8 @@ class InternS1(BaseAPIModel):
                     image_content = self._process_image_data(image_data)
                     if image_content:
                         content.append(image_content)
+                    else:
+                        print(f"[InternS1] Warning: failed to process image #{i+1} for prompt.")
 
             messages.append({"role": "user", "content": content})
 
@@ -136,7 +137,7 @@ class InternS1(BaseAPIModel):
                 # Handle file path
                 path = Path(image_data)
                 if not path.exists():
-                    print(f"Warning: image file does not exist: {image_data}")
+                    print(f"[InternS1] Warning: image file does not exist: {image_data}")
                     return None
 
                 # Read image and convert to base64
@@ -154,7 +155,7 @@ class InternS1(BaseAPIModel):
                 from PIL import Image as PILImage
 
                 if not isinstance(image_data, PILImage.Image):
-                    print(f"Warning: unsupported image type: {type(image_data)}")
+                    print(f"[InternS1] Warning: unsupported image type: {type(image_data)}")
                     return None
 
                 # Convert PIL Image to base64
@@ -175,7 +176,7 @@ class InternS1(BaseAPIModel):
             return {"type": "image_url", "image_url": {"url": f"data:image/{image_format};base64,{image_bytes}"}}
 
         except Exception as e:
-            print(f"Failed to process image: {e}")
+            print(f"[InternS1] Warning: failed to process image data ({e})")
             return None
 
     def _process_image_path(self, image_path: str) -> Optional[Dict[str, Any]]:

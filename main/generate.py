@@ -4,7 +4,7 @@ Unified generation entry point for OmniGen.
 Usage:
     # Basic generation
     python -m main.generate --type benchmark --config src/config/benchmark.yaml --samples 10
-    python -m main.generate --type image_pair --data-source "SpectrumWorld/molpuzzle-seed-datasets" --samples 5
+    python -m main.generate --type image_pair --data-source "SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000" --samples 5
     python -m main.generate --type cot --config src/config/cot.yaml --output cot_data.json
     python -m main.generate --type qa_pair --config src/config/qa_pair.yaml --output qa_pairs.json
 

@@ -11,8 +11,7 @@ from .registry import register_loader
 from .data_structures import Dataset, DataSample
 
 
-@register_loader("molpuzzle")
-@register_loader("spectrum")  # Also register as generic spectrum loader
+@register_loader("spectrum")  # Register as generic spectrum loader
 class SpectrumDataLoader(BaseDataLoader):
     """
     Universal data loader for spectroscopic datasets from Hugging Face.
@@ -166,6 +165,8 @@ class SpectrumDataLoader(BaseDataLoader):
 
             if not images:
                 print(f"Warning: No valid images found for sample {sample_id}")
+                print(f"Available fields: {list(hf_sample.keys())}")
+                print(f"Image fields found: {image_fields}")
                 return None
 
             # Create descriptive text

@@ -1,6 +1,6 @@
 """API 模型基类"""
 
-from typing import Union, Dict, Any, Optional
+from typing import Optional
 from .base import BaseModel
 
 
@@ -14,11 +14,10 @@ class BaseAPIModel(BaseModel):
         model_name: str,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 2048,
         **kwargs,
     ):
         # 调用父类构造函数，path 参数对 API 模型来说是 model_name
-        super().__init__(path=model_name, max_seq_len=max_seq_len)
+        super().__init__(path=model_name)
 
         self.model_name = model_name
         self.api_key = api_key

@@ -1,7 +1,6 @@
-import json
 import os
 import random
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, Tuple
 from .base import BaseGenerator, PromptTemplate, register_generator
 from ..data_loaders import DataSample
 from PIL import Image as PILImage
@@ -36,46 +35,47 @@ class ImagePairGenerator(BaseGenerator):
 
         # Handle missing model client gracefully
         if self.model_client is None:
+            print("[ImagePairGenerator] Missing model client; cannot generate output.")
             return None
 
+        # Get all available spectrum types from the sample
+        # This is dataset-agnostic and works with any spectrum types
+        available_spectrum_types = sample.get_image_types()
+
+        if not available_spectrum_types:
+            print(f"[ImagePairGenerator] Sample {sample.id} contains no spectrum images.")
+            return None
+
+        selected_spectrum_type = random.choice(available_spectrum_types)
+
+        # Select description type
+        description_type = self.description_types[self.current_type_index]
+        template_info = self.prompt_templates[description_type]
+
+        if isinstance(template_info, dict):
+            template_str = template_info["template"]
+        else:
+            template_str = template_info
+
+        # Prepare model input
+        model_input = self._prepare_model_input(sample, selected_spectrum_type, template_str)
+
+        # Generate description using LLM
+        max_out_len = self.config.get("max_out_len", 1500)
         try:
-            # Get all available spectrum types from the sample
-            # This is dataset-agnostic and works with any spectrum types
-            available_spectrum_types = sample.get_image_types()
-
-            if not available_spectrum_types:
-                return None
-
-            selected_spectrum_type = random.choice(available_spectrum_types)
-
-            # Select description type
-            description_type = self.description_types[self.current_type_index]
-            template_info = self.prompt_templates[description_type]
-
-            if isinstance(template_info, dict):
-                template_str = template_info["template"]
-            else:
-                template_str = template_info
-
-            # Prepare model input
-            model_input = self._prepare_model_input(sample, selected_spectrum_type, template_str)
-
-            try:
-                # Generate description using LLM
-                max_out_len = self.config.get("max_out_len", 1500)
-                raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
-
-                if raw_output:
-                    result = self._create_image_pair(sample, selected_spectrum_type, raw_output)
-                    if result:
-                        self.current_type_index = (self.current_type_index + 1) % len(self.description_types)
-                        return result
-            except Exception as e:
-                pass
-
+            raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
+        except Exception as exc:
+            print(f"[ImagePairGenerator] Model generation failed for sample {sample.id}: {exc}")
             return None
-        except Exception as e:
+
+        if not raw_output:
+            print(f"[ImagePairGenerator] Empty response received for sample {sample.id}.")
             return None
+
+        result = self._create_image_pair(sample, selected_spectrum_type, raw_output)
+        if result:
+            self.current_type_index = (self.current_type_index + 1) % len(self.description_types)
+        return result
 
     def _prepare_model_input(self, sample: DataSample, spectrum_type: str, template_str: str):
         """Prepare input for the model including text prompt and spectrum image."""
@@ -124,28 +124,28 @@ class ImagePairGenerator(BaseGenerator):
         self, sample: DataSample, spectrum_type: str, raw_description: str
     ) -> Optional[Dict[str, Any]]:
         """Create image-text pair from generated description."""
-        try:
-            # Clean and validate the description
-            description = self._clean_description(raw_description)
+        # Clean and validate the description
+        description = self._clean_description(raw_description)
 
-            if not self._validate_description(description):
-                return None
-
-            # Save the spectrum image
-            image_path = self._save_spectrum_image(sample, spectrum_type)
-            if not image_path:
-                return None
-
-            # Create unique ID
-            pair_id = f"{sample.id}_{spectrum_type.lower().replace('-', '_')}"
-
-            # Create the image-text pair
-            result = {"id": pair_id, "type": "image-text pair", "image": image_path, "text": description}
-
-            return result
-
-        except Exception as e:
+        is_valid, error_message = self._validate_description(description)
+        if not is_valid:
+            detail = f": {error_message}" if error_message else ""
+            print(f"[ImagePairGenerator] Validation failed for sample {sample.id}{detail}")
             return None
+
+        # Save the spectrum image
+        image_path = self._save_spectrum_image(sample, spectrum_type)
+        if not image_path:
+            print(f"[ImagePairGenerator] Failed to save image for sample {sample.id} ({spectrum_type}).")
+            return None
+
+        # Create unique ID
+        pair_id = f"{sample.id}_{spectrum_type.lower().replace('-', '_')}"
+
+        # Create the image-text pair
+        result = {"id": pair_id, "type": "image-text pair", "image": image_path, "text": description}
+
+        return result
 
     def _clean_description(self, raw_description: str) -> str:
         """Clean and process the generated description."""
@@ -165,18 +165,18 @@ class ImagePairGenerator(BaseGenerator):
 
         return description
 
-    def _validate_description(self, description: str) -> bool:
+    def _validate_description(self, description: str) -> Tuple[bool, Optional[str]]:
         """Validate the generated description."""
         if not description or not description.strip():
-            return False
+            return False, "description is empty"
 
         # Check length constraints
         desc_len = len(description)
         if desc_len < self.min_text_length:
-            return False
+            return False, f"description too short ({desc_len} < {self.min_text_length})"
 
         if desc_len > self.max_text_length:
-            return False
+            return False, f"description too long ({desc_len} > {self.max_text_length})"
 
         # Basic quality checks
         # Check if it contains key information
@@ -185,9 +185,9 @@ class ImagePairGenerator(BaseGenerator):
 
         keyword_count = sum(1 for keyword in required_keywords if keyword in description_lower)
         if keyword_count < 2:  # At least 2 out of 3 keywords should be present
-            return False
+            return False, f"insufficient keywords ({keyword_count}/3 required keywords present)"
 
-        return True
+        return True, None
 
     def _save_spectrum_image(self, sample: DataSample, spectrum_type: str) -> Optional[str]:
         """Save spectrum image to output directory and return path."""
@@ -211,7 +211,8 @@ class ImagePairGenerator(BaseGenerator):
             # Save image as PNG (default format)
             image_data.save(file_path, "PNG")
             return file_path
-        except Exception as e:
+        except Exception as exc:
+            print(f"[ImagePairGenerator] Failed to write image {file_path}: {exc}")
             return None
 
     def validate_input(self, sample: DataSample) -> bool:

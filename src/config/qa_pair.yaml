@@ -130,7 +130,6 @@ model_config:
   api_key: ${INTERNS1_API_KEY}
   base_url: ${INTERNS1_BASE_URL}
   model_name: ${INTERNS1_MODEL_NAME}
-  max_seq_len: 8192
 
 num_samples: 1500
 output_path: qm9s_output/qa_pairs_interns1_1500.json

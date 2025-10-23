@@ -14,7 +14,6 @@ class InternVL(BaseAPIModel):
         model_name: Optional[str] = None,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        max_seq_len: int = 2048,
         **kwargs,
     ):
         # Set default values
@@ -23,7 +22,7 @@ class InternVL(BaseAPIModel):
         base_url = base_url or os.getenv("INTERNVL_BASE_URL")
 
         # Initialize parent class
-        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, max_seq_len=max_seq_len, **kwargs)
+        super().__init__(model_name=model_name, api_key=api_key, base_url=base_url, **kwargs)
 
         # Validate configuration
         if not self.validate_config():
