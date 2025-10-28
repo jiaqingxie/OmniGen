@@ -17,6 +17,8 @@ Usage:
         --stages reason --cot-type text_only --output output/cot_text_only_with_reasoning.json
     python -m main.generate --type cot --input-json output/cot_multimodal_500.json \\
         --stages reason --cot-type multimodal --output output/cot_multimodal_with_reasoning.json
+    
+    python -m main.generate --type qa_pair --config src/config/qa_pair.yaml --output multimodal_multi_qa_pair_full.json --qa-type multi_step  --samples 2000
 """
 
 import asyncio
