@@ -1,5 +1,5 @@
 # Image-Text Pair Generation Configuration for InternS1
-dataset_path: SpectrumWorld/qm9s-seed-datasets-small
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
 generator_type: image_pair
 generator_config:
   prompt_templates:
@@ -67,15 +67,15 @@ generator_config:
   default_description_type: "basic_description"
   
   # Image output settings
-  image_output_dir: "./tests_image/qm9s_output/itpair_interns1_spectrum_images"
+  image_output_dir: "./tests_image/multimodal_output/itpair_interns1_spectrum_images"
 
 model_type: interns1
 model_config:
-  api_key: ${INTERNS1_API_KEY}
-  base_url: ${INTERNS1_BASE_URL}
-  model_name: ${INTERNS1_MODEL_NAME}
+  api_key: sk-FNPoGYKclMlwrxz7f8t63uvQnOhsRKbeS8CQZlowh04PudR0
+  base_url: https://intern.openxlab.org.cn/api/v1/
+  model_name: intern-s1
 
 num_samples: 1500
-output_path: qm9s_output/image_pairs_interns1_1500.json
+output_path: multimodal_output/image_pairs_interns1_1500.json
 verbose: true
 max_retries: 3

@@ -1,4 +1,4 @@
-dataset_path: SpectrumWorld/molpuzzle-seed-datasets
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
 generator_type: benchmark
 generator_config:
   prompt_templates:
@@ -347,10 +347,10 @@ generator_config:
   question_types: ["type_cls", "quality_eval", "feature_extract", "impurity_detect", "group_recog", "element_pred", "peak_assign", "property_pred", "structure_elucidate", "modality_fusion", "mol_reasoning"]
 model_type: internvl
 model_config:
-  api_key: ${INTERNVL_API_KEY}
-  base_url: ${INTERNVL_BASE_URL}
-  model_name: ${INTERNVL_MODEL_NAME}
-num_samples: 30
-output_path: output/benchmark.json
+  api_key: sk-FNPoGYKclMlwrxz7f8t63uvQnOhsRKbeS8CQZlowh04PudR0
+  base_url: https://intern.openxlab.org.cn/api/v1/
+  model_name: internvl3.5-241b-a28b
+num_samples: 2500
+output_path: multimodal_output/benchmark_internvl_2500.json
 verbose: true
 max_retries: 3 

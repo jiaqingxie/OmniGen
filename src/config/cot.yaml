@@ -1,4 +1,4 @@
-dataset_path: SpectrumWorld/qm9s-seed-datasets-small
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
 generator_type: cot
 generator_config:
   cot_types:
@@ -9,7 +9,7 @@ generator_config:
   - reason
   use_claude: false
   use_interns1: true
-  image_output_dir: qm9s_output/cot_interns1_spectrum_images
+  image_output_dir: "./tests_image/multimodal_output/cot_interns1_spectrum_images"
   image_format: png
   draft:
     max_out_len: 8192
@@ -97,10 +97,10 @@ generator_config:
     temperature: 0.7
 model_type: interns1
 model_config:
-  api_key: ${INTERNS1_API_KEY}
-  base_url: ${INTERNS1_BASE_URL}
-  model_name: ${INTERNS1_MODEL_NAME}
+  api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
+  base_url: https://chat.intern-ai.org.cn/api/v1/
+  model_name: intern-s1
 num_samples: 1500
-output_path: qm9s_output/cot_interns1_1500.json
+output_path: multimodal_output/cot_interns1_1500.json
 verbose: true
 max_retries: 3
