@@ -124,11 +124,15 @@ generator_config:
   
   # Text generation settings
   max_out_len: 4096
+  
+  # Loader settings - limit source dataset to 3000 samples
+  loader_kwargs:
+    max_samples: 3000
 
 model_type: interns1
 model_config:
-  api_key: sk-FNPoGYKclMlwrxz7f8t63uvQnOhsRKbeS8CQZlowh04PudR0
-  base_url: https://intern.openxlab.org.cn/api/v1/
+  api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
+  base_url: https://chat.intern-ai.org.cn/api/v1/
   model_name: intern-s1
 
 num_samples: 1500

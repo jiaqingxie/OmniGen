@@ -1,5 +1,5 @@
 # Image-Text Pair Generation Configuration for InternS1
-dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-full
 generator_type: image_pair
 generator_config:
   prompt_templates:
@@ -11,9 +11,10 @@ generator_config:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
         - Spectrum type: {spectrum_type}
+        - Chemical Shifts: {chemical_shifts}
 
         TASK: Generate a description that STARTS with this exact phrase:
-        "This is a {spectrum_type} spectrum of a molecule with formula {formula} (SMILES: {smiles})."
+        "This is a {spectrum_type} spectrum of a molecule with formula {formula} (SMILES: {smiles}). The chemical shifts are {chemical_shifts}."
 
         Then continue with your analysis of the spectral features visible in the image.
 
@@ -36,12 +37,13 @@ generator_config:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
         - Spectrum type: {spectrum_type}
+        - Chemical Shifts: {chemical_shifts}
 
         TASK: Generate a detailed analysis that includes the exact molecular information provided above.
 
         Structure your analysis with these sections:
         1. Spectrum type identification and analytical purpose
-        2. Key spectral features and peak assignments for molecule {formula} (SMILES: {smiles})
+        2. Key spectral features and peak assignments for molecule {formula} (SMILES: {smiles}) with the given chemical shifts.
         3. Functional groups or structural elements identified
         4. Chemical significance and interpretation
         5. Educational insights about the molecular structure
@@ -68,11 +70,14 @@ generator_config:
   
   # Image output settings
   image_output_dir: "./tests_image/multimodal_output/itpair_interns1_spectrum_images"
+  # Loader settings - limit source dataset to 3000 samples
+  loader_kwargs:
+    max_samples: 3000
 
 model_type: interns1
 model_config:
-  api_key: sk-FNPoGYKclMlwrxz7f8t63uvQnOhsRKbeS8CQZlowh04PudR0
-  base_url: https://intern.openxlab.org.cn/api/v1/
+  api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
+  base_url: https://chat.intern-ai.org.cn/api/v1/
   model_name: intern-s1
 
 num_samples: 1500

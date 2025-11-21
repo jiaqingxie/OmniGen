@@ -1,4 +1,4 @@
-dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-full
 generator_type: cot
 generator_config:
   cot_types:
@@ -95,6 +95,10 @@ generator_config:
   reason:
     max_out_len: 8192
     temperature: 0.7
+    # Loader settings - limit source dataset to 3000 samples
+  loader_kwargs:
+    max_samples: 3000
+
 model_type: interns1
 model_config:
   api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
