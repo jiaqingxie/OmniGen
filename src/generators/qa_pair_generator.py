@@ -34,6 +34,7 @@ class QAPairGenerator(BaseGenerator):
             return None
 
         if self.model_client is None:
+            print("[QAPairGenerator] Missing model client; cannot generate output.")
             return None
 
         try:
@@ -60,16 +61,29 @@ class QAPairGenerator(BaseGenerator):
             try:
                 max_out_len = self.config.get("max_out_len", 2000)
                 raw_output = self.model_client.generate(model_input, max_out_len=max_out_len)
-                if raw_output:
-                    result = self._create_qa_pair(sample, selected_spectrum_type, qa_type, raw_output)
-                    if result:
-                        self.current_type_index = (self.current_type_index + 1) % len(self.qa_types)
-                        return result
+                # Normalize possible dict response to string content
+                if isinstance(raw_output, dict):
+                    raw_output = raw_output.get("content") or raw_output.get("text") or ""
+                
+                # Convert to string
+                raw_output_str = str(raw_output).strip() if raw_output else ""
+                if not raw_output_str:
+                    return None
+                
+                result = self._create_qa_pair(sample, selected_spectrum_type, qa_type, raw_output_str)
+                if result:
+                    self.current_type_index = (self.current_type_index + 1) % len(self.qa_types)
+                    return result
             except Exception as e:
-                print(f"Exception in generate_single for sample {sample.id}: {e}")
+                # Only log exceptions if verbose mode is enabled
+                if self.config.get("verbose", False):
+                    print(f"[QAPairGenerator] Exception in generate_single for sample {sample.id}: {e}")
 
             return None
         except Exception as e:
+            # Only log exceptions if verbose mode is enabled
+            if self.config.get("verbose", False):
+                print(f"[QAPairGenerator] Outer exception in generate_single for sample {sample.id}: {e}")
             return None
 
     def _prepare_model_input(self, sample: DataSample, spectrum_type: str, template_str: str):
@@ -92,12 +106,21 @@ class QAPairGenerator(BaseGenerator):
         # Get available spectra types
         available_spectra = ", ".join(sample.get_image_types()) if sample.has_images() else "None"
 
+        # Derive spectrum-specific auxiliary fields (e.g., chemical shifts)
+        spectrum_upper = (spectrum_type or "").upper()
+        chemical_shifts = None
+        if spectrum_upper == "H-NMR":
+            chemical_shifts = molecule_info.get("h_nmr_chemical_shift")
+        elif spectrum_upper == "C-NMR":
+            chemical_shifts = molecule_info.get("c_nmr_chemical_shift")
+
         # Build template variables
         template_vars = {
             "spectrum_type": spectrum_type,
             "formula": formula,
             "smiles": smiles,
             "available_spectra": available_spectra,
+            "chemical_shifts": chemical_shifts if chemical_shifts is not None else "Unknown",
         }
 
         # Add any additional metadata
@@ -106,11 +129,30 @@ class QAPairGenerator(BaseGenerator):
                 if isinstance(value, (str, int, float, bool)):
                     template_vars[key] = value
 
+        # Safe formatting: handle templates with JSON examples containing { } that aren't placeholders
+        # Strategy: escape all braces first, then restore the placeholders we want to format
+        class _DefaultDict(dict):
+            def __missing__(self, key):
+                return "Unknown"
+        
+        # Step 1: Escape all braces (double them)
+        escaped_template = template_str.replace("{", "{{").replace("}", "}}")
+        
+        # Step 2: Restore the placeholders we want to format
+        for key in template_vars.keys():
+            placeholder = "{" + key + "}"
+            escaped_placeholder = "{{" + key + "}}"
+            escaped_template = escaped_template.replace(escaped_placeholder, placeholder)
+        
+        # Step 3: Now format with the escaped template
         try:
-            prompt_template = PromptTemplate(template_str)
-            formatted_prompt = prompt_template.template.format(**template_vars)
-        except KeyError as e:
+            formatted_prompt = escaped_template.format_map(_DefaultDict(template_vars))
+        except (ValueError, KeyError) as e:
+            # If still fails, use simple string replacement as fallback
             formatted_prompt = template_str
+            for key, value in template_vars.items():
+                placeholder = "{" + key + "}"
+                formatted_prompt = formatted_prompt.replace(placeholder, str(value))
 
         return formatted_prompt
 
@@ -122,7 +164,31 @@ class QAPairGenerator(BaseGenerator):
             # Parse the JSON response
             conversations = self._parse_conversations(raw_output)
             if not conversations:
-                return None
+                # Fallback: build a minimal 1Q1A conversation when model didn't return JSON
+                molecule_info = sample.metadata.get("molecule_info", {}) if sample.metadata else {}
+                formula = molecule_info.get("formula", "Unknown")
+                smiles = molecule_info.get("smiles", "Unknown")
+                shifts = molecule_info.get("h_nmr_chemical_shift") if spectrum_type.upper() == "H-NMR" else (
+                    molecule_info.get("c_nmr_chemical_shift") if spectrum_type.upper() == "C-NMR" else None
+                )
+                shifts_str = shifts if shifts is not None else "Unknown"
+
+                question = (
+                    f"Please analyze this {spectrum_type} spectrum of molecule {formula} "
+                    f"(SMILES: {smiles}). The chemical shifts are {shifts_str}. "
+                    f"Provide an educational explanation."
+                )
+                answer = raw_output.strip() if isinstance(raw_output, str) else ""
+                if not answer:
+                    return None
+                # Trim overly long answers
+                if len(answer) > 4000:
+                    answer = answer[:4000].rstrip() + "..."
+
+                conversations = [
+                    {"from": "human", "value": question},
+                    {"from": "gpt", "value": answer},
+                ]
 
             # Replace template variables in conversations
             conversations = self._replace_template_variables(conversations, sample, spectrum_type)
@@ -147,13 +213,16 @@ class QAPairGenerator(BaseGenerator):
             return result
 
         except Exception as e:
+            # Only log exceptions if verbose mode is enabled
+            if self.config.get("verbose", False):
+                print(f"[QAPairGenerator] Exception in _create_qa_pair for sample {sample.id}: {e}")
             return None
 
     def _parse_conversations(self, raw_output: str) -> Optional[List[Dict[str, str]]]:
         """Parse conversations from model output."""
         try:
             # Clean the output first
-            cleaned_output = raw_output.strip()
+            cleaned_output = str(raw_output).strip()
 
             # Try to find JSON array in the output
             start_idx = cleaned_output.find('[')
@@ -219,7 +288,7 @@ class QAPairGenerator(BaseGenerator):
             return conversations if conversations else None
 
         except Exception as e:
-            print(f"Error parsing conversations: {e}")
+            # Error will be handled by caller
             return None
 
     def _replace_template_variables(
@@ -231,11 +300,21 @@ class QAPairGenerator(BaseGenerator):
         formula = molecule_info.get("formula", "Unknown")
         smiles = molecule_info.get("smiles", "Unknown")
 
+        # Determine chemical shifts for replacement
+        spectrum_upper = (spectrum_type or "").upper()
+        chemical_shifts_val = None
+        if spectrum_upper == "H-NMR":
+            chemical_shifts_val = molecule_info.get("h_nmr_chemical_shift")
+        elif spectrum_upper == "C-NMR":
+            chemical_shifts_val = molecule_info.get("c_nmr_chemical_shift")
+        chemical_shifts_str = chemical_shifts_val if chemical_shifts_val is not None else "Unknown"
+
         # Create replacement mapping
         replacements = {
             "{formula}": formula,
             "{smiles}": smiles,
             "{spectrum_type}": spectrum_type,
+            "{chemical_shifts}": chemical_shifts_str,
         }
 
         # Replace variables in each conversation

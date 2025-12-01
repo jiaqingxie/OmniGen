@@ -94,6 +94,14 @@ class ImagePairGenerator(BaseGenerator):
         formula = molecule_info.get("formula", "Unknown")
         smiles = molecule_info.get("smiles", "Unknown")
 
+        # Derive spectrum-specific auxiliary fields (e.g., chemical shifts) from molecule info
+        spectrum_upper = (spectrum_type or "").upper()
+        chemical_shifts = None
+        if spectrum_upper == "H-NMR":
+            chemical_shifts = molecule_info.get("h_nmr_chemical_shift")
+        elif spectrum_upper == "C-NMR":
+            chemical_shifts = molecule_info.get("c_nmr_chemical_shift")
+
         # Get available spectra types
         available_spectra = ", ".join(sample.get_image_types()) if sample.has_images() else "None"
 
@@ -103,6 +111,7 @@ class ImagePairGenerator(BaseGenerator):
             "formula": formula,
             "smiles": smiles,
             "available_spectra": available_spectra,
+            "chemical_shifts": chemical_shifts if chemical_shifts is not None else "Unknown",
         }
 
         # Add any additional metadata
@@ -111,12 +120,13 @@ class ImagePairGenerator(BaseGenerator):
                 if isinstance(value, (str, int, float, bool)):
                     template_vars[key] = value
 
-        try:
-            prompt_template = PromptTemplate(template_str)
-            formatted_prompt = prompt_template.template.format(**template_vars)
-        except KeyError as e:
-            # Fallback if template formatting fails
-            formatted_prompt = template_str
+        # Use safe formatting so missing keys don't drop already-resolved fields
+        class _DefaultDict(dict):
+            def __missing__(self, key):
+                return "Unknown"
+
+        prompt_template = PromptTemplate(template_str)
+        formatted_prompt = prompt_template.template.format_map(_DefaultDict(template_vars))
 
         return formatted_prompt
 

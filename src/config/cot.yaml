@@ -1,4 +1,4 @@
-dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
+dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-full
 generator_type: cot
 generator_config:
   cot_types:
@@ -30,6 +30,7 @@ generator_config:
           - Provide a detailed, step-by-step solution with clear explanations
           - Ensure scientific accuracy and proper terminology
           - Use the EXACT JSON format shown below
+          - Data Interpretation: The solution MUST NOT merely quote the chemical shifts input. Instead, the solution must interpret the visual features of the spectrum image (e.g., peak position, multiplicity, integration) and use the chemical shifts context only to confirm the visually observed values or as a summary of the raw data being analyzed.
 
           Examples of problem types:
           - IR spectrum interpretation: "Identify functional groups from IR peaks at 1700, 1600, 1250 cm⁻¹"
@@ -48,7 +49,7 @@ generator_config:
           Context:
           - Molecular formula: {formula}
           - SMILES: {smiles}
-          - Available spectra: {available_spectra}
+          - Chemical Shifts: {chemical_shifts}
           - Data type: {cot_type}
 
           Generate a high-quality reasoning problem in JSON format. Focus on scientific accuracy and educational value.
@@ -70,6 +71,8 @@ generator_config:
           - Provide a detailed, step-by-step solution with clear explanations
           - Ensure scientific accuracy and proper terminology
           - Use the EXACT JSON format shown below
+          - Data Interpretation: The solution MUST NOT merely quote the chemical shifts input. Instead, the solution must interpret the visual features of the spectrum image (e.g., peak position, multiplicity, integration) and use the chemical shifts context only to confirm the visually observed values or as a summary of the raw data being analyzed.
+
 
           Examples of {spectrum_type}-specific analysis approaches:
           - Peak identification and assignment in {spectrum_type} spectroscopy
@@ -88,19 +91,24 @@ generator_config:
           - Spectrum type: {spectrum_type} (MUST be mentioned in your question)
           - Molecular formula: {formula}
           - SMILES: {smiles}
-          - Available spectra: {available_spectra}
+          - Chemical Shifts: {chemical_shifts}
           - Data type: {cot_type}
 
           Generate a high-quality reasoning problem in JSON format. Ensure your question explicitly mentions "{spectrum_type} spectrum".
   reason:
     max_out_len: 8192
     temperature: 0.7
+    # Loader settings - limit source dataset to 3000 samples
+  loader_kwargs:
+    max_samples: 1500
+    start_file_idx: 200
+
 model_type: interns1
 model_config:
   api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
   base_url: https://chat.intern-ai.org.cn/api/v1/
   model_name: intern-s1
 num_samples: 1500
-output_path: multimodal_output/cot_interns1_1500.json
+output_path: multimodal_output/cot_interns1_text_only.json
 verbose: true
 max_retries: 3

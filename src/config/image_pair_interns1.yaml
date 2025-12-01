@@ -1,47 +1,49 @@
 # Image-Text Pair Generation Configuration for InternS1
-dataset_path: SpectrumWorld/multimodal-spectroscopic-seed-datasets-1000
+dataset_path: /mnt/shared-storage-user/xiejiaqing/huggingface/datasets/generator/default-12737e9f3a5e935a/0.0.0
 generator_type: image_pair
 generator_config:
   prompt_templates:
     basic_description:
       template: |
-        You are analyzing a molecular spectrum image. Generate a descriptive English text.
+        You are analyzing a molecular spectrum image. Generate a detailed, scientifically rigorous English text that analyzes the spectral features and concludes with the identified molecular structure.
 
         IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
-        - Spectrum type: {spectrum_type}
+        - Spectrum type: {spectrum_type}·
+        - Chemical Shifts: {chemical_shifts}
 
-        TASK: Generate a description that STARTS with this exact phrase:
-        "This is a {spectrum_type} spectrum of a molecule with formula {formula} (SMILES: {smiles})."
-
-        Then continue with your analysis of the spectral features visible in the image.
+        TASK: Generate a description that STARTS with a general statement about the spectrum type and ENDS with the final molecular identification.
 
         Requirements:
-        - MUST use the exact formula and SMILES provided above
-        - DO NOT infer or guess different molecular information
-        - Focus on describing visible spectral features (peaks, bands, chemical shifts)
-        - Provide chemical interpretation of the observed features
-        - Write in clear, scientific English
-        - Keep description between 100-500 words
-        - Be educational and informative
+        - **STRUCTURE:** The text must follow this flow: Introduction ($\text{Spectrum Type}$ and $\text{Chemical Shifts}$) → Feature Analysis → **Conclusion** ($\text{Formula}$ and $\text{SMILES}$).
+        - **CONCLUSION:** The text must end by stating the molecular formula and SMILES notation, using the exact values provided in the constraints.
+        - Write in clear, scientific English.
+        - Keep description between 100-500 words.
+        
+        **--- SCIENTIFIC RIGOR CONSTRAINTS ---**
+        1. **Deductive Flow:** The analysis section must justify the final conclusion.
+        2. **No Hallucination:** Do not quote precise coupling constants (J values in Hz) if the splitting is not visually clear or measurable on the spectrum image. Describe the *effect* (e.g., "strong C-F coupling") instead.
+        3. **C-NMR Phase Analysis:** If the spectrum is $\text{DEPT}$ or $\text{APT}$, the description **MUST** utilize the phase information (positive/negative signals) to assign $\text{CH}/\text{CH}_3$ versus $\text{CH}_2$ fragments.
+        4. **Conservative Inference:** Do not definitively identify a specific halogen (e.g., 'Bromine') unless the spectrum provides irrefutable proof. Use terms like 'Halogen' or 'Electron-withdrawing group'.
 
         Please provide only the descriptive text, no additional formatting or quotation marks.
         
     detailed_analysis:
       template: |
-        Provide a detailed scientific analysis of this molecular spectrum.
+        You are a professor of computational chemistry providing a detailed scientific analysis of a molecular spectrum image for your students.
 
         IMPORTANT CONSTRAINTS - YOU MUST USE THESE EXACT VALUES:
         - Molecular formula: {formula} (DO NOT CHANGE THIS)
         - SMILES notation: {smiles} (DO NOT CHANGE THIS)
         - Spectrum type: {spectrum_type}
+        - Chemical Shifts: {chemical_shifts}
 
-        TASK: Generate a detailed analysis that includes the exact molecular information provided above.
+        TASK: Generate a detailed scientific analysis that integrates the exact molecular information provided above.
 
         Structure your analysis with these sections:
         1. Spectrum type identification and analytical purpose
-        2. Key spectral features and peak assignments for molecule {formula} (SMILES: {smiles})
+        2. Key spectral features and peak assignments for molecule {formula} (SMILES: {smiles}) with the given chemical shifts.
         3. Functional groups or structural elements identified
         4. Chemical significance and interpretation
         5. Educational insights about the molecular structure
@@ -56,6 +58,13 @@ generator_config:
         - 200-800 words
         - Professional tone
 
+        **--- SCIENTIFIC RIGOR CONSTRAINTS ---**
+        **1. EVIDENCE-BASED ANALYSIS:** The analysis must **explicitly link** chemical shifts, splitting patterns, or phase information (e.g., DEPT) **visible in the image** to the structural assignments.
+        **2. NO HALLUCINATION:**
+          **a.** Do not quote precise coupling constants ($J$ values in Hz, e.g., "272.0 Hz") if the splitting is not visually clear or measurable on the spectrum image. **Describe the *effect* (e.g., "strong $\text{C-F}$ coupling") instead.**
+          **b.** **Phase Information:** If the spectrum is $\text{DEPT}$ or $\text{APT}$, the analysis **MUST** discuss the phase information (positive/negative signals) to confirm $\text{CH}/\text{CH}_3$ versus $\text{CH}_2$ assignments.
+          **c.** **Conservative Inference:** Do not definitively identify a specific halogen (e.g., 'Bromine') unless irrefutable proof is visible. Use terms like 'Halogen' or 'Electron-withdrawing group' where appropriate.
+
         Please provide only the analytical text content.
 
   description_types: ["basic_description"]
@@ -68,14 +77,17 @@ generator_config:
   
   # Image output settings
   image_output_dir: "./tests_image/multimodal_output/itpair_interns1_spectrum_images"
+  # Loader settings - limit source dataset to 3000 samples
+  loader_kwargs:
+    max_samples: 1600
 
 model_type: interns1
 model_config:
-  api_key: sk-FNPoGYKclMlwrxz7f8t63uvQnOhsRKbeS8CQZlowh04PudR0
-  base_url: https://intern.openxlab.org.cn/api/v1/
+  api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
+  base_url: https://chat.intern-ai.org.cn/api/v1/
   model_name: intern-s1
 
 num_samples: 1500
-output_path: multimodal_output/image_pairs_interns1_1500.json
+output_path: multimodal_output/image_pairs_interns1.json
 verbose: true
 max_retries: 3

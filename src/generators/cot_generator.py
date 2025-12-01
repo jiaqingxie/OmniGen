@@ -124,11 +124,20 @@ class CoTGenerator(BaseGenerator):
         # Get available spectra types
         available_spectra = ", ".join(sample.get_image_types()) if sample.has_images() else "None"
 
+        # Derive spectrum-specific auxiliary fields (e.g., chemical shifts)
+        spectrum_upper = (selected_spectrum_type or "").upper()
+        chemical_shifts = None
+        if spectrum_upper == "H-NMR":
+            chemical_shifts = molecule_info.get("h_nmr_chemical_shift")
+        elif spectrum_upper == "C-NMR":
+            chemical_shifts = molecule_info.get("c_nmr_chemical_shift")
+
         # Build template variables
         template_vars = {
             "formula": formula,
             "smiles": smiles,
             "available_spectra": available_spectra,
+            "chemical_shifts": chemical_shifts if chemical_shifts is not None else "Unknown",
             "cot_type": cot_type,
             "spectrum_type": selected_spectrum_type if selected_spectrum_type else "N/A",
         }
