@@ -100,7 +100,7 @@ generator_config:
     temperature: 0.7
     # Loader settings - limit source dataset to 3000 samples
   loader_kwargs:
-    max_samples: 1500
+    max_samples: 1200
     start_file_idx: 200
 
 model_type: interns1
@@ -108,7 +108,7 @@ model_config:
   api_key: sk-o3mE7Y335YJBNz3mtjRjEvmKzzzHPv75gqTJviokS1q3G55P
   base_url: https://chat.intern-ai.org.cn/api/v1/
   model_name: intern-s1
-num_samples: 1500
+num_samples: 1200
 output_path: multimodal_output/cot_interns1_text_only.json
 verbose: true
 max_retries: 3
