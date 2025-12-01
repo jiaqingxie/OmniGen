@@ -135,6 +135,7 @@ class SpectrumDataLoader(BaseDataLoader):
         # Check if it's a local path
         if os.path.isdir(data_source):
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             return self._load_from_local_path(data_source, max_samples, split)
         else:
             # Assume it's a HuggingFace dataset ID
@@ -202,6 +203,13 @@ class SpectrumDataLoader(BaseDataLoader):
             return self._load_from_huggingface(data_source, max_samples, split, start_index=start_index)
 >>>>>>> Stashed changes
 
+=======
+            return self._load_from_local_path(data_source, max_samples, split, start_index=start_index, start_file_idx=start_file_idx)
+        else:
+            # Assume it's a HuggingFace dataset ID
+            return self._load_from_huggingface(data_source, max_samples, split, start_index=start_index)
+
+>>>>>>> Stashed changes
     def _load_from_local_path(self, data_path: str, max_samples: Optional[int], split: str, start_index: int = 0, start_file_idx: int = 0) -> Dataset:
         """Load spectroscopic data from local Arrow files"""
         print(f"Loading spectroscopic dataset from local path: {data_path}")
@@ -290,18 +298,27 @@ class SpectrumDataLoader(BaseDataLoader):
             samples = []
             sample_count = 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             
             for i, hf_sample in enumerate(dataset):
 =======
             skipped = 0
             
             for i, hf_sample in enumerate(dataset):
+=======
+            skipped = 0
+            
+            for i, hf_sample in enumerate(dataset):
+>>>>>>> Stashed changes
                 # Skip first start_index samples globally
                 if start_index and skipped < start_index:
                     skipped += 1
                     if (skipped % 100) == 0:
                         print(f"Skipped {skipped} samples (start_index={start_index})")
                     continue
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 if max_samples and sample_count >= max_samples:
                     break
