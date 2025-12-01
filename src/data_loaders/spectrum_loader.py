@@ -128,9 +128,13 @@ class SpectrumDataLoader(BaseDataLoader):
 
         max_samples = kwargs.get('max_samples', None)
         split = kwargs.get('split', 'train')
+        # Optional starting offsets
+        start_index = kwargs.get('start_index', 0)  # skip first N samples globally
+        start_file_idx = kwargs.get('start_file_idx', 0)  # for local path: start from this arrow file index
 
         # Check if it's a local path
         if os.path.isdir(data_source):
+<<<<<<< Updated upstream
             return self._load_from_local_path(data_source, max_samples, split)
         else:
             # Assume it's a HuggingFace dataset ID
@@ -191,8 +195,80 @@ class SpectrumDataLoader(BaseDataLoader):
         except Exception as e:
             print(f"Error loading from local path: {e}")
             raise
+=======
+            return self._load_from_local_path(data_source, max_samples, split, start_index=start_index, start_file_idx=start_file_idx)
+        else:
+            # Assume it's a HuggingFace dataset ID
+            return self._load_from_huggingface(data_source, max_samples, split, start_index=start_index)
+>>>>>>> Stashed changes
 
-    def _load_from_huggingface(self, dataset_id: str, max_samples: Optional[int], split: str) -> Dataset:
+    def _load_from_local_path(self, data_path: str, max_samples: Optional[int], split: str, start_index: int = 0, start_file_idx: int = 0) -> Dataset:
+        """Load spectroscopic data from local Arrow files"""
+        print(f"Loading spectroscopic dataset from local path: {data_path}")
+        
+        try:
+            # Find all .arrow files in the directory
+            arrow_files = sorted(list(Path(data_path).glob("*.arrow")))
+            if not arrow_files:
+                raise ValueError(f"No .arrow files found in {data_path}")
+            
+            print(f"Found {len(arrow_files)} arrow file(s)")
+            if start_file_idx and 0 <= start_file_idx < len(arrow_files):
+                arrow_files = arrow_files[start_file_idx:]
+                print(f"Starting from arrow file index {start_file_idx}, remaining files: {len(arrow_files)}")
+            
+            # Load dataset from arrow files
+            if len(arrow_files) == 1:
+                dataset = load_dataset("arrow", data_files=str(arrow_files[0]), split=split, streaming=True)
+            else:
+                # Multiple files - load all
+                data_files = [str(f) for f in arrow_files]
+                dataset = load_dataset("arrow", data_files=data_files, split=split, streaming=True)
+            
+            samples = []
+            sample_count = 0
+            skipped = 0
+            
+            for i, hf_sample in enumerate(dataset):
+                # Skip first start_index samples globally
+                if start_index and skipped < start_index:
+                    skipped += 1
+                    if (skipped % 100) == 0:
+                        print(f"Skipped {skipped} samples (start_index={start_index})")
+                    continue
+                if max_samples and sample_count >= max_samples:
+                    break
+                # Use id from data if available, otherwise use index
+                sample_id_from_data = hf_sample.get("id") or hf_sample.get("molecule_index")
+                if sample_id_from_data:
+                    sample_id = f"local_{sample_id_from_data}"
+                else:
+                    sample_id = f"local_{i}"
+                sample = self._parse_hf_sample(hf_sample, sample_id)
+                if sample:
+                    samples.append(sample)
+                    sample_count += 1
+                if (i + 1) % 100 == 0:
+                    print(f"Processed {i + 1} samples, parsed {len(samples)} valid samples")
+            
+            print(f"Successfully parsed {len(samples)} samples from {i + 1} total samples processed")
+            original_size = i + 1
+            
+            return Dataset(
+                samples=samples,
+                metadata={
+                    "source": "local",
+                    "data_path": data_path,
+                    "split": split,
+                    "original_size": original_size,
+                },
+            )
+        
+        except Exception as e:
+            print(f"Error loading from local path: {e}")
+            raise
+
+    def _load_from_huggingface(self, dataset_id: str, max_samples: Optional[int], split: str, start_index: int = 0) -> Dataset:
         """Load spectroscopic data from Hugging Face dataset"""
         print(f"Loading spectroscopic dataset from Hugging Face: {dataset_id}")
 
@@ -213,8 +289,20 @@ class SpectrumDataLoader(BaseDataLoader):
 
             samples = []
             sample_count = 0
+<<<<<<< Updated upstream
             
             for i, hf_sample in enumerate(dataset):
+=======
+            skipped = 0
+            
+            for i, hf_sample in enumerate(dataset):
+                # Skip first start_index samples globally
+                if start_index and skipped < start_index:
+                    skipped += 1
+                    if (skipped % 100) == 0:
+                        print(f"Skipped {skipped} samples (start_index={start_index})")
+                    continue
+>>>>>>> Stashed changes
                 if max_samples and sample_count >= max_samples:
                     break
                 # Use id from data if available, otherwise use index
